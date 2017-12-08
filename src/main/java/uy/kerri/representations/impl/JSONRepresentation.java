@@ -1,7 +1,7 @@
 package uy.kerri.representations.impl;
 
+import uy.kerri.representations.exception.UnsupportedFormatException;
 import uy.kerri.representations.Representation;
-import uy.kerri.representations.Representable;
 
 import org.json.*;
 
@@ -16,7 +16,8 @@ public class JSONRepresentation implements Representation {
     return new JSONRepresentation(addKey(key, value));
   }
 
-  public Representation with(String key, Representable value) {
+  public Representation with(String key, Representation value)
+      throws UnsupportedFormatException {
     return new JSONRepresentation(addKey(key, value));
   }
 
@@ -24,9 +25,10 @@ public class JSONRepresentation implements Representation {
      return new JSONRepresentation(addKey(key, arrayFrom(values)));
   }
 
-  public Representation with(String key, Representable[] representables) {
+  public Representation with(String key, Representation[] representations)
+      throws UnsupportedFormatException {
     return new JSONRepresentation(
-      addKey(key, arrayFrom(representables))
+      addKey(key, arrayFrom(representations))
     );
   }
 
@@ -46,14 +48,23 @@ public class JSONRepresentation implements Representation {
     return copy().put(key, value);
   }
 
-  private JSONObject addKey(String key, Representable representable) {
-    return copy().put(key, valueFrom(representable));
+  private JSONObject addKey(String key, Representation representation)
+      throws UnsupportedFormatException {
+    return copy().put(key, valueFrom(representation));
   }
 
-  private JSONObject valueFrom(Representable representable) {
-    return new JSONObject(
-      representable.summary(new JSONRepresentation()).toString()
-    );
+  private JSONObject valueFrom(Representation representation)
+      throws UnsupportedFormatException {
+    try {
+      return new JSONObject(
+        representation.toString()
+      );
+    } catch (JSONException cause) {
+      throw new UnsupportedFormatException(
+        "Nested representation must be on JSON format.",
+        cause
+      );
+    }
   }
 
   private JSONArray arrayFrom(Object[] values) {
@@ -64,10 +75,11 @@ public class JSONRepresentation implements Representation {
     return array;
   }
 
-  private JSONArray arrayFrom(Representable[] representables) {
+  private JSONArray arrayFrom(Representation[] representations)
+    throws UnsupportedFormatException {
     JSONArray array = new JSONArray();
-    for (Representable representable : representables) {
-      array.put(valueFrom(representable));
+    for (Representation representation : representations) {
+      array.put(valueFrom(representation));
     }
     return array;
   }
