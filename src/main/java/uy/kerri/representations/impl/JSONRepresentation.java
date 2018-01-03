@@ -8,8 +8,16 @@ import org.json.*;
 public class JSONRepresentation implements Representation {
   private JSONObject json;
 
+  private JSONRepresentation(JSONObject json) {
+    this.json = json;
+  }
+
   public JSONRepresentation() {
     this(new JSONObject());
+  }
+
+  public JSONRepresentation(String json) {
+    this(new JSONObject(json));
   }
 
   public Representation with(String key, Object value) {
@@ -34,10 +42,6 @@ public class JSONRepresentation implements Representation {
 
   public String toString() {
     return json.toString();
-  }
-
-  private JSONRepresentation(JSONObject json) {
-    this.json = json;
   }
 
   private JSONObject copy() {
