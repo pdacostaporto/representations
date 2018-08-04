@@ -25,34 +25,34 @@ package uy.kerri.representations.impl;
 
 import java.util.Arrays;
 import uy.kerri.representations.Field;
+import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
-import uy.kerri.representations.Representation;
 
 /**
- * {@link uy.kerri.representations.Representation} consisting of multiple
+ * {@link uy.kerri.representations.Representation} consisting of an array of
  *  fields.
  *
  * @since 1.0
  */
-public class FieldsRepresentation implements Representation {
+public class ArrayOfFields implements Fields {
     /**
-     * Fields of the representation.
+     * Array of fields.
      */
     private final Field[] fields;
 
     /**
-     * Constructs a representation with the given fields.
+     * Constructs an array of fields with the given fields.
      *
      * @param flds The fields for the constructed representation.
      */
-    public FieldsRepresentation(final Field... flds) {
+    public ArrayOfFields(final Field... flds) {
         this.fields = Arrays.copyOf(flds, flds.length);
     }
 
     /**
-     * Constructs an empty representation.
+     * Constructs an empty array of fields.
      */
-    public FieldsRepresentation() {
+    public ArrayOfFields() {
         this(new Field[0]);
     }
 

@@ -28,19 +28,19 @@ import org.hamcrest.CoreMatchers;
 import org.hamcrest.junit.MatcherAssert;
 import org.junit.Test;
 import uy.kerri.representations.fake.FakeOutput;
+import uy.kerri.representations.impl.ArrayOfFields;
 import uy.kerri.representations.impl.BooleanField;
-import uy.kerri.representations.impl.FieldsRepresentation;
 import uy.kerri.representations.impl.IntegerField;
 import uy.kerri.representations.impl.StringField;
 
 /**
- * Tests for {@link uy.kerri.representations.impl.FieldsRepresentation}.
+ * Tests for {@link uy.kerri.representations.impl.ArrayOfFields}.
  *
  * @since 1.0
  */
-public class FieldsRepresentationTest {
+public class ArrayOfFieldsTest {
     /**
-     * FieldsRepresentation prints nothing if it has no fields.
+     * ArrayOfFields prints nothing if it has no fields.
      *
      * @throws Exception if something fails.
      */
@@ -50,13 +50,13 @@ public class FieldsRepresentationTest {
         final FakeOutput output = new FakeOutput(name);
         MatcherAssert.assertThat(
             "Empty output isn't empty",
-            new FieldsRepresentation().print(output).show(),
+            new ArrayOfFields().print(output).show(),
             CoreMatchers.equalTo(name)
         );
     }
 
     /**
-     * FieldsRepresentation prints its fields on the output.
+     * ArrayOfFields prints its fields on the output.
      *
      * @throws Exception if something fails.
      */
@@ -69,7 +69,7 @@ public class FieldsRepresentationTest {
         final FakeOutput output = new FakeOutput(name);
         MatcherAssert.assertThat(
             "Fields weren't printed correctly.",
-            new FieldsRepresentation(
+            new ArrayOfFields(
                 new StringField("surname", surname),
                 new IntegerField("age", age),
                 new BooleanField("registered", registered)

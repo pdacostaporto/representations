@@ -111,4 +111,28 @@ public class FakeOutputTest {
             )
         );
     }
+
+    /**
+     * FakeOutput prints a boolean field.
+     *
+     * @throws Exception if anything goes wrong.
+     */
+    @Test
+    public final void printsBooleanField() throws Exception {
+        final String preformat = "username:String:dmr";
+        final Boolean active = false;
+        MatcherAssert.assertThat(
+            "Boolean field isn't being printed correctly.",
+            new FakeOutput(preformat).print("active", active).show(),
+            CoreMatchers.equalTo(
+                StringUtils.join(
+                    new String[] {
+                        preformat,
+                        String.format("active:Boolean:%b", active),
+                    },
+                    String.format("%n")
+                )
+            )
+        );
+    }
 }
