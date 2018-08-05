@@ -135,4 +135,53 @@ public class FakeOutputTest {
             )
         );
     }
+
+    /**
+     * FakeOutput prints a double field.
+     *
+     * @throws Exception if anything goes wrong.
+     */
+    @Test
+    public final void printsDoubleField() throws Exception {
+        final String preformat = "humidity:String:96%";
+        final Double pressure = 29.83;
+        MatcherAssert.assertThat(
+            "Double field isn't being printed correctly.",
+            new FakeOutput(preformat).print("pressure", pressure).show(),
+            CoreMatchers.equalTo(
+                StringUtils.join(
+                    new String[] {
+                        preformat,
+                        String.format("pressure:Double:%f", pressure),
+                    },
+                    String.format("%n")
+                )
+            )
+        );
+    }
+
+    /**
+     * FakeOutput prints a long field.
+     *
+     * @throws Exception if anything goes wrong.
+     */
+    @Test
+    public final void printsLongField() throws Exception {
+        final String preformat =
+            "file:String:Alice In Wonderland (1951) BDrip 1080p x264.mkv";
+        final Long size = 4702923681L;
+        MatcherAssert.assertThat(
+            "Long field isn't being printed correctly.",
+            new FakeOutput(preformat).print("size", size).show(),
+            CoreMatchers.equalTo(
+                StringUtils.join(
+                    new String[] {
+                        preformat,
+                        String.format("size:Long:%d", size),
+                    },
+                    String.format("%n")
+                )
+            )
+        );
+    }
 }

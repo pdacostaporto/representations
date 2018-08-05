@@ -58,26 +58,45 @@ public class FakeOutput implements Output {
     }
 
     @Override
-    public final FakeOutput print(final String key, final String value)
-    throws Exception {
-        return new FakeOutput(
-            String.format("%s%n%s:String:%s", this.output, key, value)
-        );
+    public final FakeOutput print(final String key, final String value) {
+        return this.print(key, "String", value);
     }
 
     @Override
-    public final FakeOutput print(final String key, final Integer value)
-    throws Exception {
-        return new FakeOutput(
-            String.format("%s%n%s:Integer:%d", this.output, key, value)
-        );
+    public final FakeOutput print(final String key, final Integer value) {
+        return this.print(key, "Integer", String.format("%d", value));
     }
 
     @Override
-    public final FakeOutput print(final String key, final Boolean value)
-    throws Exception {
+    public final FakeOutput print(final String key, final Boolean value) {
+        return this.print(key, "Boolean", String.format("%b", value));
+    }
+
+    @Override
+    public final FakeOutput print(final String key, final Double value) {
+        return this.print(key, "Double", String.format("%f", value));
+    }
+
+    @Override
+    public final FakeOutput print(final String key, final Long value) {
+        return this.print(key, "Long", String.format("%d", value));
+    }
+
+    /**
+     * Prints the output with the value already formatted.
+     *
+     * @param key The key of the printed field.
+     * @param type The original type of the printed value.
+     * @param value The value of the printed field already formatted as string.
+     * @return The output with the field printed on it.
+     */
+    private FakeOutput print(
+        final String key,
+        final String type,
+        final String value
+    ) {
         return new FakeOutput(
-            String.format("%s%n%s:Boolean:%b", this.output, key, value)
+            String.format("%s%n%s:%s:%s", this.output, key, type, value)
         );
     }
 }

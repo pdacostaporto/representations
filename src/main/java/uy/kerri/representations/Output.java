@@ -66,4 +66,24 @@ public interface Output {
      * @throws Exception if anything goes wrong.
      */
     Output print(String key, Boolean value) throws Exception;
+
+    /**
+     * Prints a double field on the output.
+     *
+     * @param key The key of the printed field.
+     * @param value The value of the printed field.
+     * @return The output with the field printed on it.
+     * @throws Exception if anything goes wrong.
+     */
+    Output print(String key, Double value) throws Exception;
+
+    /**
+     * Prints a long field on the output.
+     *
+     * @param key The key of the printed field.
+     * @param value The value of the printed field.
+     * @return The output with the field printed on it.
+     * @throws Exception if anything goes wrong.
+     */
+    Output print(String key, Long value) throws Exception;
 }
