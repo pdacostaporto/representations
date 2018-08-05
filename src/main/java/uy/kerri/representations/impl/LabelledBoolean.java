@@ -27,34 +27,34 @@ import uy.kerri.representations.Field;
 import uy.kerri.representations.Output;
 
 /**
- * {@link uy.kerri.representations.Field} consisting of an integer value.
+ * A label-value pair with a boolean value.
  *
  * @since 1.0
  */
-public class IntegerField implements Field {
+public class LabelledBoolean implements Field {
     /**
-     * The name of this field.
+     * The label.
      */
-    private final String name;
+    private final String label;
 
     /**
-     * The value of this field.
+     * The value.
      */
-    private final Integer value;
+    private final Boolean value;
 
     /**
-     * Constructs the field with given key and value.
+     * Constructs a pair with given label and value.
      *
-     * @param key The name for this field.
-     * @param val The value for this field.
+     * @param name The label for this pair.
+     * @param val The value for this pair.
      */
-    public IntegerField(final String key, final Integer val) {
-        this.name = key;
+    public LabelledBoolean(final String name, final Boolean val) {
+        this.label = name;
         this.value = val;
     }
 
     @Override
     public final Output print(final Output output) throws Exception {
-        return output.print(this.name, this.value);
+        return output.print(this.label, this.value);
     }
 }

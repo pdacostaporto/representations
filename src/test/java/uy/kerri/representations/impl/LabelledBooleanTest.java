@@ -21,40 +21,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package uy.kerri.representations.impl;
+package uy.kerri.representations.test.impl;
 
-import uy.kerri.representations.Field;
-import uy.kerri.representations.Output;
+import org.apache.commons.lang3.StringUtils;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.junit.MatcherAssert;
+import org.junit.Test;
+import uy.kerri.representations.fake.FakeOutput;
+import uy.kerri.representations.impl.LabelledBoolean;
 
 /**
- * {@link uy.kerri.representations.Field} consisting of a String value.
+ * Tests for {@link uy.kerri.representations.impl.LabelledBoolean}.
  *
  * @since 1.0
  */
-public class StringField implements Field {
+public class LabelledBooleanTest {
     /**
-     * The name of this field.
-     */
-    private final String name;
-
-    /**
-     * The value of this field.
-     */
-    private final String value;
-
-    /**
-     * Constructs the field with given key and value.
+     * LabelledBoolean prints itself in an output.
      *
-     * @param key The name for this field.
-     * @param val The value for this field.
+     * @throws Exception if something fails.
      */
-    public StringField(final String key, final String val) {
-        this.name = key;
-        this.value = val;
-    }
-
-    @Override
-    public final Output print(final Output output) throws Exception {
-        return output.print(this.name, this.value);
+    @Test
+    public final void printsItself() throws Exception {
+        final String username = "username:String:rms";
+        final Boolean active = true;
+        final FakeOutput output = new FakeOutput(username);
+        MatcherAssert.assertThat(
+            "The field didn't print itself correctly.",
+            new LabelledBoolean("active", active).print(output).show(),
+            CoreMatchers.equalTo(
+                StringUtils.join(
+                    new String[] {
+                        username,
+                        String.format("active:Boolean:%b", active),
+                    },
+                    String.format("%n")
+                )
+            )
+        );
     }
 }

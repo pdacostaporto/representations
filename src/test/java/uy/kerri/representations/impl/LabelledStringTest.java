@@ -28,16 +28,16 @@ import org.hamcrest.CoreMatchers;
 import org.hamcrest.junit.MatcherAssert;
 import org.junit.Test;
 import uy.kerri.representations.fake.FakeOutput;
-import uy.kerri.representations.impl.StringField;
+import uy.kerri.representations.impl.LabelledString;
 
 /**
- * Tests for {@link uy.kerri.representations.impl.StringField}.
+ * Tests for {@link uy.kerri.representations.impl.LabelledString}.
  *
  * @since 1.0
  */
-public class StringFieldTest {
+public class LabelledStringTest {
     /**
-     * StringField prints itself in an output.
+     * LabelledString prints itself in an output.
      *
      * @throws Exception if something fails.
      */
@@ -48,7 +48,7 @@ public class StringFieldTest {
         final String surname = "Musso";
         MatcherAssert.assertThat(
             "Field didn't print itself correctly.",
-            new StringField("surname", surname).print(output).show(),
+            new LabelledString("surname", surname).print(output).show(),
             CoreMatchers.equalTo(
                 StringUtils.join(
                     new String[] {

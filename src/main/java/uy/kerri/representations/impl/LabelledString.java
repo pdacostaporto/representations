@@ -21,43 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package uy.kerri.representations.test.impl;
+package uy.kerri.representations.impl;
 
-import org.apache.commons.lang3.StringUtils;
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.junit.MatcherAssert;
-import org.junit.Test;
-import uy.kerri.representations.fake.FakeOutput;
-import uy.kerri.representations.impl.BooleanField;
+import uy.kerri.representations.Field;
+import uy.kerri.representations.Output;
 
 /**
- * Tests for {@link uy.kerri.representations.impl.BooleanField}.
+ * A label-value pair with a string value.
  *
  * @since 1.0
  */
-public class BooleanFieldTest {
+public class LabelledString implements Field {
     /**
-     * BooleanField prints itself in an output.
-     *
-     * @throws Exception if something fails.
+     * The label.
      */
-    @Test
-    public final void printsItself() throws Exception {
-        final String username = "username:String:rms";
-        final Boolean active = true;
-        final FakeOutput output = new FakeOutput(username);
-        MatcherAssert.assertThat(
-            "The field didn't print itself correctly.",
-            new BooleanField("active", active).print(output).show(),
-            CoreMatchers.equalTo(
-                StringUtils.join(
-                    new String[] {
-                        username,
-                        String.format("active:Boolean:%b", active),
-                    },
-                    String.format("%n")
-                )
-            )
-        );
+    private final String label;
+
+    /**
+     * The value.
+     */
+    private final String value;
+
+    /**
+     * Constructs the pair with given label and value.
+     *
+     * @param name The label for this pair.
+     * @param val The value for this pair.
+     */
+    public LabelledString(final String name, final String val) {
+        this.label = name;
+        this.value = val;
+    }
+
+    @Override
+    public final Output print(final Output output) throws Exception {
+        return output.print(this.label, this.value);
     }
 }

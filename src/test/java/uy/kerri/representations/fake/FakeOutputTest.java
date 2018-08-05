@@ -30,7 +30,7 @@ import org.hamcrest.junit.MatcherAssert;
 import org.junit.Test;
 import uy.kerri.representations.fake.FakeOutput;
 import uy.kerri.representations.impl.ArrayOfFields;
-import uy.kerri.representations.impl.StringField;
+import uy.kerri.representations.impl.LabelledString;
 
 /**
  * Tests for {@link uy.kerri.representations.fake.FakeOutput}.
@@ -73,7 +73,7 @@ public class FakeOutputTest {
      * @throws Exception if anything goes wrong.
      */
     @Test
-    public final void printsStringField() throws Exception {
+    public final void printsLabelledString() throws Exception {
         final String preformat = "place:String:Facultad de Ingeniería, UdelaR";
         final String address = "Julio Herrera y Reissig s/n";
         MatcherAssert.assertThat(
@@ -197,10 +197,10 @@ public class FakeOutputTest {
     public final void printsNestedField() throws Exception {
         final String preformat = "band:String:Hole";
         final ArrayOfFields lineup = new ArrayOfFields(
-            new StringField("vocals", "Courtney Love"),
-            new StringField("guitar", "Eric Erlandson"),
-            new StringField("bass", "Melissa Auf der Maur"),
-            new StringField("drums", "Patty Schemel")
+            new LabelledString("vocals", "Courtney Love"),
+            new LabelledString("guitar", "Eric Erlandson"),
+            new LabelledString("bass", "Melissa Auf der Maur"),
+            new LabelledString("drums", "Patty Schemel")
         );
         MatcherAssert.assertThat(
             "Nested fields aren't being printed correctly.",
@@ -243,5 +243,4 @@ public class FakeOutputTest {
             )
         );
     }
-
 }

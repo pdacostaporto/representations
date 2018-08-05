@@ -28,16 +28,16 @@ import org.hamcrest.CoreMatchers;
 import org.hamcrest.junit.MatcherAssert;
 import org.junit.Test;
 import uy.kerri.representations.fake.FakeOutput;
-import uy.kerri.representations.impl.IntegerField;
+import uy.kerri.representations.impl.LabelledInteger;
 
 /**
- * Tests for {@link uy.kerri.representations.impl.IntegerField}.
+ * Tests for {@link uy.kerri.representations.impl.LabelledInteger}.
  *
  * @since 1.0
  */
-public class IntegerFieldTest {
+public class LabelledIntegerTest {
     /**
-     * IntegerField prints itself in an output.
+     * LabelledInteger prints itself in an output.
      *
      * @throws Exception if something fails.
      */
@@ -48,7 +48,7 @@ public class IntegerFieldTest {
         final Integer age = 53;
         MatcherAssert.assertThat(
             "The field didn't print itself correctly.",
-            new IntegerField("age", age).print(output).show(),
+            new LabelledInteger("age", age).print(output).show(),
             CoreMatchers.equalTo(
                 StringUtils.join(
                     new String[] {

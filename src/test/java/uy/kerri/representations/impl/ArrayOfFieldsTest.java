@@ -29,9 +29,9 @@ import org.hamcrest.junit.MatcherAssert;
 import org.junit.Test;
 import uy.kerri.representations.fake.FakeOutput;
 import uy.kerri.representations.impl.ArrayOfFields;
-import uy.kerri.representations.impl.BooleanField;
-import uy.kerri.representations.impl.IntegerField;
-import uy.kerri.representations.impl.StringField;
+import uy.kerri.representations.impl.LabelledBoolean;
+import uy.kerri.representations.impl.LabelledInteger;
+import uy.kerri.representations.impl.LabelledString;
 
 /**
  * Tests for {@link uy.kerri.representations.impl.ArrayOfFields}.
@@ -70,9 +70,9 @@ public class ArrayOfFieldsTest {
         MatcherAssert.assertThat(
             "Fields weren't printed correctly.",
             new ArrayOfFields(
-                new StringField("surname", surname),
-                new IntegerField("age", age),
-                new BooleanField("registered", registered)
+                new LabelledString("surname", surname),
+                new LabelledInteger("age", age),
+                new LabelledBoolean("registered", registered)
             ).print(output).show(),
             CoreMatchers.equalTo(
                 StringUtils.join(
