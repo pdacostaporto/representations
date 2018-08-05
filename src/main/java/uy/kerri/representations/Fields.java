@@ -28,13 +28,5 @@ package uy.kerri.representations;
  *
  * @since 1.0
  */
-public interface Fields {
-    /**
-     * Prints encapsulated fields in a formatted output.
-     *
-     * @param output A preformatted output to print on.
-     * @return The preformatted output with encapsulated fields printed on it.
-     * @throws Exception if anything goes wrong.
-     */
-    Output print(Output output) throws Exception;
+public interface Fields extends Representation {
 }

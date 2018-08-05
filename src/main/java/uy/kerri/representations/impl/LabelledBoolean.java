@@ -25,13 +25,14 @@ package uy.kerri.representations.impl;
 
 import uy.kerri.representations.Field;
 import uy.kerri.representations.Output;
+import uy.kerri.representations.Value;
 
 /**
  * A label-value pair with a boolean value.
  *
  * @since 1.0
  */
-public class LabelledBoolean implements Field {
+public class LabelledBoolean implements Field, Value {
     /**
      * The label.
      */

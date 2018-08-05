@@ -25,13 +25,14 @@ package uy.kerri.representations.impl;
 
 import uy.kerri.representations.Field;
 import uy.kerri.representations.Output;
+import uy.kerri.representations.Value;
 
 /**
  * A label-value pair with an integer value.
  *
  * @since 1.0
  */
-public class LabelledInteger implements Field {
+public class LabelledInteger implements Field, Value {
     /**
      * The label.
      */

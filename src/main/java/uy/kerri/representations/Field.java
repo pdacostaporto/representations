@@ -28,13 +28,5 @@ package uy.kerri.representations;
  *
  * @since 1.0
  */
-public interface Field {
-    /**
-     * Prints the field in the output.
-     *
-     * @param output Output to print the field on.
-     * @return The output with the field printed on it.
-     * @throws Exception if anything goes wrong
-     */
-    Output print(Output output) throws Exception;
+public interface Field extends Representation {
 }

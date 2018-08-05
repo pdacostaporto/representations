@@ -23,39 +23,44 @@
  */
 package uy.kerri.representations.impl;
 
-import uy.kerri.representations.Field;
+import java.util.Arrays;
 import uy.kerri.representations.Output;
-import uy.kerri.representations.Value;
+import uy.kerri.representations.Representation;
+import uy.kerri.representations.Representations;
 
 /**
- * A label-value pair with a string value.
+ * An array of {@link uy.kerri.Representation}s.
  *
  * @since 1.0
  */
-public class LabelledString implements Field, Value {
+public class ArrayOfRepresentations implements Representations {
     /**
-     * The label.
+     * The array.
      */
-    private final String label;
+    private final Representation[] array;
 
     /**
-     * The value.
-     */
-    private final String value;
-
-    /**
-     * Constructs the pair with given label and value.
+     * Constructs an array with the given representations.
      *
-     * @param name The label for this pair.
-     * @param val The value for this pair.
+     * @param values The array of representations.
      */
-    public LabelledString(final String name, final String val) {
-        this.label = name;
-        this.value = val;
+    public ArrayOfRepresentations(final Representation... values) {
+        this.array = Arrays.copyOf(values, values.length);
+    }
+
+    /**
+     * Constructs an empty array of representations.
+     */
+    public ArrayOfRepresentations() {
+        this(new Representation[0]);
     }
 
     @Override
     public final Output print(final Output output) throws Exception {
-        return output.print(this.label, this.value);
+        Output printed = output;
+        for (final Representation value : this.array) {
+            printed = value.print(printed);
+        }
+        return printed;
     }
 }
