@@ -55,7 +55,7 @@ public class LabelledFieldsTest {
         final FakeOutput output = new FakeOutput(movie);
         MatcherAssert.assertThat(
             "The fields didn't print themselves correctly.",
-            new LabelledFields("staff", staff).print(output).show(),
+            new LabelledFields("staff", staff).printTo(output).show(),
             CoreMatchers.equalTo(
                 StringUtils.join(
                     new String[] {
@@ -63,7 +63,7 @@ public class LabelledFieldsTest {
                         String.format(
                             "staff:Nested:%n\t%s",
                             StringUtils.replace(
-                                staff.print(new FakeOutput()).show(),
+                                staff.printTo(new FakeOutput()).show(),
                                 String.format("%n"),
                                 String.format("%n\t")
                             )

@@ -48,7 +48,7 @@ public class LabelledStringTest {
         final String surname = "Musso";
         MatcherAssert.assertThat(
             "Field didn't print itself correctly.",
-            new LabelledString("surname", surname).print(output).show(),
+            new LabelledString("surname", surname).printTo(output).show(),
             CoreMatchers.equalTo(
                 StringUtils.join(
                     new String[] {

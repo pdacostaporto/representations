@@ -56,7 +56,7 @@ public class LabelledFields implements Field, Value {
     }
 
     @Override
-    public final Output print(final Output output) throws Exception {
+    public final Output printTo(final Output output) throws Exception {
         return output.print(this.label, this.value);
     }
 }

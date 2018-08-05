@@ -50,7 +50,7 @@ public class ArrayOfRepresentationsTest {
         final FakeOutput output = new FakeOutput(name);
         MatcherAssert.assertThat(
             "Empty output isn't empty",
-            new ArrayOfRepresentations().print(output).show(),
+            new ArrayOfRepresentations().printTo(output).show(),
             CoreMatchers.equalTo(name)
         );
     }
@@ -73,7 +73,7 @@ public class ArrayOfRepresentationsTest {
                 new LabelledString("surname", surname),
                 new LabelledInteger("age", age),
                 new LabelledBoolean("registered", registered)
-            ).print(output).show(),
+            ).printTo(output).show(),
             CoreMatchers.equalTo(
                 StringUtils.join(
                     new String[] {

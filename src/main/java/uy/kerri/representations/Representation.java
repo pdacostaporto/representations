@@ -36,5 +36,5 @@ public interface Representation {
      * @return The preformatted output with encapsulated data printed on it.
      * @throws Exception if anything goes wrong.
      */
-    Output print(Output output) throws Exception;
+    Output printTo(Output output) throws Exception;
 }

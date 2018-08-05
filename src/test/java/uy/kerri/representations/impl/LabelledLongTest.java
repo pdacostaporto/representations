@@ -48,7 +48,7 @@ public class LabelledLongTest {
         final FakeOutput output = new FakeOutput(filename);
         MatcherAssert.assertThat(
             "The value didn't print itself correctly.",
-            new LabelledLong("size", size).print(output).show(),
+            new LabelledLong("size", size).printTo(output).show(),
             CoreMatchers.equalTo(
                 StringUtils.join(
                     new String[] {

@@ -94,7 +94,7 @@ public class FakeOutput implements Output {
             key,
             "Nested",
             this.reformat(
-                value.print(new FakeOutput()).show(),
+                value.printTo(new FakeOutput()).show(),
                 String.format("%n\t")
             )
         );
@@ -109,7 +109,7 @@ public class FakeOutput implements Output {
             key,
             "Multivalued",
             this.reformat(
-                values.print(new FakeOutput()).show(),
+                values.printTo(new FakeOutput()).show(),
                 String.format("%n*")
             )
         );

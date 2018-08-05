@@ -215,7 +215,7 @@ public class FakeOutputTest {
                                 new String[] {
                                     String.format("lineup:Nested:"),
                                 },
-                                lineup.print(new FakeOutput())
+                                lineup.printTo(new FakeOutput())
                                 .show()
                                 .split(String.format("%n"))
                             ),
@@ -257,7 +257,7 @@ public class FakeOutputTest {
                                 new String[] {
                                     String.format("albums:Multivalued:"),
                                 },
-                                albums.print(new FakeOutput())
+                                albums.printTo(new FakeOutput())
                                 .show()
                                 .split(String.format("%n"))
                             ),

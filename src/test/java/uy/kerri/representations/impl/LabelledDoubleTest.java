@@ -48,7 +48,7 @@ public class LabelledDoubleTest {
         final FakeOutput output = new FakeOutput(humidity);
         MatcherAssert.assertThat(
             "The value didn't print itself correctly.",
-            new LabelledDouble("pressure", pressure).print(output).show(),
+            new LabelledDouble("pressure", pressure).printTo(output).show(),
             CoreMatchers.equalTo(
                 StringUtils.join(
                     new String[] {

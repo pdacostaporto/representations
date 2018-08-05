@@ -48,7 +48,7 @@ public class LabelledBooleanTest {
         final FakeOutput output = new FakeOutput(username);
         MatcherAssert.assertThat(
             "The field didn't print itself correctly.",
-            new LabelledBoolean("active", active).print(output).show(),
+            new LabelledBoolean("active", active).printTo(output).show(),
             CoreMatchers.equalTo(
                 StringUtils.join(
                     new String[] {

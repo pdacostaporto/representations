@@ -48,7 +48,7 @@ public class LabelledIntegerTest {
         final Integer age = 53;
         MatcherAssert.assertThat(
             "The field didn't print itself correctly.",
-            new LabelledInteger("age", age).print(output).show(),
+            new LabelledInteger("age", age).printTo(output).show(),
             CoreMatchers.equalTo(
                 StringUtils.join(
                     new String[] {

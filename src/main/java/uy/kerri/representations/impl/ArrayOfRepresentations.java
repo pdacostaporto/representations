@@ -56,10 +56,10 @@ public class ArrayOfRepresentations implements Representations {
     }
 
     @Override
-    public final Output print(final Output output) throws Exception {
+    public final Output printTo(final Output output) throws Exception {
         Output printed = output;
         for (final Representation value : this.array) {
-            printed = value.print(printed);
+            printed = value.printTo(printed);
         }
         return printed;
     }

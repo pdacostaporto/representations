@@ -55,7 +55,7 @@ public class ArrayOfFields implements Fields {
     }
 
     @Override
-    public final Output print(final Output output) throws Exception {
-        return this.array.print(output);
+    public final Output printTo(final Output output) throws Exception {
+        return this.array.printTo(output);
     }
 }

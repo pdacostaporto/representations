@@ -57,7 +57,11 @@ public class LabelledRepresentationsTest {
         final FakeOutput output = new FakeOutput(artist);
         MatcherAssert.assertThat(
             "The values didn't print themselves correctly.",
-            new LabelledRepresentations("albums", albums).print(output).show(),
+            new LabelledRepresentations(
+                "albums",
+                albums
+            ).printTo(output)
+            .show(),
             CoreMatchers.equalTo(
                 StringUtils.join(
                     new String[] {
@@ -65,7 +69,7 @@ public class LabelledRepresentationsTest {
                         String.format(
                             "albums:Multivalued:%n*%s",
                             StringUtils.replace(
-                                albums.print(new FakeOutput()).show(),
+                                albums.printTo(new FakeOutput()).show(),
                                 String.format("%n"),
                                 String.format("%n*")
                             )
