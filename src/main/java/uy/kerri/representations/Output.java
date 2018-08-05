@@ -96,4 +96,14 @@ public interface Output {
      * @throws Exception if anything goes wrong.
      */
     Output print(String key, Fields value) throws Exception;
+
+    /**
+     * Prints a multivalued field on the output.
+     *
+     * @param key The key of the printed field.
+     * @param values The values of the printed field.
+     * @return The output with the field printed on it.
+     * @throws Exception if anything goes wrong.
+     */
+    Output print(String key, Representations values) throws Exception;
 }

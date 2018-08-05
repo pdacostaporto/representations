@@ -30,6 +30,7 @@ import org.hamcrest.junit.MatcherAssert;
 import org.junit.Test;
 import uy.kerri.representations.fake.FakeOutput;
 import uy.kerri.representations.impl.ArrayOfFields;
+import uy.kerri.representations.impl.ArrayOfRepresentations;
 import uy.kerri.representations.impl.LabelledString;
 
 /**
@@ -212,7 +213,7 @@ public class FakeOutputTest {
                         StringUtils.join(
                             ArrayUtils.addAll(
                                 new String[] {
-                                    String.format("lineup:"),
+                                    String.format("lineup:Nested:"),
                                 },
                                 lineup.print(new FakeOutput())
                                 .show()
@@ -228,7 +229,49 @@ public class FakeOutputTest {
     }
 
     /**
-     * FakeOutput a field correctly if originally empty.
+     * FakeOutput prints a multivalued field.
+     *
+     * @throws Exception if anything goes wrong.
+     */
+    @Test
+    public final void printsMultivaluedField() throws Exception {
+        final String preformat = "artist:String:Silver Jews";
+        final String label = "album";
+        final ArrayOfRepresentations albums = new ArrayOfRepresentations(
+            new LabelledString(label, "Starlite Walker"),
+            new LabelledString(label, "The Natural Bridge"),
+            new LabelledString(label, "American Water"),
+            new LabelledString(label, "Bright Flight"),
+            new LabelledString(label, "Tanglewood Numbers"),
+            new LabelledString(label, "Lookout Mountain, Lookout Sea")
+        );
+        MatcherAssert.assertThat(
+            "Multivalued field isn't being printed correctly.",
+            new FakeOutput(preformat).print("albums", albums).show(),
+            CoreMatchers.equalTo(
+                StringUtils.join(
+                    new String[] {
+                        preformat,
+                        StringUtils.join(
+                            ArrayUtils.addAll(
+                                new String[] {
+                                    String.format("albums:Multivalued:"),
+                                },
+                                albums.print(new FakeOutput())
+                                .show()
+                                .split(String.format("%n"))
+                            ),
+                            String.format("%n*")
+                        ),
+                    },
+                    String.format("%n")
+                )
+            )
+        );
+    }
+
+    /**
+     * FakeOutput prints a field correctly if originally empty.
      *
      * @throws Exception if anything goes wrong.
      */

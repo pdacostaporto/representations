@@ -23,10 +23,10 @@
  */
 package uy.kerri.representations.fake;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
+import uy.kerri.representations.Representations;
 
 /**
  * Output implementation for testing purposes.
@@ -91,18 +91,45 @@ public class FakeOutput implements Output {
         final Fields value
     ) throws Exception {
         return this.print(
-            StringUtils.join(
-                ArrayUtils.addAll(
-                    new String[] {
-                        String.format("%s:", key),
-                    },
-                    value.print(
-                        new FakeOutput()
-                    ).show()
-                    .split(String.format("%n"))
-                ),
+            key,
+            "Nested",
+            this.reformat(
+                value.print(new FakeOutput()).show(),
                 String.format("%n\t")
             )
+        );
+    }
+
+    @Override
+    public final FakeOutput print(
+        final String key,
+        final Representations values
+    ) throws Exception {
+        return this.print(
+            key,
+            "Multivalued",
+            this.reformat(
+                values.print(new FakeOutput()).show(),
+                String.format("%n*")
+            )
+        );
+    }
+
+    /**
+     * Reformats the output of another representation.
+     *
+     * @param input The original output of the representation.
+     * @param separator The separator used to join the lines of the output.
+     * @return The reformatted output.
+     */
+    private static String reformat(
+        final String input,
+        final String separator
+    ) {
+        return String.format(
+            "%s%s",
+            separator,
+            StringUtils.join(input.split(String.format("%n")), separator)
         );
     }
 
@@ -119,22 +146,11 @@ public class FakeOutput implements Output {
         final String type,
         final String value
     ) {
-        return this.print(String.format("%s:%s:%s", key, type, value));
-    }
-
-    /**
-     * Prints a field.
-     *
-     * @param field A field to print, already formatted as a string.
-     * @return The output with the field printed on it.
-     */
-    private FakeOutput print(final String field) {
-        final String printed;
-        if (this.output.equals("")) {
-            printed = field;
-        } else {
-            printed = String.format("%s%n%s", this.output, field);
-        }
-        return new FakeOutput(printed);
+        return new FakeOutput(
+            StringUtils.stripStart(
+                String.format("%s%n%s:%s:%s", this.output, key, type, value),
+                String.format("%n")
+            )
+        );
     }
 }
