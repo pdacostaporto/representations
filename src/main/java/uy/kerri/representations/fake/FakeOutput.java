@@ -23,6 +23,9 @@
  */
 package uy.kerri.representations.fake;
 
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
+import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
 
 /**
@@ -82,6 +85,27 @@ public class FakeOutput implements Output {
         return this.print(key, "Long", String.format("%d", value));
     }
 
+    @Override
+    public final FakeOutput print(
+        final String key,
+        final Fields value
+    ) throws Exception {
+        return this.print(
+            StringUtils.join(
+                ArrayUtils.addAll(
+                    new String[] {
+                        String.format("%s:", key),
+                    },
+                    value.print(
+                        new FakeOutput()
+                    ).show()
+                    .split(String.format("%n"))
+                ),
+                String.format("%n\t")
+            )
+        );
+    }
+
     /**
      * Prints the output with the value already formatted.
      *
@@ -95,8 +119,22 @@ public class FakeOutput implements Output {
         final String type,
         final String value
     ) {
-        return new FakeOutput(
-            String.format("%s%n%s:%s:%s", this.output, key, type, value)
-        );
+        return this.print(String.format("%s:%s:%s", key, type, value));
+    }
+
+    /**
+     * Prints a field.
+     *
+     * @param field A field to print, already formatted as a string.
+     * @return The output with the field printed on it.
+     */
+    private FakeOutput print(final String field) {
+        final String printed;
+        if (this.output.equals("")) {
+            printed = field;
+        } else {
+            printed = String.format("%s%n%s", this.output, field);
+        }
+        return new FakeOutput(printed);
     }
 }

@@ -23,11 +23,14 @@
  */
 package uy.kerri.representations.test.fake;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.junit.MatcherAssert;
 import org.junit.Test;
 import uy.kerri.representations.fake.FakeOutput;
+import uy.kerri.representations.impl.ArrayOfFields;
+import uy.kerri.representations.impl.StringField;
 
 /**
  * Tests for {@link uy.kerri.representations.fake.FakeOutput}.
@@ -184,4 +187,61 @@ public class FakeOutputTest {
             )
         );
     }
+
+    /**
+     * FakeOutput prints a nested field.
+     *
+     * @throws Exception if anything goes wrong.
+     */
+    @Test
+    public final void printsNestedField() throws Exception {
+        final String preformat = "band:String:Hole";
+        final ArrayOfFields lineup = new ArrayOfFields(
+            new StringField("vocals", "Courtney Love"),
+            new StringField("guitar", "Eric Erlandson"),
+            new StringField("bass", "Melissa Auf der Maur"),
+            new StringField("drums", "Patty Schemel")
+        );
+        MatcherAssert.assertThat(
+            "Nested fields aren't being printed correctly.",
+            new FakeOutput(preformat).print("lineup", lineup).show(),
+            CoreMatchers.equalTo(
+                StringUtils.join(
+                    new String[] {
+                        preformat,
+                        StringUtils.join(
+                            ArrayUtils.addAll(
+                                new String[] {
+                                    String.format("lineup:"),
+                                },
+                                lineup.print(new FakeOutput())
+                                .show()
+                                .split(String.format("%n"))
+                            ),
+                            String.format("%n\t")
+                        ),
+                    },
+                    String.format("%n")
+                )
+            )
+        );
+    }
+
+    /**
+     * FakeOutput a field correctly if originally empty.
+     *
+     * @throws Exception if anything goes wrong.
+     */
+    @Test
+    public final void printsCorrectlyIfEmpty() throws Exception {
+        final String sentence = "No sea nabo, Neber.";
+        MatcherAssert.assertThat(
+            "Field not printing correctly if output is empty.",
+            new FakeOutput().print("sentence", sentence).show(),
+            CoreMatchers.equalTo(
+                String.format("sentence:String:%s", sentence)
+            )
+        );
+    }
+
 }

@@ -86,4 +86,14 @@ public interface Output {
      * @throws Exception if anything goes wrong.
      */
     Output print(String key, Long value) throws Exception;
+
+    /**
+     * Prints nested fields on the output.
+     *
+     * @param key The key of the printed field.
+     * @param value The nested fields of the printed field.
+     * @return The output with the nested fields printed on it.
+     * @throws Exception if anything goes wrong.
+     */
+    Output print(String key, Fields value) throws Exception;
 }
