@@ -25,7 +25,7 @@ package uy.kerri.representations.impl;
 
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
-import uy.kerri.representations.Representations;
+import uy.kerri.representations.Values;
 import uy.kerri.representations.exception.FieldNotMatchedException;
 
 /**
@@ -156,7 +156,7 @@ public class SelectedFieldOutput implements Output {
 
     @Override
     public final Output print(
-        final String key, final Representations values
+        final String key, final Values values
     ) throws Exception {
         final Output output;
         if (key.equals(this.field)) {

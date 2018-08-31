@@ -26,7 +26,7 @@ package uy.kerri.representations.fake;
 import org.apache.commons.lang3.StringUtils;
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
-import uy.kerri.representations.Representations;
+import uy.kerri.representations.Values;
 
 /**
  * Output implementation for testing purposes.
@@ -103,7 +103,7 @@ public class FakeOutput implements Output {
     @Override
     public final FakeOutput print(
         final String key,
-        final Representations values
+        final Values values
     ) throws Exception {
         return this.print(
             key,

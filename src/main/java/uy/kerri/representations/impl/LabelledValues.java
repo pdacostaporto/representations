@@ -25,15 +25,15 @@ package uy.kerri.representations.impl;
 
 import uy.kerri.representations.Field;
 import uy.kerri.representations.Output;
-import uy.kerri.representations.Representations;
 import uy.kerri.representations.Value;
+import uy.kerri.representations.Values;
 
 /**
  * A label-value pair with multiple values.
  *
  * @since 1.0
  */
-public class LabelledRepresentations implements Field, Value {
+public class LabelledValues implements Field, Value {
     /**
      * The label.
      */
@@ -42,7 +42,7 @@ public class LabelledRepresentations implements Field, Value {
     /**
      * The values.
      */
-    private final Representations values;
+    private final Values values;
 
     /**
      * Constructs a pair with given label and values.
@@ -50,10 +50,7 @@ public class LabelledRepresentations implements Field, Value {
      * @param name The label for this pair.
      * @param vals The values for this pair.
      */
-    public LabelledRepresentations(
-        final String name,
-        final Representations vals
-    ) {
+    public LabelledValues(final String name, final Values vals) {
         this.label = name;
         this.values = vals;
     }

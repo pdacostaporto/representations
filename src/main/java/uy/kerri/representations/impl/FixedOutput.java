@@ -25,7 +25,7 @@ package uy.kerri.representations.impl;
 
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
-import uy.kerri.representations.Representations;
+import uy.kerri.representations.Values;
 
 /**
  * {@link uy.kerri.representations.Output} that shows an object and ignores any
@@ -93,7 +93,7 @@ public class FixedOutput implements Output {
     @Override
     public final FixedOutput print(
         final String key,
-        final Representations values
+        final Values values
     ) {
         return this;
     }

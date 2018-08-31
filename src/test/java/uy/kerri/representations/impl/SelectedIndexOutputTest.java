@@ -30,7 +30,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import uy.kerri.representations.exception.IndexNotFoundException;
 import uy.kerri.representations.impl.ArrayOfFields;
-import uy.kerri.representations.impl.ArrayOfRepresentations;
+import uy.kerri.representations.impl.ArrayOfValues;
 import uy.kerri.representations.impl.LabelledValue;
 import uy.kerri.representations.impl.SelectedFieldOutput;
 import uy.kerri.representations.impl.SelectedIndexOutput;
@@ -60,7 +60,7 @@ public class SelectedIndexOutputTest {
         final Integer index = 4;
         MatcherAssert.assertThat(
             "The correct string value wasn't selected.",
-            new ArrayOfRepresentations(
+            new ArrayOfValues(
                 new LabelledValue(label, "Argentina"),
                 new LabelledValue(label, "Brazil"),
                 new LabelledValue(label, "Paraguay"),
@@ -85,11 +85,11 @@ public class SelectedIndexOutputTest {
         final Integer status = 200;
         MatcherAssert.assertThat(
             "The correct integer value wasn't selected.",
-            new ArrayOfRepresentations(
+            new ArrayOfValues(
                 new LabelledValue("address", "api.blizz.io"),
                 new LabelledValue(
                     "headers",
-                    new ArrayOfRepresentations(
+                    new ArrayOfValues(
                         new LabelledValue("Connection", "keep-alive"),
                         new LabelledValue("Content-Length", length)
                     )
@@ -114,13 +114,13 @@ public class SelectedIndexOutputTest {
         final Integer index = 5;
         MatcherAssert.assertThat(
             "The correct boolean value wasn't selected.",
-            new ArrayOfRepresentations(
+            new ArrayOfValues(
                 new LabelledValue("username", "zidadin"),
                 new LabelledValue("email", "zidadin@kerri.uy"),
                 new LabelledValue(
                     "lastPost",
                     new ArrayOfFields(
-                        new LabelledValue("subject", "Representations"),
+                        new LabelledValue("subject", "Values"),
                         new LabelledValue("date", "2017-01-01")
                     )
                 ),
@@ -144,7 +144,7 @@ public class SelectedIndexOutputTest {
         final Integer index = 3;
         MatcherAssert.assertThat(
             "The correct double value wasn't selected.",
-            new ArrayOfRepresentations(
+            new ArrayOfValues(
                 new LabelledValue("symbol", "H"),
                 new LabelledValue("atomicNumber", 1),
                 new LabelledValue("densityAtSTP", value),
@@ -167,7 +167,7 @@ public class SelectedIndexOutputTest {
         final Integer index = 4;
         MatcherAssert.assertThat(
             "The correct value wasn't selected.",
-            new ArrayOfRepresentations(
+            new ArrayOfValues(
                 new LabelledValue("introduced", introduced),
                 new LabelledValue("developer", "Microsoft"),
                 new LabelledValue("acronym", "NTFS"),
@@ -191,7 +191,7 @@ public class SelectedIndexOutputTest {
         final Integer first = 200;
         MatcherAssert.assertThat(
             "The nested value wasn't selected.",
-            new ArrayOfRepresentations(
+            new ArrayOfValues(
                 new LabelledValue("first", first),
                 new LabelledValue(
                     field,
@@ -226,12 +226,12 @@ public class SelectedIndexOutputTest {
         final Integer inner = 2;
         MatcherAssert.assertThat(
             "The value in the sequence of values wasn't selected.",
-            new ArrayOfRepresentations(
+            new ArrayOfValues(
                 new LabelledValue("1st", first),
                 new LabelledValue("2nd", "the 2nd outer value"),
                 new LabelledValue(
                     "3rd",
-                    new ArrayOfRepresentations(
+                    new ArrayOfValues(
                         new LabelledValue("1st index", "1st value"),
                         new LabelledValue("2nd index", value),
                         new LabelledValue("3rd index", "3rd value")
@@ -257,7 +257,7 @@ public class SelectedIndexOutputTest {
         this.thrown.expectMessage(
             CoreMatchers.equalTo("The index is not present.")
         );
-        new ArrayOfRepresentations(
+        new ArrayOfValues(
             new LabelledValue("this", "is"),
             new LabelledValue(
                 "my",

@@ -25,40 +25,40 @@ package uy.kerri.representations.impl;
 
 import java.util.Arrays;
 import uy.kerri.representations.Output;
-import uy.kerri.representations.Representation;
-import uy.kerri.representations.Representations;
+import uy.kerri.representations.Value;
+import uy.kerri.representations.Values;
 
 /**
- * An array of {@link uy.kerri.Representation}s.
+ * An array of {@link uy.kerri.Value}s.
  *
  * @since 1.0
  */
-public class ArrayOfRepresentations implements Representations {
+public class ArrayOfValues implements Values {
     /**
      * The array.
      */
-    private final Representation[] array;
+    private final Value[] array;
 
     /**
-     * Constructs an array with the given representations.
+     * Constructs an array with the given values.
      *
-     * @param values The array of representations.
+     * @param values The array of values.
      */
-    public ArrayOfRepresentations(final Representation... values) {
+    public ArrayOfValues(final Value... values) {
         this.array = Arrays.copyOf(values, values.length);
     }
 
     /**
-     * Constructs an empty array of representations.
+     * Constructs an empty array of values.
      */
-    public ArrayOfRepresentations() {
-        this(new Representation[0]);
+    public ArrayOfValues() {
+        this(new Value[0]);
     }
 
     @Override
     public final Output printTo(final Output output) throws Exception {
         Output printed = output;
-        for (final Representation value : this.array) {
+        for (final Value value : this.array) {
             printed = value.printTo(printed);
         }
         return printed;

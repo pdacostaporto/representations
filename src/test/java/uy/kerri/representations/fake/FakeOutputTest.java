@@ -30,7 +30,7 @@ import org.hamcrest.junit.MatcherAssert;
 import org.junit.Test;
 import uy.kerri.representations.fake.FakeOutput;
 import uy.kerri.representations.impl.ArrayOfFields;
-import uy.kerri.representations.impl.ArrayOfRepresentations;
+import uy.kerri.representations.impl.ArrayOfValues;
 import uy.kerri.representations.impl.LabelledString;
 
 /**
@@ -237,7 +237,7 @@ public class FakeOutputTest {
     public final void printsMultivaluedField() throws Exception {
         final String preformat = "artist:String:Silver Jews";
         final String label = "album";
-        final ArrayOfRepresentations albums = new ArrayOfRepresentations(
+        final ArrayOfValues albums = new ArrayOfValues(
             new LabelledString(label, "Starlite Walker"),
             new LabelledString(label, "The Natural Bridge"),
             new LabelledString(label, "American Water"),

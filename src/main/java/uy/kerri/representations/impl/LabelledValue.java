@@ -26,8 +26,8 @@ package uy.kerri.representations.impl;
 import uy.kerri.representations.Field;
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
-import uy.kerri.representations.Representations;
 import uy.kerri.representations.Value;
+import uy.kerri.representations.Values;
 
 /**
  * A label-value pair.
@@ -114,8 +114,8 @@ public class LabelledValue implements Field, Value {
      * @param name The label for this pair.
      * @param values The values for this pair.
      */
-    public LabelledValue(final String name, final Representations values) {
-        this(new LabelledRepresentations(name, values));
+    public LabelledValue(final String name, final Values values) {
+        this(new LabelledValues(name, values));
     }
 
     @Override

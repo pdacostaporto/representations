@@ -30,7 +30,7 @@ import org.json.JSONObject;
 import org.junit.Test;
 import uk.co.datumedge.hamcrest.json.SameJSONAs;
 import uy.kerri.representations.impl.ArrayOfFields;
-import uy.kerri.representations.impl.ArrayOfRepresentations;
+import uy.kerri.representations.impl.ArrayOfValues;
 import uy.kerri.representations.impl.JsonArrayOutput;
 import uy.kerri.representations.impl.JsonObjectOutput;
 import uy.kerri.representations.impl.LabelledString;
@@ -206,7 +206,7 @@ public class JsonObjectOutputTest {
         final String preformat = "{\"artist\":\"Silver Jews\"}";
         final String key = "albums";
         final String label = "album";
-        final ArrayOfRepresentations values = new ArrayOfRepresentations(
+        final ArrayOfValues values = new ArrayOfValues(
             new LabelledString(label, "Starlite Walker"),
             new LabelledString(label, "The Natural Bridge"),
             new LabelledString(label, "American Water"),

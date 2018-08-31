@@ -105,5 +105,5 @@ public interface Output {
      * @return The output with the field printed on it.
      * @throws Exception if anything goes wrong.
      */
-    Output print(String key, Representations values) throws Exception;
+    Output print(String key, Values values) throws Exception;
 }

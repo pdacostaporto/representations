@@ -27,7 +27,7 @@ import org.hamcrest.CoreMatchers;
 import org.hamcrest.junit.MatcherAssert;
 import org.junit.Test;
 import uy.kerri.representations.impl.ArrayOfFields;
-import uy.kerri.representations.impl.ArrayOfRepresentations;
+import uy.kerri.representations.impl.ArrayOfValues;
 import uy.kerri.representations.impl.FixedOutput;
 import uy.kerri.representations.impl.LabelledString;
 
@@ -88,7 +88,7 @@ public class FixedOutputTest {
                 )
             ).print(
                 "doesntmatter",
-                new ArrayOfRepresentations(
+                new ArrayOfValues(
                     new LabelledString("anotherlabel", "anotherstring")
                 )
             ).show(),

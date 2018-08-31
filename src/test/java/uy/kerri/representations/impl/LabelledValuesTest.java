@@ -27,20 +27,20 @@ import org.apache.commons.lang3.StringUtils;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.junit.MatcherAssert;
 import org.junit.Test;
-import uy.kerri.representations.Representations;
+import uy.kerri.representations.Values;
 import uy.kerri.representations.fake.FakeOutput;
-import uy.kerri.representations.impl.ArrayOfRepresentations;
-import uy.kerri.representations.impl.LabelledRepresentations;
+import uy.kerri.representations.impl.ArrayOfValues;
+import uy.kerri.representations.impl.LabelledValues;
 import uy.kerri.representations.impl.LabelledString;
 
 /**
- * Tests for {@link uy.kerri.representations.impl.LabelledRepresentations}.
+ * Tests for {@link uy.kerri.representations.impl.LabelledValues}.
  *
  * @since 1.0
  */
-public class LabelledRepresentationsTest {
+public class LabelledValuesTest {
     /**
-     * LabelledRepresentations print themselves in an output.
+     * LabelledValues print themselves in an output.
      *
      * @throws Exception if something fails.
      */
@@ -48,7 +48,7 @@ public class LabelledRepresentationsTest {
     public final void printThemselves() throws Exception {
         final String artist = "artis:String:Boards of Canada";
         final String label = "album";
-        final Representations albums = new ArrayOfRepresentations(
+        final Values albums = new ArrayOfValues(
             new LabelledString(label, "Music Has the Right to Children"),
             new LabelledString(label, "Geogaddi"),
             new LabelledString(label, "The Campfire Headphase"),
@@ -57,7 +57,7 @@ public class LabelledRepresentationsTest {
         final FakeOutput output = new FakeOutput(artist);
         MatcherAssert.assertThat(
             "The values didn't print themselves correctly.",
-            new LabelledRepresentations(
+            new LabelledValues(
                 "albums",
                 albums
             ).printTo(output)

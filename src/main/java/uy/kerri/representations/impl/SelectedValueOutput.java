@@ -25,7 +25,7 @@ package uy.kerri.representations.impl;
 
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
-import uy.kerri.representations.Representations;
+import uy.kerri.representations.Values;
 import uy.kerri.representations.exception.ValueNotSelectedException;
 
 /**
@@ -71,7 +71,7 @@ public class SelectedValueOutput implements Output {
     }
 
     @Override
-    public final Output print(final String key, final Representations values) {
+    public final Output print(final String key, final Values values) {
         return this.select(values);
     }
 

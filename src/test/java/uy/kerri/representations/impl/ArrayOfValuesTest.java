@@ -28,19 +28,19 @@ import org.hamcrest.CoreMatchers;
 import org.hamcrest.junit.MatcherAssert;
 import org.junit.Test;
 import uy.kerri.representations.fake.FakeOutput;
-import uy.kerri.representations.impl.ArrayOfRepresentations;
+import uy.kerri.representations.impl.ArrayOfValues;
 import uy.kerri.representations.impl.LabelledBoolean;
 import uy.kerri.representations.impl.LabelledInteger;
 import uy.kerri.representations.impl.LabelledString;
 
 /**
- * Tests for {@link uy.kerri.representations.impl.ArrayOfRepresentations}.
+ * Tests for {@link uy.kerri.representations.impl.ArrayOfValues}.
  *
  * @since 1.0
  */
-public class ArrayOfRepresentationsTest {
+public class ArrayOfValuesTest {
     /**
-     * ArrayOfRepresentations prints nothing if it has no representations.
+     * ArrayOfValues prints nothing if it has no values.
      *
      * @throws Exception if something fails.
      */
@@ -50,13 +50,13 @@ public class ArrayOfRepresentationsTest {
         final FakeOutput output = new FakeOutput(name);
         MatcherAssert.assertThat(
             "Empty output isn't empty",
-            new ArrayOfRepresentations().printTo(output).show(),
+            new ArrayOfValues().printTo(output).show(),
             CoreMatchers.equalTo(name)
         );
     }
 
     /**
-     * ArrayOfRepresentations prints its representations on the output.
+     * ArrayOfValues prints its representations on the output.
      *
      * @throws Exception if something fails.
      */
@@ -69,7 +69,7 @@ public class ArrayOfRepresentationsTest {
         final FakeOutput output = new FakeOutput(name);
         MatcherAssert.assertThat(
             "Representations weren't printed correctly.",
-            new ArrayOfRepresentations(
+            new ArrayOfValues(
                 new LabelledString("surname", surname),
                 new LabelledInteger("age", age),
                 new LabelledBoolean("registered", registered)

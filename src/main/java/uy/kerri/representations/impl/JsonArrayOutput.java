@@ -29,7 +29,7 @@ import javax.json.JsonArrayBuilder;
 import javax.json.JsonReader;
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
-import uy.kerri.representations.Representations;
+import uy.kerri.representations.Values;
 
 /**
  * Output in JSON array format.
@@ -143,7 +143,7 @@ public class JsonArrayOutput implements Output {
     @Override
     public final JsonArrayOutput print(
         final String label,
-        final Representations values
+        final Values values
     ) throws Exception {
         return new JsonArrayOutput(
             this.builder().add(

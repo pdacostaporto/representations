@@ -30,7 +30,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import uy.kerri.representations.exception.FieldNotMatchedException;
 import uy.kerri.representations.impl.ArrayOfFields;
-import uy.kerri.representations.impl.ArrayOfRepresentations;
+import uy.kerri.representations.impl.ArrayOfValues;
 import uy.kerri.representations.impl.LabelledValue;
 import uy.kerri.representations.impl.SelectedFieldOutput;
 import uy.kerri.representations.impl.SelectedIndexOutput;
@@ -77,7 +77,7 @@ public class SelectedFieldOutputTest {
                 ),
                 new LabelledValue(
                     "teams",
-                    new ArrayOfRepresentations(
+                    new ArrayOfValues(
                         new LabelledValue(team, "Argentina National Team"),
                         new LabelledValue(team, "Barcelona")
                     )
@@ -238,7 +238,7 @@ public class SelectedFieldOutputTest {
                 new LabelledValue("account", "199992-20001"),
                 new LabelledValue(
                     field,
-                    new ArrayOfRepresentations(
+                    new ArrayOfValues(
                         new LabelledValue("2018-01-02", first),
                         new LabelledValue("2018-02-02", value),
                         new LabelledValue("2018-03-02", third)
