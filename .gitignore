@@ -3,3 +3,7 @@
 
 # Maven target directory
 target
+
+# Vagrant files
+.vagrant
+*.log
