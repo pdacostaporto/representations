@@ -29,7 +29,7 @@ import uy.kerri.representations.Value;
 import uy.kerri.representations.Values;
 
 /**
- * An array of {@link uy.kerri.Value}s.
+ * An array of {@link uy.kerri.representations.Value}s.
  *
  * @since 1.0
  */
