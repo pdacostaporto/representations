@@ -79,65 +79,35 @@ public class SelectedFieldOutput implements Output {
     public final Output print(
         final String key, final String value
     ) throws Exception {
-        final Output output;
-        if (key.equals(this.field)) {
-            output = this.nested.print(key, value);
-        } else {
-            output = this;
-        }
-        return output;
+        return this.select(key, this.nested.print(key, value));
     }
 
     @Override
     public final Output print(
         final String key, final Integer value
     ) throws Exception {
-        final Output output;
-        if (key.equals(this.field)) {
-            output = this.nested.print(key, value);
-        } else {
-            output = this;
-        }
-        return output;
+        return this.select(key, this.nested.print(key, value));
     }
 
     @Override
     public final Output print(
         final String key, final Boolean value
     ) throws Exception {
-        final Output output;
-        if (key.equals(this.field)) {
-            output = this.nested.print(key, value);
-        } else {
-            output = this;
-        }
-        return output;
+        return this.select(key, this.nested.print(key, value));
     }
 
     @Override
     public final Output print(
         final String key, final Double value
     ) throws Exception {
-        final Output output;
-        if (key.equals(this.field)) {
-            output = this.nested.print(key, value);
-        } else {
-            output = this;
-        }
-        return output;
+        return this.select(key, this.nested.print(key, value));
     }
 
     @Override
     public final Output print(
         final String key, final Long value
     ) throws Exception {
-        final Output output;
-        if (key.equals(this.field)) {
-            output = this.nested.print(key, value);
-        } else {
-            output = this;
-        }
-        return output;
+        return this.select(key, this.nested.print(key, value));
     }
 
     @Override
@@ -145,25 +115,35 @@ public class SelectedFieldOutput implements Output {
         final String key,
         final Fields value
     ) throws Exception {
-        final Output output;
-        if (key.equals(this.field)) {
-            output = value.printTo(this.nested);
-        } else {
-            output = this;
-        }
-        return output;
+        return this.select(key, value.printTo(this.nested));
     }
 
     @Override
     public final Output print(
         final String key, final Values values
     ) throws Exception {
-        final Output output;
+        return this.select(key, values.printTo(this.nested));
+    }
+
+    /**
+     * Selects the printed output if the printed field matches the field to
+     *  select.
+     *
+     * @param key The name of the printed field.
+     * @param printed The output with the field printed.
+     * @return The printed output if the field matches the field to select or
+     *  this otherwise.
+     * @throws Exception if something fails.
+     */
+    private Output select(
+        final String key, final Output printed
+    ) throws Exception {
+        final Output selected;
         if (key.equals(this.field)) {
-            output = values.printTo(this.nested);
+            selected = printed;
         } else {
-            output = this;
+            selected = this;
         }
-        return output;
+        return selected;
     }
 }

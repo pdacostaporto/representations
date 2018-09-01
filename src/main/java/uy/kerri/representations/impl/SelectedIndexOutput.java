@@ -75,90 +75,67 @@ public class SelectedIndexOutput implements Output {
     public final Output print(
         final String key, final String value
     ) throws Exception {
-        final Output output;
-        if (this.index.equals(1)) {
-            output = this.nested.print(key, value);
-        } else {
-            output = new SelectedIndexOutput(this.index - 1, this.nested);
-        }
-        return output;
+        return this.select(this.nested.print(key, value));
     }
 
     @Override
     public final Output print(
         final String key, final Integer value
     ) throws Exception {
-        final Output output;
-        if (this.index.equals(1)) {
-            output = this.nested.print(key, value);
-        } else {
-            output = new SelectedIndexOutput(this.index - 1, this.nested);
-        }
-        return output;
+        return this.select(this.nested.print(key, value));
     }
 
     @Override
     public final Output print(
         final String key, final Boolean value
     ) throws Exception {
-        final Output output;
-        if (this.index.equals(1)) {
-            output = this.nested.print(key, value);
-        } else {
-            output = new SelectedIndexOutput(this.index - 1, this.nested);
-        }
-        return output;
+        return this.select(this.nested.print(key, value));
     }
 
     @Override
     public final Output print(
         final String key, final Double value
     ) throws Exception {
-        final Output output;
-        if (this.index.equals(1)) {
-            output = this.nested.print(key, value);
-        } else {
-            output = new SelectedIndexOutput(this.index - 1, this.nested);
-        }
-        return output;
+        return this.select(this.nested.print(key, value));
     }
 
     @Override
     public final Output print(
         final String key, final Long value
     ) throws Exception {
-        final Output output;
-        if (this.index.equals(1)) {
-            output = this.nested.print(key, value);
-        } else {
-            output = new SelectedIndexOutput(this.index - 1, this.nested);
-        }
-        return output;
+        return this.select(this.nested.print(key, value));
     }
 
     @Override
     public final Output print(
         final String key, final Fields value
     ) throws Exception {
-        final Output output;
-        if (this.index.equals(1)) {
-            output = value.printTo(this.nested);
-        } else {
-            output = new SelectedIndexOutput(this.index - 1, this.nested);
-        }
-        return output;
+        return this.select(value.printTo(this.nested));
     }
 
     @Override
     public final Output print(
         final String key, final Values values
     ) throws Exception {
-        final Output output;
+        return this.select(values.printTo(this.nested));
+    }
+
+    /**
+     * Selects the printed output if the actual if it corresponds to the index
+     *  to be selected.
+     *
+     * @param printed The output with the value of the index printed.
+     * @return The printed output if the actual index corresponds to the index
+     *  to select or an output to print the next index otherwise.
+     * @throws Exception if something fails.
+     */
+    private Output select(final Output printed) throws Exception {
+        final Output selected;
         if (this.index.equals(1)) {
-            output = values.printTo(this.nested);
+            selected = printed;
         } else {
-            output = new SelectedIndexOutput(this.index - 1, this.nested);
+            selected = new SelectedIndexOutput(this.index - 1, this.nested);
         }
-        return output;
+        return selected;
     }
 }

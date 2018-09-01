@@ -30,8 +30,8 @@ import org.junit.Test;
 import uy.kerri.representations.Values;
 import uy.kerri.representations.fake.FakeOutput;
 import uy.kerri.representations.impl.ArrayOfValues;
-import uy.kerri.representations.impl.LabelledValues;
 import uy.kerri.representations.impl.LabelledString;
+import uy.kerri.representations.impl.LabelledValues;
 
 /**
  * Tests for {@link uy.kerri.representations.impl.LabelledValues}.
