@@ -29,8 +29,8 @@ import uy.kerri.representations.Values;
 import uy.kerri.representations.exception.ValueNotSelectedException;
 
 /**
- * {@link uy.kerri.representations.Output} that selects the value the first
- *  value that is printed on it.
+ * An {@link uy.kerri.representations.Output} that selects the first value that
+ *  is printed on it.
  *
  * @since 1.0
  */

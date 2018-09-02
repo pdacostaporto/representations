@@ -29,7 +29,7 @@ import uy.kerri.representations.Output;
 import uy.kerri.representations.Value;
 
 /**
- * A label-value pair with nested fields as value.
+ * A label-value pair with a set of nested fields as value.
  *
  * @since 1.0
  */

@@ -29,8 +29,8 @@ import uy.kerri.representations.Values;
 import uy.kerri.representations.exception.IndexNotFoundException;
 
 /**
- * {@link uy.kerri.representations.Output} to selects the n-th printed value in
- *  a sequence of values.
+ * An {@link uy.kerri.representations.Output} to select the n-th printed value
+ *  in a sequence of values.
  *
  * @since 1.0
  */
@@ -47,7 +47,7 @@ public class SelectedIndexOutput implements Output {
 
     /**
      * Constructs an output that prints the value of the given index in the
-     *  sequence on the output.
+     *  sequence on the nested output.
      *
      * @param idx The index of the value to be selected.
      * @param output The output where the selected value will be printed.
@@ -58,7 +58,7 @@ public class SelectedIndexOutput implements Output {
     }
 
     /**
-     * Constructs an output that selects the value of a.
+     * Constructs an output that selects the value of the given index.
      *
      * @param idx The index of the value to be selected.
      */
@@ -121,10 +121,10 @@ public class SelectedIndexOutput implements Output {
     }
 
     /**
-     * Selects the printed output if the actual if it corresponds to the index
+     * Selects the printed output if the actual index corresponds to the index
      *  to be selected.
      *
-     * @param printed The output with the value of the index printed.
+     * @param printed The output with the value of the index printed on it.
      * @return The printed output if the actual index corresponds to the index
      *  to select or an output to print the next index otherwise.
      * @throws Exception if something fails.

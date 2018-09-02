@@ -32,7 +32,7 @@ import uy.kerri.representations.Output;
 import uy.kerri.representations.Values;
 
 /**
- * Output in JSON array format.
+ * An {@link uy.kerri.representations.Output} in JSON array format.
  *
  * Labels are ignored.
  *

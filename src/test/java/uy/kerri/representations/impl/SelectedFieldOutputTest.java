@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package uy.kerri.representations.test.fake;
+package uy.kerri.representations.test.impl;
 
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.junit.MatcherAssert;

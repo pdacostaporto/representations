@@ -28,8 +28,8 @@ import uy.kerri.representations.Output;
 import uy.kerri.representations.Values;
 
 /**
- * {@link uy.kerri.representations.Output} that shows an object and ignores any
- *  printing.
+ * {@link uy.kerri.representations.Output} that shows a fixed value and ignores
+ *  anything else printed on it.
  *
  * @since 1.0
  */
@@ -40,7 +40,7 @@ public class FixedOutput implements Output {
     private Object fixed;
 
     /**
-     * Constructs an output that shows an object.
+     * Constructs an output that shows a fixed value.
      *
      * @param value The object that will be shown.
      */
@@ -91,10 +91,7 @@ public class FixedOutput implements Output {
     }
 
     @Override
-    public final FixedOutput print(
-        final String key,
-        final Values values
-    ) {
+    public final FixedOutput print(final String key, final Values values) {
         return this;
     }
 }

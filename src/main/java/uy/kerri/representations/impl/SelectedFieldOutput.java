@@ -29,7 +29,7 @@ import uy.kerri.representations.Values;
 import uy.kerri.representations.exception.FieldNotMatchedException;
 
 /**
- * {@link uy.kerri.representations.Output} that selects the value of a field.
+ * An {@link uy.kerri.representations.Output} that selects the value of a field.
  *
  * @since 1.0
  */
@@ -51,10 +51,7 @@ public class SelectedFieldOutput implements Output {
      * @param name The name of the field to be selected.
      * @param output The output to print the field on.
      */
-    public SelectedFieldOutput(
-        final String name,
-        final Output output
-    ) {
+    public SelectedFieldOutput(final String name, final Output output) {
         this.field = name;
         this.nested = output;
     }
@@ -130,7 +127,7 @@ public class SelectedFieldOutput implements Output {
      *  select.
      *
      * @param key The name of the printed field.
-     * @param printed The output with the field printed.
+     * @param printed The output with the field printed on it.
      * @return The printed output if the field matches the field to select or
      *  this otherwise.
      * @throws Exception if something fails.

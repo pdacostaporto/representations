@@ -42,6 +42,7 @@ public class LabelledValue implements Field, Value {
 
     /**
      * Constructs a new value that encapsulates another value.
+     *
      * @param val The value to encapsulate.
      */
     private LabelledValue(final Value val) {
@@ -99,10 +100,10 @@ public class LabelledValue implements Field, Value {
     }
 
     /**
-     * Constructs a pair with given label and composite value.
+     * Constructs a pair with given label and nested fields as value.
      *
      * @param name The label for this pair.
-     * @param val The composite value for this pair.
+     * @param val The nested fields value for this pair.
      */
     public LabelledValue(final String name, final Fields val) {
         this(new LabelledFields(name, val));

@@ -24,7 +24,7 @@
 package uy.kerri.representations;
 
 /**
- * A set of {@link uy.kerri.representations.Value}s.
+ * A sequence of {@link uy.kerri.representations.Value}s.
  *
  * @since 1.0
  */
