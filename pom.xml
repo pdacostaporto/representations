@@ -23,8 +23,8 @@
     </developer>
   </developers>
   <scm>
-    <connection>scm:git:git://github.com/pdacostaporto/representations.git</connection>
-    <developerConnection>scm:git:ssh://github.com/pdacostaporto/representations.git</developerConnection>
+    <connection>scm:git:ssh://git@github.com:pdacostaporto/representations.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com:pdacostaporto/representations.git</developerConnection>
     <url>https://github.com/pdacostaporto/representations</url>
   </scm>
   <distributionManagement>
