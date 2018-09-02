@@ -21,20 +21,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package uy.kerri.representations;
+package uy.kerri.representations.test.impl;
+
+import org.apache.commons.lang3.StringUtils;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.junit.MatcherAssert;
+import org.junit.Test;
+import uy.kerri.representations.fake.FakeOutput;
+import uy.kerri.representations.impl.LabelledBoolean;
 
 /**
- * Media for data communication.
+ * Tests for {@link uy.kerri.representations.impl.LabelledBoolean}.
  *
  * @since 1.0
  */
-public interface Representation {
+public class LabelledBooleanTest {
     /**
-     * Prints encapsulated data in a formatted output.
+     * LabelledBoolean prints itself in an output.
      *
-     * @param output A preformatted output to print on.
-     * @return The preformatted output with encapsulated data printed on it.
-     * @throws Exception if anything goes wrong.
+     * @throws Exception if something fails.
      */
-    Output printTo(Output output) throws Exception;
+    @Test
+    public final void printsItself() throws Exception {
+        final String username = "username:String:rms";
+        final Boolean active = true;
+        final FakeOutput output = new FakeOutput(username);
+        MatcherAssert.assertThat(
+            "The field didn't print itself correctly.",
+            new LabelledBoolean("active", active).printTo(output).show(),
+            CoreMatchers.equalTo(
+                StringUtils.join(
+                    new String[] {
+                        username,
+                        String.format("active:Boolean:%b", active),
+                    },
+                    String.format("%n")
+                )
+            )
+        );
+    }
 }

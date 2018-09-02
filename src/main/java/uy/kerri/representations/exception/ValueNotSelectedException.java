@@ -21,20 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package uy.kerri.representations;
+package uy.kerri.representations.exception;
 
 /**
- * Media for data communication.
+ * Exception to throw when an output is to be shown but its value has not been
+ *  selected yet.
  *
  * @since 1.0
  */
-public interface Representation {
+public class ValueNotSelectedException extends Exception {
     /**
-     * Prints encapsulated data in a formatted output.
-     *
-     * @param output A preformatted output to print on.
-     * @return The preformatted output with encapsulated data printed on it.
-     * @throws Exception if anything goes wrong.
+     * Creates an exception.
      */
-    Output printTo(Output output) throws Exception;
+    public ValueNotSelectedException() {
+        super();
+    }
+
+    /**
+    * Creates an exception with given message and cause.
+    *
+    * @param message The message of the exception.
+    */
+    public ValueNotSelectedException(final String message) {
+        super(message);
+    }
+
+    /**
+    * Creates an exception with given message and cause.
+    *
+    * @param message The message of the exception.
+    * @param cause The cause of the exception.
+    */
+    public ValueNotSelectedException(
+        final String message, final Exception cause
+    ) {
+        super(message, cause);
+    }
 }

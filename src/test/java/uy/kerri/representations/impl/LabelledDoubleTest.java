@@ -21,20 +21,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package uy.kerri.representations;
+package uy.kerri.representations.test.impl;
+
+import org.apache.commons.lang3.StringUtils;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.junit.MatcherAssert;
+import org.junit.Test;
+import uy.kerri.representations.fake.FakeOutput;
+import uy.kerri.representations.impl.LabelledDouble;
 
 /**
- * Media for data communication.
+ * Tests for {@link uy.kerri.representations.impl.LabelledDouble}.
  *
  * @since 1.0
  */
-public interface Representation {
+public class LabelledDoubleTest {
     /**
-     * Prints encapsulated data in a formatted output.
+     * LabelledDouble prints itself in an output.
      *
-     * @param output A preformatted output to print on.
-     * @return The preformatted output with encapsulated data printed on it.
-     * @throws Exception if anything goes wrong.
+     * @throws Exception if something fails.
      */
-    Output printTo(Output output) throws Exception;
+    @Test
+    public final void printsItself() throws Exception {
+        final String humidity = "humidity:String:100%";
+        final Double pressure = 29.83;
+        final FakeOutput output = new FakeOutput(humidity);
+        MatcherAssert.assertThat(
+            "The value didn't print itself correctly.",
+            new LabelledDouble("pressure", pressure).printTo(output).show(),
+            CoreMatchers.equalTo(
+                StringUtils.join(
+                    new String[] {
+                        humidity,
+                        String.format("pressure:Double:%f", pressure),
+                    },
+                    String.format("%n")
+                )
+            )
+        );
+    }
 }

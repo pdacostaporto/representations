@@ -24,17 +24,9 @@
 package uy.kerri.representations;
 
 /**
- * Media for data communication.
+ * A printable field consisting of a field name and a value.
  *
  * @since 1.0
  */
-public interface Representation {
-    /**
-     * Prints encapsulated data in a formatted output.
-     *
-     * @param output A preformatted output to print on.
-     * @return The preformatted output with encapsulated data printed on it.
-     * @throws Exception if anything goes wrong.
-     */
-    Output printTo(Output output) throws Exception;
+public interface Field extends Representation {
 }

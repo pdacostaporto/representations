@@ -21,20 +21,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package uy.kerri.representations;
+package uy.kerri.representations.test.impl;
+
+import org.apache.commons.lang3.StringUtils;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.junit.MatcherAssert;
+import org.junit.Test;
+import uy.kerri.representations.fake.FakeOutput;
+import uy.kerri.representations.impl.LabelledLong;
 
 /**
- * Media for data communication.
+ * Tests for {@link uy.kerri.representations.impl.LabelledLong}.
  *
  * @since 1.0
  */
-public interface Representation {
+public class LabelledLongTest {
     /**
-     * Prints encapsulated data in a formatted output.
+     * LabelledLong prints itself in an output.
      *
-     * @param output A preformatted output to print on.
-     * @return The preformatted output with encapsulated data printed on it.
-     * @throws Exception if anything goes wrong.
+     * @throws Exception if something fails.
      */
-    Output printTo(Output output) throws Exception;
+    @Test
+    public final void printsItself() throws Exception {
+        final String filename = "filename:String:WinDev1806Eval.VirtualBox.zip";
+        final Long size = 16750372454L;
+        final FakeOutput output = new FakeOutput(filename);
+        MatcherAssert.assertThat(
+            "The value didn't print itself correctly.",
+            new LabelledLong("size", size).printTo(output).show(),
+            CoreMatchers.equalTo(
+                StringUtils.join(
+                    new String[] {
+                        filename,
+                        String.format("size:Long:%d", size),
+                    },
+                    String.format("%n")
+                )
+            )
+        );
+    }
 }

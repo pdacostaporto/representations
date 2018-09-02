@@ -21,20 +21,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package uy.kerri.representations;
+package uy.kerri.representations.impl;
+
+import java.util.Arrays;
+import uy.kerri.representations.Output;
+import uy.kerri.representations.Value;
+import uy.kerri.representations.Values;
 
 /**
- * Media for data communication.
+ * An array of {@link uy.kerri.representations.Value}s.
  *
  * @since 1.0
  */
-public interface Representation {
+public class ArrayOfValues implements Values {
     /**
-     * Prints encapsulated data in a formatted output.
-     *
-     * @param output A preformatted output to print on.
-     * @return The preformatted output with encapsulated data printed on it.
-     * @throws Exception if anything goes wrong.
+     * The array.
      */
-    Output printTo(Output output) throws Exception;
+    private final Value[] array;
+
+    /**
+     * Constructs an array with the given values.
+     *
+     * @param values The array of values.
+     */
+    public ArrayOfValues(final Value... values) {
+        this.array = Arrays.copyOf(values, values.length);
+    }
+
+    /**
+     * Constructs an empty array of values.
+     */
+    public ArrayOfValues() {
+        this(new Value[0]);
+    }
+
+    @Override
+    public final Output printTo(final Output output) throws Exception {
+        Output printed = output;
+        for (final Value value : this.array) {
+            printed = value.printTo(printed);
+        }
+        return printed;
+    }
 }

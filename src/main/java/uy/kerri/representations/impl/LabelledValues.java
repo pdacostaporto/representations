@@ -21,20 +21,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package uy.kerri.representations;
+package uy.kerri.representations.impl;
+
+import uy.kerri.representations.Field;
+import uy.kerri.representations.Output;
+import uy.kerri.representations.Value;
+import uy.kerri.representations.Values;
 
 /**
- * Media for data communication.
+ * A label-value pair with multiple values.
  *
  * @since 1.0
  */
-public interface Representation {
+public class LabelledValues implements Field, Value {
     /**
-     * Prints encapsulated data in a formatted output.
-     *
-     * @param output A preformatted output to print on.
-     * @return The preformatted output with encapsulated data printed on it.
-     * @throws Exception if anything goes wrong.
+     * The label.
      */
-    Output printTo(Output output) throws Exception;
+    private final String label;
+
+    /**
+     * The values.
+     */
+    private final Values values;
+
+    /**
+     * Constructs a pair with given label and values.
+     *
+     * @param name The label for this pair.
+     * @param vals The values for this pair.
+     */
+    public LabelledValues(final String name, final Values vals) {
+        this.label = name;
+        this.values = vals;
+    }
+
+    @Override
+    public final Output printTo(final Output output) throws Exception {
+        return output.print(this.label, this.values);
+    }
 }

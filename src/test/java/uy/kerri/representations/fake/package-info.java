@@ -21,20 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package uy.kerri.representations;
-
 /**
- * Media for data communication.
- *
- * @since 1.0
+ * Tests for {@link uy.kerri.representations.fake} classes.
  */
-public interface Representation {
-    /**
-     * Prints encapsulated data in a formatted output.
-     *
-     * @param output A preformatted output to print on.
-     * @return The preformatted output with encapsulated data printed on it.
-     * @throws Exception if anything goes wrong.
-     */
-    Output printTo(Output output) throws Exception;
-}
+package uy.kerri.representations.test.fake;

@@ -21,20 +21,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package uy.kerri.representations;
+package uy.kerri.representations.impl;
+
+import java.util.Arrays;
+import uy.kerri.representations.Field;
+import uy.kerri.representations.Fields;
+import uy.kerri.representations.Output;
 
 /**
- * Media for data communication.
+ * An array of {@link uy.kerri.representations.Field}s.
  *
  * @since 1.0
  */
-public interface Representation {
+public class ArrayOfFields implements Fields {
     /**
-     * Prints encapsulated data in a formatted output.
-     *
-     * @param output A preformatted output to print on.
-     * @return The preformatted output with encapsulated data printed on it.
-     * @throws Exception if anything goes wrong.
+     * The array of fields.
      */
-    Output printTo(Output output) throws Exception;
+    private final Field[] array;
+
+    /**
+     * Constructs an array of fields with the given fields.
+     *
+     * @param fields The array of fields.
+     */
+    public ArrayOfFields(final Field... fields) {
+        this.array = Arrays.copyOf(fields, fields.length);
+    }
+
+    /**
+     * Constructs an empty array of fields.
+     */
+    public ArrayOfFields() {
+        this(new Field[0]);
+    }
+
+    @Override
+    public final Output printTo(final Output output) throws Exception {
+        Output printed = output;
+        for (final Field field : this.array) {
+            printed = field.printTo(printed);
+        }
+        return printed;
+    }
 }
