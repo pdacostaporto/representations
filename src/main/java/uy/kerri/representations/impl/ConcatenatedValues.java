@@ -24,8 +24,8 @@
 package uy.kerri.representations.impl;
 
 import java.util.Arrays;
-import uy.kerri.representations.Values;
 import uy.kerri.representations.Output;
+import uy.kerri.representations.Values;
 
 /**
  * Concatenated sequences of {@link uy.kerri.representations.Value}s.

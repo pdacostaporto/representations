@@ -28,8 +28,8 @@ import org.hamcrest.CoreMatchers;
 import org.hamcrest.junit.MatcherAssert;
 import org.junit.Test;
 import uy.kerri.representations.fake.FakeOutput;
-import uy.kerri.representations.impl.ConcatenatedValues;
 import uy.kerri.representations.impl.ArrayOfValues;
+import uy.kerri.representations.impl.ConcatenatedValues;
 import uy.kerri.representations.impl.LabelledValue;
 
 /**

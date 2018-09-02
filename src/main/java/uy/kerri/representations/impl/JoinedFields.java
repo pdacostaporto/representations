@@ -24,7 +24,6 @@
 package uy.kerri.representations.impl;
 
 import java.util.Arrays;
-import uy.kerri.representations.Field;
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
 
