@@ -1,7 +1,7 @@
 Representations
 ===============
 [![Build Status](https://travis-ci.org/pdacostaporto/representations.svg?branch=master)](https://travis-ci.org/pdacostaporto/representations)
-[![Build Status](https://travis-ci.org/pdacostaporto/representations.svg?branch=master)](https://travis-ci.org/pdacostaporto/representations)
+[![Coverage Status](https://coveralls.io/repos/github/pdacostaporto/representations/badge.svg)](https://coveralls.io/github/pdacostaporto/representations)
 
 Representations serve as an interface for objects to communicate data indepently of their implementation details.
 Their goal is to get rid of getters and setters and other techniques that expose the internal implementation of the objects they want to get the data from or force them to be structured on some specific way.
