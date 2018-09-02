@@ -2,141 +2,125 @@ Representations
 ===============
 [![Build Status](https://travis-ci.org/pdacostaporto/representations.svg?branch=master)](https://travis-ci.org/pdacostaporto/representations)
 [![Coverage Status](https://coveralls.io/repos/github/pdacostaporto/representations/badge.svg)](https://coveralls.io/github/pdacostaporto/representations)
+[![Maintainability](https://api.codeclimate.com/v1/badges/0bae9ee741ef9170b432/maintainability)](https://codeclimate.com/github/pdacostaporto/representations/maintainability)
 
-Representations serve as an interface for objects to communicate data indepently of their implementation details.
-Their goal is to get rid of getters and setters and other techniques that expose the internal implementation of the objects they want to get the data from or force them to be structured on some specific way.
+Representations serve as interfaces for objects to communicate data indepently of their implementation details. Their goal is to get rid of getters and setters and other techniques that expose the internal implementation of the objects we want to get data from or force them to be structured on some specific way.
+
+## Concepts
+
+A `Representation` is a media for communicating data. A `Representation` can be:
+* a single `Value`.
+* a single key-value pair (`Field`).
+* a sequence of `Values` in a list or array manner.
+* a set of `Fields` in a map manner.
+
+Their principal feature is their ability to print themselves on an `Output`, which serves as a formatter for the `Representation`'s data as a string. For example, an `Output` implementation can format the data as a JSON string, while another implementation formats it as an XML document. This way, data can be manipulated in many ways just by changing the output implementation on which it is printed.
 
 ## Usage
 
-### Representing data
-
-A `Representation` is a media for representing data in key-value pairs.
-Keys are strings and values are objects of the `Value` type.
-It can be serialized by its `toString` method.
-
-By the moment, only the class `JSONRepresentation` is implemented, which represents the data as a JSON string.
+At the moment, `ArrayOfValues` and `ArrayOfFields` are the only implementations of `Values` and `Fields` available, respectively. They both take an array of `Value`s or `Field`s as a parameter for their constructors, which will be the data they will encapsulate.
+`LabelledValue` is the main implementation of the `Value` and `Field` interfaces. Its constructor can take a primitive value of the types `Integer`, `String`, `Boolean`, `Double` or `Long`, or a `Fields` or `Values` instance to represent composite values. It also requires a string label which will represent the name of the represented `Field` or a label for the represented `Value` in a sequence of values.
 
 ```
-Representation json = new JSONRepresentation()
-.with("name", new StringValue("Pablo Da Costa Porto"))
-.with("age", new IntegerValue(25))
-.with(
-  "phoneNumbers",
-  new ArrayValue(
-    {
-      new StringValue("598 815 56 59"),
-      new StringValue("598 90 599 666")
-    }
-  )
-).toString(); // {"name":"Pablo Da Costa Porto","age":25,"phoneNumbers":["598 815 56 59","598 90 599 666"]}
-```
+import uy.kerri.representations.Fields;
+import uy.kerri.representations.impl.ArrayOfFields;
+import uy.kerri.representations.impl.ArrayOfValues;
+import uy.kerri.representations.impl.LabelledValue;
 
-A `Value` encapsulates a value which can be serialized by its `toString` method.
-It is used as the value of a field.
-By the time, `IntegerValue`, `LongValue`, BooleanValue`, `StringValue` are the implemented options for basic data types and `ArrayValue` for arrays.
-`Representation` is a subtype of `Value`.
-
-```
-String name = new StringValue("Pablo Da Costa Porto").toString(); // Pablo Da Costa Porto
-String age = new IntegerValue(25).toString(); // 25
-String phoneNumbers = new ArrayValue(
-  {
-    new StringValue("598 815 56 59"),
-    new StringValue("598 90 599 666")
-  }
-).toString(); // ["598 815 56 59","598 90 599 666"]
-String unemployed = new BooleanValue(true).toString(); // true
-String fileSize = new LongValue(12345678910L).toString(); // 12345678910
-String phoneNumber = new LongValue(12345678910L).toString(); // 12345678910
-```
-
-### Reading data
-
-Sometimes you might want to access some specific field of a representation.
-Some `Value` implementations can help you with that.
-
-```
-Representation json = new JSONRepresentation()
-.with("name", new StringValue("Pablo Da Costa Porto"))
-.with("age", new IntegerValue(25))
-.with(
-  "phoneNumbers",
-  new ArrayValue(
-    {
-      new StringValue("598 815 56 59"),
-      new StringValue("598 90 599 666")
-    }
+Fields person = new ArrayOfFields(
+  LabelledValue("name", "Pablo Da Costa Porto"),
+  LabelledValue("age", 25),
+  LabelledValue(
+    "phoneNumbers",
+    new ArrayOfValues(
+      new LabelledValue("598 815 56 59"),
+      new LabelledValue("598 90 599 666")
+    )
   )
 );
-String age = new IntegerValue(
-  JSONFieldValue(json, "age")
-).toString(); // "25"
-String cellphone = new StringValue(
-  new JSONArrayIndexValue(
-    new JSONFieldValue(
-      json,
-      "phoneNumbers"
-    ),
-    1
-  )
-).toString(); // 598 90 599 666
 ```
 
-## Customizing
+Once you constructed your representation, you can format it as a string through an `Output`. At the moment, the only implementations of this interface that do this are `JsonObjectOutput` and `JsonArrayOutput`, which format the data as a JSON object or a JSON array, respectively. This serialization is done through the `show` method.
 
-You're encouraged to write your own implementations of the interfaces.
-Don't hesitate to submit a PR if you think your custom implementation could be useful for someone else.
-
-### Writing custom representation formats
-
-You might want to have representations for some specific format that is useful to you.
-For example:
 ```
-String savings = new SavingsHTMLTable()
-.with("January", new IntegerValue(1000))
-.with("February", new IntegerValue(1200))
-.with("March", new IntegerValue(950))
-.with("April", new IntegerValue(1125))
-.toString();
-/*
-  <table>
-    <tr>
-      <th>Month</th>
-      <th>Savings</th>
-    </tr>
-    <tr>
-      <td>January</td>
-      <td>1000</td>
-    </tr>
-    <tr>
-      <td>February</td>
-      <td>1200</td>
-    </tr>
-    <tr>
-      <td>March</td>
-      <td>950</td>
-    </tr>
-    <tr>
-      <td>April</td>
-      <td>1125</td>
-    </tr>
-  </table>
-*/
+import uy.kerri.representations.impl.JsonObjectOutput;
+
+String json = person.printTo(new JsonObjectOutput()).show(); // {"name":"Pablo Da Costa Porto","age":25,"phoneNumbers":["598 815 56 59","598 90 599 666"]}
 ```
 
-By the moment, `Representation` objects rely on some internal interfaces and classes.
-The `MapUnformattedRepresentation` class encapsulates the key-value fields logic without outputting in any specific format.
-Formatted representations decorate this class and make the unformatted representation and its values print themselves through the `printTo` method of the `Value` interface on an `Output` object which implements their desired format, so you can decorate an unformatted representation and implement the `Output` interface to make your custom formatted representation easily.
+You can also access specific values through `SelectedFieldOutput` and `SelectedIndexOutput` to select a specific field in a map or index in a sequence of values, respectively.
 
-### Writing custom value formats
-
-You might want to have some specific data types of formats to be supported as values.
-For example:
 ```
-String budget = new USDCurrencyValue(1500).toString(); // USD1500
-String speed = new MPHValue(60).toString(); // 60mph
+String age = new SelectedFieldOutput("age", person).show(); // 25
+String cellphone = new SelectedFieldOutput(
+  "phoneNumbers",
+  SelectedIndexOutput(2)
+).show(); // 598 90 599 666
 ```
 
-### Writing custom key-value field or printing logic
+All objects in this library are immutable so they can be reused easily without unexpected side effects.
 
-You can write your own implementation of the `Representation` interface from scratch if you're not happy with the existing field or printing logic.
+## Installation
+
+Add it as a dependency on your `pom.xml`.
+
+```
+<dependency>
+  <groupId>uy.kerri.representations</groupId>
+  <artifactId>representations</artifactId>
+  <version>1.0</version>
+</dependency>
+```
+
+This library is tested with the Java 8 JDK, but it should work with Java 7.
+
+## How to contribute
+
+Submit an issue if you find a bug or have an idea for a feature. You can also do it if you want to contribute to the code and something is blocking you.
+You're also encouraged to make your own implementations of any of the interfaces and make a pull request if you think it can be useful for someone else.
+
+### Configuration
+
+This project requires the [OpenJDK 8](http://openjdk.java.net/projects/jdk8/) and [Maven](https://maven.apache.org/) and it's expected to be developed on a UNIX-like environment.
+
+If you use [Vagrant](https://www.vagrantup.com/) you can automate the configuration process. Just run `vagrant up` at the root of this repository.
+
+### Guidelines
+
+The code of this library tries to respect the [Elegant Objects](https://www.elegantobjects.org/) principles, so check them out when contributing.
+
+Besides that, just check that `mvn install` runs without issues before submiting the code.
+
+### Releasing
+
+To release a new version just run the `release.sh` script and fill the prompted information.
+
+Remember to configure your [OSSRH Jira](https://issues.sonatype.org) credentials and your GPG passphrase on your `settings.xml` file. If you use Vagrant edit the file at `/home/vagrant/.m2/settings.xml`.
+
+## Credits
+
+The concepts behind this library were heavily influenced by [this post from Yegor Bugayenko's blog](https://www.yegor256.com/2016/04/05/printers-instead-of-getters.html).
+
+## License
+
+MIT License
+
+Copyright (c) 2018 Pablo Da Costa Porto
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
