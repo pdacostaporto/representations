@@ -95,7 +95,7 @@ Besides that, just check that `mvn install` runs without issues before submiting
 
 To release a new version just run the `release.sh` script and fill the prompted information.
 
-Remember to configure your [OSSRH Jira](https://issues.sonatype.org) credentials and your GPG passphrase on your `settings.xml` file. If you use Vagrant edit the file at `/home/vagrant/.m2/settings.xml`.
+Remember to configure your [OSSRH Nexus](https://oss.sonatype.org/) credentials and your GPG passphrase on your `settings.xml` file. If you use Vagrant edit the file at `/home/vagrant/.m2/settings.xml`.
 
 ## Credits
 
