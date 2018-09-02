@@ -10,5 +10,7 @@ Vagrant.configure("2") do |config|
     vb.memory = "2048"
   end
 
+  config.ssh.forward_agent = true
+
   config.vm.provision "shell", path: "install.sh"
 end
