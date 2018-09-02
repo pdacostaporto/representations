@@ -51,6 +51,9 @@ String json = person.printTo(new JsonObjectOutput()).show(); // {"name":"Pablo D
 You can also access specific values through `SelectedFieldOutput` and `SelectedIndexOutput` to select a specific field in a map or index in a sequence of values, respectively.
 
 ```
+import uy.kerri.representations.impl.SelectedFieldOutput;
+import uy.kerri.representations.impl.SelectedIndexOutput;
+
 String age = person.printTo(new SelectedFieldOutput("age")).show(); // 25
 String cellphone = person.printTo(
   new SelectedFieldOutput(
