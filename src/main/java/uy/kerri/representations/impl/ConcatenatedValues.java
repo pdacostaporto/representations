@@ -24,35 +24,34 @@
 package uy.kerri.representations.impl;
 
 import java.util.Arrays;
-import uy.kerri.representations.Field;
-import uy.kerri.representations.Fields;
+import uy.kerri.representations.Values;
 import uy.kerri.representations.Output;
 
 /**
- * Joined groups of {@link uy.kerri.representations.Field}s.
+ * Concatenated sequences of {@link uy.kerri.representations.Value}s.
  *
  * @since 1.0
  */
-public class JoinedFields implements Fields {
+public class ConcatenatedValues implements Values {
     /**
-     * Fields to join.
+     * Values to concatenate.
      */
-    private final Fields[] array;
+    private final Values[] array;
 
     /**
-     * Constructs a joined group of fields.
+     * Constructs a concatenation of given sequences of values.
      *
-     * @param fields An array of fields to join.
+     * @param values An array of values to join.
      */
-    public JoinedFields(final Fields... fields) {
-        this.array = Arrays.copyOf(fields, fields.length);
+    public ConcatenatedValues(final Values... values) {
+        this.array = Arrays.copyOf(values, values.length);
     }
 
     @Override
     public final Output printTo(final Output output) throws Exception {
         Output printed = output;
-        for (final Fields fields : this.array) {
-            printed = fields.printTo(printed);
+        for (final Values values : this.array) {
+            printed = values.printTo(printed);
         }
         return printed;
     }
