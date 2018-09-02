@@ -51,10 +51,12 @@ String json = person.printTo(new JsonObjectOutput()).show(); // {"name":"Pablo D
 You can also access specific values through `SelectedFieldOutput` and `SelectedIndexOutput` to select a specific field in a map or index in a sequence of values, respectively.
 
 ```
-String age = new SelectedFieldOutput("age", person).show(); // 25
-String cellphone = new SelectedFieldOutput(
-  "phoneNumbers",
-  SelectedIndexOutput(2)
+String age = person.printTo(new SelectedFieldOutput("age")).show(); // 25
+String cellphone = person.printTo(
+  new SelectedFieldOutput(
+    "phoneNumbers",
+    SelectedIndexOutput(2)
+  )
 ).show(); // 598 90 599 666
 ```
 
