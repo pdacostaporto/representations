@@ -28,5 +28,5 @@ package uy.kerri.representations;
  *
  * @since 1.0
  */
-public interface Fields extends Representation {
+public interface Fields extends Value {
 }
