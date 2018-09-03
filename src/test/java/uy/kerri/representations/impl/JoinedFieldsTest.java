@@ -35,7 +35,7 @@ import uy.kerri.representations.impl.LabelledValue;
 /**
  * Tests for {@link uy.kerri.representations.impl.JoinedFields}.
  *
- * @since 1.0
+ * @since 1.1
  */
 public class JoinedFieldsTest {
     /**

@@ -30,7 +30,7 @@ import uy.kerri.representations.Output;
 /**
  * Joined groups of {@link uy.kerri.representations.Field}s.
  *
- * @since 1.0
+ * @since 1.1
  */
 public class JoinedFields implements Fields {
     /**

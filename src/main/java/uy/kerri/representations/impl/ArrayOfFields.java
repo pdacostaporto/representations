@@ -24,6 +24,7 @@
 package uy.kerri.representations.impl;
 
 import java.util.Arrays;
+import java.util.Collection;
 import uy.kerri.representations.Field;
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
@@ -53,6 +54,15 @@ public class ArrayOfFields implements Fields {
      */
     public ArrayOfFields() {
         this(new Field[0]);
+    }
+
+    /**
+     * Constructs an array of fields from a {@link java.util.Collection}.
+     *
+     * @param collection A collection of fields.
+     */
+    public ArrayOfFields(final Collection<? extends Field> collection) {
+        this(collection.toArray(new Field[collection.size()]));
     }
 
     @Override

@@ -23,15 +23,15 @@
  */
 package uy.kerri.representations.test.impl;
 
+import java.util.Arrays;
+import java.util.Collection;
 import org.apache.commons.lang3.StringUtils;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.junit.MatcherAssert;
 import org.junit.Test;
 import uy.kerri.representations.fake.FakeOutput;
 import uy.kerri.representations.impl.ArrayOfFields;
-import uy.kerri.representations.impl.LabelledBoolean;
-import uy.kerri.representations.impl.LabelledInteger;
-import uy.kerri.representations.impl.LabelledString;
+import uy.kerri.representations.impl.LabelledValue;
 
 /**
  * Tests for {@link uy.kerri.representations.impl.ArrayOfFields}.
@@ -70,9 +70,9 @@ public class ArrayOfFieldsTest {
         MatcherAssert.assertThat(
             "Fields weren't printed correctly.",
             new ArrayOfFields(
-                new LabelledString("surname", surname),
-                new LabelledInteger("age", age),
-                new LabelledBoolean("registered", registered)
+                new LabelledValue("surname", surname),
+                new LabelledValue("age", age),
+                new LabelledValue("registered", registered)
             ).printTo(output).show(),
             CoreMatchers.equalTo(
                 StringUtils.join(
@@ -81,6 +81,42 @@ public class ArrayOfFieldsTest {
                         String.format("surname:String:%s", surname),
                         String.format("age:Integer:%d", age),
                         String.format("registered:Boolean:%b", registered),
+                    },
+                    String.format("%n")
+                )
+            )
+        );
+    }
+
+    /**
+     * ArrayOfFields accepts a {@link java.util.Collection}.
+     *
+     * @throws Exception if something fails.
+     */
+    @Test
+    public final void acceptsACollection() throws Exception {
+        final Integer user = 20;
+        final Integer id = 100;
+        final String title = "my first post";
+        final String body = "hi";
+        final FakeOutput output = new FakeOutput();
+        MatcherAssert.assertThat(
+            "Fields from collection weren't printed correctly.",
+            new ArrayOfFields(
+                (Collection<LabelledValue>) Arrays.asList(
+                    new LabelledValue("userId", user),
+                    new LabelledValue("id", id),
+                    new LabelledValue("title", title),
+                    new LabelledValue("body", body)
+                )
+            ).printTo(output).show(),
+            CoreMatchers.equalTo(
+                StringUtils.join(
+                    new String[] {
+                        String.format("userId:Integer:%d", user),
+                        String.format("id:Integer:%d", id),
+                        String.format("title:String:%s", title),
+                        String.format("body:String:%s", body),
                     },
                     String.format("%n")
                 )

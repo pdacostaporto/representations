@@ -24,6 +24,7 @@
 package uy.kerri.representations.impl;
 
 import java.util.Arrays;
+import java.util.Collection;
 import uy.kerri.representations.Output;
 import uy.kerri.representations.Value;
 import uy.kerri.representations.Values;
@@ -53,6 +54,15 @@ public class ArrayOfValues implements Values {
      */
     public ArrayOfValues() {
         this(new Value[0]);
+    }
+
+    /**
+     * Constructs an array of values from a {@link java.util.Collection}.
+     *
+     * @param collection A collection of fields.
+     */
+    public ArrayOfValues(final Collection<? extends Value> collection) {
+        this(collection.toArray(new Value[collection.size()]));
     }
 
     @Override

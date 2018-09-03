@@ -23,15 +23,15 @@
  */
 package uy.kerri.representations.test.impl;
 
+import java.util.Arrays;
+import java.util.Collection;
 import org.apache.commons.lang3.StringUtils;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.junit.MatcherAssert;
 import org.junit.Test;
 import uy.kerri.representations.fake.FakeOutput;
 import uy.kerri.representations.impl.ArrayOfValues;
-import uy.kerri.representations.impl.LabelledBoolean;
-import uy.kerri.representations.impl.LabelledInteger;
-import uy.kerri.representations.impl.LabelledString;
+import uy.kerri.representations.impl.LabelledValue;
 
 /**
  * Tests for {@link uy.kerri.representations.impl.ArrayOfValues}.
@@ -70,9 +70,9 @@ public class ArrayOfValuesTest {
         MatcherAssert.assertThat(
             "Representations weren't printed correctly.",
             new ArrayOfValues(
-                new LabelledString("surname", surname),
-                new LabelledInteger("age", age),
-                new LabelledBoolean("registered", registered)
+                new LabelledValue("surname", surname),
+                new LabelledValue("age", age),
+                new LabelledValue("registered", registered)
             ).printTo(output).show(),
             CoreMatchers.equalTo(
                 StringUtils.join(
@@ -81,6 +81,41 @@ public class ArrayOfValuesTest {
                         String.format("surname:String:%s", surname),
                         String.format("age:Integer:%d", age),
                         String.format("registered:Boolean:%b", registered),
+                    },
+                    String.format("%n")
+                )
+            )
+        );
+    }
+
+    /**
+     * ArrayOfValues accepts a {@link java.util.Collection}.
+     *
+     * @throws Exception if something fails.
+     */
+    @Test
+    public final void acceptsACollection() throws Exception {
+        final String label = "todo";
+        final String clean = "clean my room";
+        final String homework = "do my homework";
+        final String clothes = "wash the clothes";
+        final String format = "%s:String:%s";
+        final FakeOutput output = new FakeOutput();
+        MatcherAssert.assertThat(
+            "Values from collection weren't printed correctly.",
+            new ArrayOfValues(
+                (Collection<LabelledValue>) Arrays.asList(
+                    new LabelledValue(label, clean),
+                    new LabelledValue(label, homework),
+                    new LabelledValue(label, clothes)
+                )
+            ).printTo(output).show(),
+            CoreMatchers.equalTo(
+                StringUtils.join(
+                    new String[] {
+                        String.format(format, label, clean),
+                        String.format(format, label, homework),
+                        String.format(format, label, clothes),
                     },
                     String.format("%n")
                 )

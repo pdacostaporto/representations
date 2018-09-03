@@ -30,7 +30,7 @@ import uy.kerri.representations.Values;
 /**
  * Concatenated sequences of {@link uy.kerri.representations.Value}s.
  *
- * @since 1.0
+ * @since 1.1
  */
 public class ConcatenatedValues implements Values {
     /**
