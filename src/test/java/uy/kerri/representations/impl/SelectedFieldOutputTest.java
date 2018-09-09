@@ -32,11 +32,12 @@ import uy.kerri.representations.exception.FieldNotMatchedException;
 import uy.kerri.representations.impl.ArrayOfFields;
 import uy.kerri.representations.impl.ArrayOfValues;
 import uy.kerri.representations.impl.LabelledValue;
-import uy.kerri.representations.impl.SelectedFieldOutput;
+import uy.kerri.representations.impl.SelectedOutput;
 import uy.kerri.representations.impl.SelectedIndexOutput;
 
 /**
- * Tests for {@link uy.kerri.representations.impl.SelectedFieldOutput}.
+ * Tests for field selection with
+ *  {@link uy.kerri.representations.impl.SelectedOutput}.
  *
  * @since 1.0
  */
@@ -48,7 +49,7 @@ public class SelectedFieldOutputTest {
     public ExpectedException thrown = ExpectedException.none();
 
     /**
-     * SelectedFieldOutput selects the field if it's a string.
+     * SelectedOutput selects the field if it's a string.
      *
      * @throws Exception if anything goes wrong.
      */
@@ -82,13 +83,13 @@ public class SelectedFieldOutputTest {
                         new LabelledValue(team, "Barcelona")
                     )
                 )
-            ).printTo(new SelectedFieldOutput(field)).show(),
+            ).printTo(new SelectedOutput(field)).show(),
             CoreMatchers.equalTo(value)
         );
     }
 
     /**
-     * SelectedFieldOutput selects the field if it's an integer.
+     * SelectedOutput selects the field if it's an integer.
      *
      * @throws Exception if anything goes wrong.
      */
@@ -103,7 +104,7 @@ public class SelectedFieldOutputTest {
                 new LabelledValue("id", "1.234.567-8"),
                 new LabelledValue(field, value),
                 new LabelledValue("average", average)
-            ).printTo(new SelectedFieldOutput(field)).show(),
+            ).printTo(new SelectedOutput(field)).show(),
             CoreMatchers.equalTo(value.toString())
         );
     }
@@ -130,13 +131,13 @@ public class SelectedFieldOutputTest {
                         new LabelledValue("bird", "eagle")
                     )
                 )
-            ).printTo(new SelectedFieldOutput(field)).show(),
+            ).printTo(new SelectedOutput(field)).show(),
             CoreMatchers.equalTo(value.toString())
         );
     }
 
     /**
-     * SelectedFieldOutput selects the field if it's a double.
+     * SelectedOutput selects the field if it's a double.
      *
      * @throws Exception if anything goes wrong.
      */
@@ -152,13 +153,13 @@ public class SelectedFieldOutputTest {
                 new LabelledValue("atomicNumber", 1),
                 new LabelledValue(field, value),
                 new LabelledValue("heatOfFusion", fusion)
-            ).printTo(new SelectedFieldOutput(field)).show(),
+            ).printTo(new SelectedOutput(field)).show(),
             CoreMatchers.equalTo(value.toString())
         );
     }
 
     /**
-     * SelectedFieldOutput selects the field if it's a long.
+     * SelectedOutput selects the field if it's a long.
      *
      * @throws Exception if anything goes wrong.
      */
@@ -174,13 +175,13 @@ public class SelectedFieldOutputTest {
                 new LabelledValue("developer", "Microsoft"),
                 new LabelledValue("acronym", "NTFS"),
                 new LabelledValue(field, value)
-            ).printTo(new SelectedFieldOutput(field)).show(),
+            ).printTo(new SelectedOutput(field)).show(),
             CoreMatchers.equalTo(value.toString())
         );
     }
 
     /**
-     * SelectedFieldOutput allows to select a nested field.
+     * SelectedOutput allows to select a nested field.
      *
      * @throws Exception if anything goes wrong.
      */
@@ -212,9 +213,9 @@ public class SelectedFieldOutputTest {
                 ),
                 new LabelledValue("employees", employees)
             ).printTo(
-                new SelectedFieldOutput(
+                new SelectedOutput(
                     composite,
-                    new SelectedFieldOutput(nested)
+                    new SelectedOutput(nested)
                 )
             ).show(),
             CoreMatchers.equalTo(value)
@@ -222,7 +223,7 @@ public class SelectedFieldOutputTest {
     }
 
     /**
-     * SelectedFieldOutput allows to select a sequence of values in a field.
+     * SelectedOutput allows to select a sequence of values in a field.
      *
      * @throws Exception if anything goes wrong.
      */
@@ -246,7 +247,7 @@ public class SelectedFieldOutputTest {
                 ),
                 new LabelledValue("owner", "Lalo Landa")
             ).printTo(
-                new SelectedFieldOutput(
+                new SelectedOutput(
                     field,
                     new SelectedIndexOutput(2)
                 )
@@ -256,7 +257,7 @@ public class SelectedFieldOutputTest {
     }
 
     /**
-     * SelectedFieldOutput throws FieldNotMatchedException if the
+     * SelectedOutput throws FieldNotMatchedException if the
      *  field isn't present.
      *
      * @throws Exception if anything goes wrong.
@@ -280,6 +281,6 @@ public class SelectedFieldOutputTest {
                     new LabelledValue("bed", "now")
                 )
             )
-        ).printTo(new SelectedFieldOutput(field)).show();
+        ).printTo(new SelectedOutput(field)).show();
     }
 }

@@ -33,10 +33,11 @@ import uy.kerri.representations.impl.ArrayOfFields;
 import uy.kerri.representations.impl.ArrayOfValues;
 import uy.kerri.representations.impl.LabelledValue;
 import uy.kerri.representations.impl.SelectedFieldOutput;
-import uy.kerri.representations.impl.SelectedIndexOutput;
+import uy.kerri.representations.impl.SelectedOutput;
 
 /**
- * Tests for {@link uy.kerri.representations.impl.SelectedIndexOutput}.
+ * Tests for index selection with
+ *  {@link uy.kerri.representations.impl.SelectedOutput}.
  *
  * @since 1.0
  */
@@ -48,7 +49,7 @@ public class SelectedIndexOutputTest {
     public ExpectedException thrown = ExpectedException.none();
 
     /**
-     * SelectedIndexOutput allows to select a string between a sequence
+     * SelectedOutput allows to select a string between a sequence
      *  of values.
      *
      * @throws Exception if anything goes wrong.
@@ -66,13 +67,13 @@ public class SelectedIndexOutputTest {
                 new LabelledValue(label, "Paraguay"),
                 new LabelledValue(label, value),
                 new LabelledValue(label, "Venezuela")
-            ).printTo(new SelectedIndexOutput(index)).show(),
+            ).printTo(new SelectedOutput(index)).show(),
             CoreMatchers.equalTo(value)
         );
     }
 
     /**
-     * SelectedIndexOutput allows to select an integer between a sequence
+     * SelectedOutput allows to select an integer between a sequence
      *  of values.
      *
      * @throws Exception if anything goes wrong.
@@ -96,13 +97,13 @@ public class SelectedIndexOutputTest {
                 ),
                 new LabelledValue("port", value),
                 new LabelledValue("status", status)
-            ).printTo(new SelectedIndexOutput(index)).show(),
+            ).printTo(new SelectedOutput(index)).show(),
             CoreMatchers.equalTo(value.toString())
         );
     }
 
     /**
-     * SelectedIndexOutput allows to select a boolean between a sequence of
+     * SelectedOutput allows to select a boolean between a sequence of
      *  values.
      *
      * @throws Exception if anything goes wrong.
@@ -126,13 +127,13 @@ public class SelectedIndexOutputTest {
                 ),
                 new LabelledValue("posts", posts),
                 new LabelledValue("verified", value)
-            ).printTo(new SelectedIndexOutput(index)).show(),
+            ).printTo(new SelectedOutput(index)).show(),
             CoreMatchers.equalTo(value.toString())
         );
     }
 
     /**
-     * SelectedIndexOutput allows to select a boolean between a sequence of
+     * SelectedOutput allows to select a boolean between a sequence of
      *  values.
      *
      * @throws Exception if anything goes wrong.
@@ -141,21 +142,23 @@ public class SelectedIndexOutputTest {
     public final void selectsADouble() throws Exception {
         final Double value = 0.08988;
         final Double fusion = 0.117;
-        final Integer index = 3;
+        final Integer index = 4;
         MatcherAssert.assertThat(
             "The correct double value wasn't selected.",
-            new ArrayOfValues(
-                new LabelledValue("symbol", "H"),
-                new LabelledValue("atomicNumber", 1),
-                new LabelledValue("densityAtSTP", value),
-                new LabelledValue("heatOfFusion", fusion)
-            ).printTo(new SelectedIndexOutput(index)).show(),
-            CoreMatchers.equalTo(value.toString())
+            Double.valueOf(
+                new ArrayOfValues(
+                    new LabelledValue("heatOfFusion", fusion),
+                    new LabelledValue("symbol", "H"),
+                    new LabelledValue("atomicNumber", 1),
+                    new LabelledValue("densityAtSTP", value)
+                ).printTo(new SelectedOutput(index)).show()
+            ),
+            CoreMatchers.equalTo(value)
         );
     }
 
     /**
-     * SelectedIndexOutput allows to select a long between a sequence of values.
+     * SelectedOutput allows to select a long between a sequence of values.
      *
      * @throws Exception if anything goes wrong.
      */
@@ -164,21 +167,21 @@ public class SelectedIndexOutputTest {
         final String field = "maxNumberOfFiles";
         final Long value = 4294967295L;
         final Integer introduced = 1997;
-        final Integer index = 4;
+        final Integer index = 1;
         MatcherAssert.assertThat(
             "The correct value wasn't selected.",
             new ArrayOfValues(
+                new LabelledValue(field, value),
                 new LabelledValue("introduced", introduced),
                 new LabelledValue("developer", "Microsoft"),
-                new LabelledValue("acronym", "NTFS"),
-                new LabelledValue(field, value)
-            ).printTo(new SelectedIndexOutput(index)).show(),
+                new LabelledValue("acronym", "NTFS")
+            ).printTo(new SelectedOutput(index)).show(),
             CoreMatchers.equalTo(value.toString())
         );
     }
 
     /**
-     * SelectedIndexOutput allows to select a composite value between a
+     * SelectedOutput allows to select a composite value between a
      *  sequence of values.
      *
      * @throws Exception if anything goes wrong.
@@ -187,33 +190,34 @@ public class SelectedIndexOutputTest {
     public final void selectsACompositeValue() throws Exception {
         final Integer index = 2;
         final String field = "second";
-        final String value = "expected";
-        final Integer first = 200;
+        final Double value = 2.2;
         MatcherAssert.assertThat(
             "The nested value wasn't selected.",
-            new ArrayOfValues(
-                new LabelledValue("first", first),
-                new LabelledValue(
-                    field,
-                    new ArrayOfFields(
-                        new LabelledValue("not", "this value"),
-                        new LabelledValue(field, value),
-                        new LabelledValue("this one", "neither")
+            Double.valueOf(
+                new ArrayOfValues(
+                    new LabelledValue("first", new ArrayOfFields()),
+                    new LabelledValue(
+                        field,
+                        new ArrayOfFields(
+                            new LabelledValue("not", "this value"),
+                            new LabelledValue(field, value),
+                            new LabelledValue("this one", "neither")
+                        )
+                    ),
+                    new LabelledValue("third", "the third value")
+                ).printTo(
+                    new SelectedOutput(
+                        index,
+                        new SelectedOutput(field)
                     )
-                ),
-                new LabelledValue("third", "the third value")
-            ).printTo(
-                new SelectedIndexOutput(
-                    index,
-                    new SelectedFieldOutput(field)
-                )
-            ).show(),
+                ).show()
+            ),
             CoreMatchers.equalTo(value)
         );
     }
 
     /**
-     * SelectedIndexOutput allows to select a sequence of values between a
+     * SelectedOutput allows to select a sequence of values between a
      *  sequence of values.
      *
      * @throws Exception if anything goes wrong.
@@ -221,7 +225,7 @@ public class SelectedIndexOutputTest {
     @Test
     public final void selectsASequenceOfValues() throws Exception {
         final String value = "2nd value";
-        final Integer first = 201;
+        final Boolean first = true;
         final Integer outer = 3;
         final Integer inner = 2;
         MatcherAssert.assertThat(
@@ -238,14 +242,14 @@ public class SelectedIndexOutputTest {
                     )
                 )
             ).printTo(
-                new SelectedIndexOutput(outer, new SelectedIndexOutput(inner))
+                new SelectedOutput(outer, new SelectedOutput(inner))
             ).show(),
             CoreMatchers.equalTo(value)
         );
     }
 
     /**
-     * SelectedIndexOutput throws IndexNotFoundException if the index isn't
+     * SelectedOutput throws IndexNotFoundException if the index isn't
      *  present.
      *
      * @throws Exception if anything goes wrong.
@@ -258,7 +262,7 @@ public class SelectedIndexOutputTest {
             CoreMatchers.equalTo("The index is not present.")
         );
         new ArrayOfValues(
-            new LabelledValue("this", "is"),
+            new LabelledValue("values", new ArrayOfValues()),
             new LabelledValue(
                 "my",
                 new ArrayOfFields(
@@ -267,6 +271,6 @@ public class SelectedIndexOutputTest {
                     new LabelledValue("bed", "now")
                 )
             )
-        ).printTo(new SelectedIndexOutput(index)).show();
+        ).printTo(new SelectedOutput(index)).show();
     }
 }
