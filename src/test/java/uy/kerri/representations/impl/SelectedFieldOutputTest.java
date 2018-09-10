@@ -21,19 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package uy.kerri.representations.test.impl;
+package uy.kerri.representations.impl;
 
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.junit.MatcherAssert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import uy.kerri.representations.exception.FieldNotMatchedException;
-import uy.kerri.representations.impl.ArrayOfFields;
-import uy.kerri.representations.impl.ArrayOfValues;
-import uy.kerri.representations.impl.LabelledValue;
-import uy.kerri.representations.impl.SelectedOutput;
-import uy.kerri.representations.impl.SelectedIndexOutput;
+import uy.kerri.representations.exception.ValueNotSelectedException;
 
 /**
  * Tests for field selection with
@@ -265,11 +260,9 @@ public class SelectedFieldOutputTest {
     @Test
     public final void throwsIfSingleNotPresent() throws Exception {
         final String field = "single";
-        this.thrown.expect(FieldNotMatchedException.class);
+        this.thrown.expect(ValueNotSelectedException.class);
         this.thrown.expectMessage(
-            CoreMatchers.equalTo(
-                String.format("The field \"%s\" is not present.", field)
-            )
+            CoreMatchers.equalTo("The value wasn't selected yet.")
         );
         new ArrayOfFields(
             new LabelledValue("this", "is"),

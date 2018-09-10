@@ -21,19 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package uy.kerri.representations.test.impl;
+package uy.kerri.representations.impl;
 
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.junit.MatcherAssert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import uy.kerri.representations.exception.IndexNotFoundException;
-import uy.kerri.representations.impl.ArrayOfFields;
-import uy.kerri.representations.impl.ArrayOfValues;
-import uy.kerri.representations.impl.LabelledValue;
-import uy.kerri.representations.impl.SelectedFieldOutput;
-import uy.kerri.representations.impl.SelectedOutput;
+import uy.kerri.representations.exception.ValueNotSelectedException;
 
 /**
  * Tests for index selection with
@@ -257,9 +252,9 @@ public class SelectedIndexOutputTest {
     @Test
     public final void throwsIfNotPresent() throws Exception {
         final Integer index = 3;
-        this.thrown.expect(IndexNotFoundException.class);
+        this.thrown.expect(ValueNotSelectedException.class);
         this.thrown.expectMessage(
-            CoreMatchers.equalTo("The index is not present.")
+            CoreMatchers.equalTo("The value wasn't selected yet.")
         );
         new ArrayOfValues(
             new LabelledValue("values", new ArrayOfValues()),

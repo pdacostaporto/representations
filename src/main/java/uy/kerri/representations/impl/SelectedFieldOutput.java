@@ -66,10 +66,8 @@ public class SelectedFieldOutput implements Output {
     }
 
     @Override
-    public final String show() throws FieldNotMatchedException {
-        throw new FieldNotMatchedException(
-            String.format("The field \"%s\" is not present.", this.field)
-        );
+    public final String show() throws Exception {
+        return this.nested.show();
     }
 
     @Override
@@ -137,7 +135,7 @@ public class SelectedFieldOutput implements Output {
     ) throws Exception {
         final Output selected;
         if (key.equals(this.field)) {
-            selected = printed;
+            selected = new SelectedFieldOutput(this.field, printed);
         } else {
             selected = this;
         }

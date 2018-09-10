@@ -26,7 +26,6 @@ package uy.kerri.representations.impl;
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
 import uy.kerri.representations.Values;
-import uy.kerri.representations.exception.IndexNotFoundException;
 
 /**
  * An {@link uy.kerri.representations.Output} to select the n-th printed value
@@ -67,8 +66,8 @@ public class SelectedIndexOutput implements Output {
     }
 
     @Override
-    public final String show() throws IndexNotFoundException {
-        throw new IndexNotFoundException("The index is not present.");
+    public final String show() throws Exception {
+        return this.nested.show();
     }
 
     @Override
@@ -132,9 +131,11 @@ public class SelectedIndexOutput implements Output {
     private Output select(final Output printed) throws Exception {
         final Output selected;
         if (this.index.equals(1)) {
-            selected = printed;
-        } else {
+            selected = new SelectedIndexOutput(this.index - 1, printed);
+        } else if (this.index > 1) {
             selected = new SelectedIndexOutput(this.index - 1, this.nested);
+        } else {
+            selected = this;
         }
         return selected;
     }
