@@ -1,18 +1,46 @@
-package uy.kerri.representations.test.impl;
+/*
+ * MIT License
+ *
+ * Copyright (c) 2018 Pablo Da Costa Porto
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+package uy.kerri.representations.impl;
 
+import org.hamcrest.CoreMatchers;
 import org.hamcrest.junit.MatcherAssert;
 import org.junit.Test;
 import uy.kerri.representations.Field;
-import uy.kerri.representations.Fields;
 import uy.kerri.representations.Value;
 import uy.kerri.representations.Values;
-import uy.kerri.representations.impl.ArrayOfFields;
-import uy.kerri.representations.impl.ArrayOfValues;
-import uy.kerri.representations.impl.LabelledValue;
-import uy.kerri.representations.impl.MatchingIndexTest;
-import static org.hamcrest.CoreMatchers.is;
 
+/**
+ * Tests for {@link uy.kerri.representations.impl.MatchingIndexTest}.
+ *
+ * @since 1.3
+ */
 public final class MatchingIndexTestTest {
+    /**
+     * MatchingIndexTest matches an index with a string value.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public void matchesAStringValue() throws Exception {
         final Integer index = 2;
@@ -22,8 +50,7 @@ public final class MatchingIndexTestTest {
             "A string value didn't match.",
             new MatchingIndexTest(
                 index,
-                label,
-                value,
+                new LabelledValue(label, value),
                 new ArrayOfValues(
                     new LabelledValue(
                         "first",
@@ -46,10 +73,15 @@ public final class MatchingIndexTestTest {
                     )
                 )
             ).passes(),
-            is(true)
+            CoreMatchers.is(true)
         );
     }
 
+    /**
+     * MatchingIndexTest matches an index with an integer value.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public void matchesAnIntegerValue() throws Exception {
         final Integer index = 2;
@@ -59,18 +91,22 @@ public final class MatchingIndexTestTest {
             "An integer value didn't match.",
             new MatchingIndexTest(
                 index,
-                label,
-                value,
+                new LabelledValue(label, value),
                 new ArrayOfValues(
                     new LabelledValue("1st", 1),
                     new LabelledValue(label, value),
                     new LabelledValue("3rd", 1L)
                 )
             ).passes(),
-            is(true)
+            CoreMatchers.is(true)
         );
     }
 
+    /**
+     * MatchingIndexTest matches an index with a boolean value.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public void matchesABooleanValue() throws Exception {
         final Integer index = 2;
@@ -80,18 +116,22 @@ public final class MatchingIndexTestTest {
             "A boolean value didn't match.",
             new MatchingIndexTest(
                 index,
-                label,
-                value,
+                new LabelledValue(label, value),
                 new ArrayOfValues(
                     new LabelledValue("indexNo1", 1),
                     new LabelledValue(label, value),
                     new LabelledValue("indexNo3", 1L)
                 )
             ).passes(),
-            is(true)
+            CoreMatchers.is(true)
         );
     }
 
+    /**
+     * MatchingIndexTest matches an index with a double value.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public void matchesADoubleValue() throws Exception {
         final Integer index = 2;
@@ -101,18 +141,22 @@ public final class MatchingIndexTestTest {
             "A double value didn't match.",
             new MatchingIndexTest(
                 index,
-                label,
-                value,
+                new LabelledValue(label, value),
                 new ArrayOfValues(
                     new LabelledValue("1stIndex", 1),
                     new LabelledValue(label, value),
                     new LabelledValue("3rdIndex", 1L)
                 )
             ).passes(),
-            is(true)
+            CoreMatchers.is(true)
         );
     }
 
+    /**
+     * MatchingIndexTest matches an index with a long value.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public void matchesALongValue() throws Exception {
         final Integer index = 1;
@@ -122,18 +166,22 @@ public final class MatchingIndexTestTest {
             "A long value didn't match.",
             new MatchingIndexTest(
                 index,
-                label,
-                value,
+                new LabelledValue(label, value),
                 new ArrayOfValues(
                     new LabelledValue(label, value),
                     new LabelledValue("2ndI", 1),
                     new LabelledValue("3rdI", 1L)
                 )
             ).passes(),
-            is(true)
+            CoreMatchers.is(true)
         );
     }
 
+    /**
+     * MatchingIndexTest matches an index with a composite value.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public void matchesACompositeValue() throws Exception {
         final Integer index = 2;
@@ -147,8 +195,7 @@ public final class MatchingIndexTestTest {
             "A composite value didn't match.",
             new MatchingIndexTest(
                 index,
-                label,
-                new ArrayOfFields(fields),
+                new LabelledValue(label, new ArrayOfFields(fields)),
                 new ArrayOfValues(
                     new LabelledValue("firstField", 1),
                     new LabelledValue(label, new ArrayOfFields(fields)),
@@ -160,10 +207,15 @@ public final class MatchingIndexTestTest {
                     new LabelledValue("ninthField", "ninthValue")
                 )
             ).passes(),
-            is(true)
+            CoreMatchers.is(true)
         );
     }
 
+    /**
+     * MatchingIndexTest matches an index with a sequence of values.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public void matchesAMultivaluedIndex() throws Exception {
         final Integer index = 2;
@@ -177,8 +229,7 @@ public final class MatchingIndexTestTest {
             "A multivalued value didn't match.",
             new MatchingIndexTest(
                 index,
-                label,
-                new ArrayOfValues(values),
+                new LabelledValue(label, new ArrayOfValues(values)),
                 new ArrayOfValues(
                     new LabelledValue("theFirstIndex", new ArrayOfValues()),
                     new LabelledValue(label, new ArrayOfValues(values)),
@@ -189,142 +240,76 @@ public final class MatchingIndexTestTest {
                     new LabelledValue("theSeventhIndex", new ArrayOfFields())
                 )
             ).passes(),
-            is(true)
+            CoreMatchers.is(true)
         );
     }
 
+    /**
+     * MatchingIndexTest does not pass if the index has a different value.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
-    public void doesntMatchIfTheSingleValueDiffers() throws Exception {
-        final Integer index = 2;
-        final String label = "mySecondIndex";
-        final String value = "expected";
-        MatcherAssert.assertThat(
-            "An index with a different single value was matched.",
-            new MatchingIndexTest(
-                index,
-                label,
-                value,
-                new ArrayOfValues(
-                    new LabelledValue("myFirstIndex", 1),
-                    new LabelledValue(label, "actual"),
-                    new LabelledValue("myThirdIndex", value)
-                )
-            ).passes(),
-            is(false)
-        );
-    }
-
-    @Test
-    public void doesntMatchIfTheCompositeValueDiffers() throws Exception {
-        final Integer index = 2;
-        final String label = "secondIdx";
-        final Fields value = new ArrayOfFields(
-            new LabelledValue("myField", "myValue")
-        );
-        MatcherAssert.assertThat(
-            "An index with a different composite value was matched.",
-            new MatchingIndexTest(
-                index,
-                label,
-                value,
-                new ArrayOfValues(
-                    new LabelledValue("firstIdx", 1),
-                    new LabelledValue(label, new ArrayOfFields()),
-                    new LabelledValue("thirdIdx", value)
-                )
-            ).passes(),
-            is(false)
-        );
-    }
-
-    @Test
-    public void doesntMatchIfTheSequenceDiffers() throws Exception {
+    public void doesntMatchIfTheValueDiffers() throws Exception {
         final Integer index = 2;
         final String label = "2ndIdx";
         final Values values = new ArrayOfValues(
             new LabelledValue("theLabel", "theValue")
         );
         MatcherAssert.assertThat(
-            "An index with a different sequence of values was matched.",
+            "An index with a different value was matched.",
             new MatchingIndexTest(
                 index,
-                label,
-                values,
+                new LabelledValue(label, values),
                 new ArrayOfValues(
                     new LabelledValue("1stIdx", "this is the first value"),
                     new LabelledValue(label, new ArrayOfValues()),
                     new LabelledValue("3rdIdx", values)
                 )
             ).passes(),
-            is(false)
+            CoreMatchers.is(false)
         );
     }
 
+    /**
+     * MatchingIndexTest does not pass if the index has a the correct value with
+     *  a different label.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
-    public void checksTheLabelForASingleValue() throws Exception {
-        final String value = "expectedValue";
-        MatcherAssert.assertThat(
-            "A single value with a different label was matched.",
-            new MatchingIndexTest(
-                2,
-                "expectedLabel",
-                value,
-                new ArrayOfValues(
-                    new LabelledValue("someFirstIndex", 1),
-                    new LabelledValue("someSecondIndex", value),
-                    new LabelledValue("someThirdIndex", 1L)
-                )
-            ).passes(),
-            is(false)
-        );
-    }
-
-    @Test
-    public void checksTheLabelForACompositeValue() throws Exception {
-        final Fields value = new ArrayOfFields();
-        MatcherAssert.assertThat(
-            "A composite value with a different label was matched.",
-            new MatchingIndexTest(
-                2,
-                "thisExpectedLabel",
-                value,
-                new ArrayOfValues(
-                    new LabelledValue("thisFirstIndex", 1.0),
-                    new LabelledValue("thisSecondIndex", value),
-                    new LabelledValue("thisThirdIndex", 1L)
-                )
-            ).passes(),
-            is(false)
-        );
-    }
-
-    @Test
-    public void checksTheLabelForASequenceOfValues() throws Exception {
+    public void doesntMatchIfTheLabelDiffers() throws Exception {
         final Values values = new ArrayOfValues();
         MatcherAssert.assertThat(
-            "A sequence of values with a different label was matched.",
+            "A value with a different label was matched.",
             new MatchingIndexTest(
                 2,
-                "itsTheExpectedLabel",
-                values,
+                new LabelledValue("itsTheExpectedLabel", values),
                 new ArrayOfValues(
                     new LabelledValue("itsTheFirstIndex", true),
                     new LabelledValue("itsTheSecondIndex", values),
                     new LabelledValue("itsTheThirdIndex", 1L)
                 )
             ).passes(),
-            is(false)
+            CoreMatchers.is(false)
         );
     }
 
+    /**
+     * MatchingIndexTest does not pass if there are no values.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public void doesntPassIfThereAreNoValues() throws Exception {
         MatcherAssert.assertThat(
             "A value was matched in an empty sequence of values.",
             new MatchingIndexTest(
-                1, "whateverLabel", "whateverValue", new ArrayOfValues()
+                1,
+                new LabelledValue("whateverLabel", "whateverValue"),
+                new ArrayOfValues()
             ).passes(),
-            is(false)
+            CoreMatchers.is(false)
         );
     }
 }

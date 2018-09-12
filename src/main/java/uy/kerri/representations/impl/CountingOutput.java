@@ -27,58 +27,82 @@ import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
 import uy.kerri.representations.Values;
 
+/**
+ * An {@link uy.kerri.representations.Output} that counts the number of pairs
+ *  that were printed on it.
+ *
+ * @since 1.3
+ */
 public final class CountingOutput implements Output {
+    /**
+     * The count of pairs printed so far.
+     */
     private final Integer count;
 
-    private CountingOutput(Integer printed) {
+    /**
+     * Constructs an output that counts the number of pairs that were printed on
+     *  it, initialized to some value.
+     *
+     * @param printed The count of prints so far.
+     */
+    private CountingOutput(final Integer printed) {
         this.count = printed;
     }
 
+    /**
+     * Constructs an output that counts the number of pairs that were printed on
+     *  it.
+     */
     public CountingOutput() {
         this(0);
     }
 
     @Override
-    public final String show() {
+    public String show() {
         return this.count.toString();
     }
 
     @Override
     public Output print(final String key, final String value) {
-        return this.increment();
+        return this.incremented();
     }
 
     @Override
     public Output print(final String key, final Integer value) {
-        return this.increment();
+        return this.incremented();
     }
 
     @Override
     public Output print(final String key, final Boolean value) {
-        return this.increment();
+        return this.incremented();
     }
 
     @Override
     public Output print(final String key, final Double value) {
-        return this.increment();
+        return this.incremented();
     }
 
     @Override
     public Output print(final String key, final Long value) {
-        return this.increment();
+        return this.incremented();
     }
 
     @Override
     public Output print(final String key, final Fields value) {
-        return this.increment();
+        return this.incremented();
     }
 
     @Override
     public Output print(final String key, final Values values) {
-        return this.increment();
+        return this.incremented();
     }
 
-    private Output increment() {
+    /**
+     * Increments the count of prints.
+     *
+     * @return An output with a count of prints incremented by one.
+     */
+    private Output incremented() {
         return new CountingOutput(this.count + 1);
     }
 }

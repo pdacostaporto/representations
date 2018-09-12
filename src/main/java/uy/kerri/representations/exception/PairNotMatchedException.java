@@ -24,16 +24,16 @@
 package uy.kerri.representations.exception;
 
 /**
- * Exception to throw when a field to be selected didn't match with existent
- *  fields.
+ * Exception to throw when a label-value pair is to be matched with another but
+ *  has not been yet.
  *
- * @since 1.0
+ * @since 1.3
  */
-public class FieldNotMatchedException extends Exception {
+public class PairNotMatchedException extends Exception {
     /**
      * Creates an exception.
      */
-    public FieldNotMatchedException() {
+    public PairNotMatchedException() {
         super();
     }
 
@@ -42,7 +42,7 @@ public class FieldNotMatchedException extends Exception {
     *
     * @param message The message of the exception.
     */
-    public FieldNotMatchedException(final String message) {
+    public PairNotMatchedException(final String message) {
         super(message);
     }
 
@@ -52,7 +52,7 @@ public class FieldNotMatchedException extends Exception {
     * @param message The message of the exception.
     * @param cause The cause of the exception.
     */
-    public FieldNotMatchedException(
+    public PairNotMatchedException(
         final String message, final Exception cause
     ) {
         super(message, cause);

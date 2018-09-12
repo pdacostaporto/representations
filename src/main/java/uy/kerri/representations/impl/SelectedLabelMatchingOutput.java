@@ -25,20 +25,32 @@ package uy.kerri.representations.impl;
 
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
-import uy.kerri.representations.Value;
 import uy.kerri.representations.Values;
-import uy.kerri.representations.exception.FieldNotMatchedException;
 
 /**
- * An {@link uy.kerri.representations.Output} that shows if a field matches
- *  certain value.
+ * An {@link uy.kerri.representations.Output} that shows if the label of the
+ *  last printed label-value pair matches a given label.
  *
  * @since 1.3
  */
-public class SelectedLabelMatchingOutput implements Output {
+public final class SelectedLabelMatchingOutput implements Output {
+    /**
+     * The expected label.
+     */
     private final String expected;
+
+    /**
+     * Whether the last printed label matched or not.
+     */
     private final Boolean matched;
 
+    /**
+     * Constructs an output that shows if the label of the last printed
+     *  label-value pair matches a given label.
+     *
+     * @param label The expected label.
+     * @param status Whether the last printed label matched or not.
+     */
     private SelectedLabelMatchingOutput(
         final String label, final Boolean status
     ) {
@@ -46,69 +58,81 @@ public class SelectedLabelMatchingOutput implements Output {
         this.matched = status;
     }
 
+    /**
+     * Constructs an output that shows if the label of the last printed
+     *  label-value pair matches a given label, assuming nothing was printed
+     *  yet.
+     *
+     * @param label The expected label.
+     */
     public SelectedLabelMatchingOutput(final String label) {
         this(label, false);
     }
 
     @Override
-    public final String show() {
+    public String show() {
         return this.matched.toString();
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final String value
     ) throws Exception {
         return this.match(key);
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Integer value
     ) throws Exception {
         return this.match(key);
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Boolean value
     ) throws Exception {
         return this.match(key);
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Double value
     ) throws Exception {
         return this.match(key);
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Long value
     ) throws Exception {
         return this.match(key);
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Fields value
     ) throws Exception {
         return this.match(key);
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Values values
     ) throws Exception {
         return this.match(key);
     }
 
-    private Output match(final String actual)
-    throws Exception {
+    /**
+     * Determines whether a currently printed label matches the expected label.
+     *
+     * @param actual The printed label.
+     * @return An output indicating if the label matched.
+     * @throws Exception if something goes wrong.
+     */
+    private Output match(final String actual) throws Exception {
         return new SelectedLabelMatchingOutput(
-            this.expected,
-            actual.equals(this.expected)
+            this.expected, actual.equals(this.expected)
         );
     }
 }

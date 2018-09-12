@@ -1,16 +1,44 @@
-package uy.kerri.representations.test.impl;
+/*
+ * MIT License
+ *
+ * Copyright (c) 2018 Pablo Da Costa Porto
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+package uy.kerri.representations.impl;
 
+import org.hamcrest.CoreMatchers;
 import org.hamcrest.junit.MatcherAssert;
 import org.junit.Test;
 import uy.kerri.representations.Fields;
-import uy.kerri.representations.Values;
-import uy.kerri.representations.impl.ArrayOfFields;
-import uy.kerri.representations.impl.ArrayOfValues;
-import uy.kerri.representations.impl.LabelledValue;
-import uy.kerri.representations.impl.ContainedFieldTest;
-import static org.hamcrest.CoreMatchers.is;
 
+/**
+ * Tests for {@link uy.kerri.representations.impl.ContainedFieldTest}.
+ *
+ * @since 1.3
+ */
 public final class ContainedFieldTestTest {
+    /**
+     * ContainedFieldTest allows to match a string field.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public void matchesAStringField() throws Exception {
         final String field = "second";
@@ -41,10 +69,15 @@ public final class ContainedFieldTestTest {
                     )
                 )
             ).passes(),
-            is(true)
+            CoreMatchers.is(true)
         );
     }
 
+    /**
+     * ContainedFieldTest allows to match an integer field.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public void matchesAnIntegerField() throws Exception {
         final String field = "2nd";
@@ -59,10 +92,15 @@ public final class ContainedFieldTestTest {
                     new LabelledValue("3rd", 1L)
                 )
             ).passes(),
-            is(true)
+            CoreMatchers.is(true)
         );
     }
 
+    /**
+     * ContainedFieldTest allows to match a boolean field.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public void matchesABooleanField() throws Exception {
         final String field = "fieldNo2";
@@ -77,10 +115,15 @@ public final class ContainedFieldTestTest {
                     new LabelledValue("fieldNo3", 1L)
                 )
             ).passes(),
-            is(true)
+            CoreMatchers.is(true)
         );
     }
 
+    /**
+     * ContainedFieldTest allows to match a double field.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public void matchesADoubleField() throws Exception {
         final String field = "2ndField";
@@ -95,10 +138,15 @@ public final class ContainedFieldTestTest {
                     new LabelledValue("3rdField", 1L)
                 )
             ).passes(),
-            is(true)
+            CoreMatchers.is(true)
         );
     }
 
+    /**
+     * ContainedFieldTest allows to match a long field.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public void matchesALongField() throws Exception {
         final String field = "1stF";
@@ -113,10 +161,15 @@ public final class ContainedFieldTestTest {
                     new LabelledValue("3rdF", 1L)
                 )
             ).passes(),
-            is(true)
+            CoreMatchers.is(true)
         );
     }
 
+    /**
+     * ContainedFieldTest allows to match a composite field.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public void matchesACompositeField() throws Exception {
         final String field = "secondField";
@@ -139,23 +192,32 @@ public final class ContainedFieldTestTest {
                     new LabelledValue("eighthField", 1.0)
                 )
             ).passes(),
-            is(true)
+            CoreMatchers.is(true)
         );
     }
 
+    /**
+     * ContainedFieldTest allows to match a multivalued field.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public void matchesAMultivaluedField() throws Exception {
         final String field = "theEighthField";
-        final Values value = new ArrayOfValues(
-            new LabelledValue("1stL", "1stAV"),
-            new LabelledValue("2ndL", "2ndAV"),
-            new LabelledValue("3rdL", "3rdAV")
+        final LabelledValue expected = new LabelledValue(
+            field,
+            new ArrayOfValues(
+                new LabelledValue("1stL", "1stAV"),
+                new LabelledValue("2ndL", "2ndAV"),
+                new LabelledValue("3rdL", "3rdAV")
+            )
         );
         MatcherAssert.assertThat(
             "A multivalued field didn't match.",
             new ContainedFieldTest(
-                new LabelledValue(field, value),
+                expected,
                 new ArrayOfFields(
+                    new LabelledValue(field, "a value to be reassigned"),
                     new LabelledValue("theFirstField", new ArrayOfValues()),
                     new LabelledValue("theSecondField", "theSecondValue"),
                     new LabelledValue("theThirdField", 1L),
@@ -163,83 +225,67 @@ public final class ContainedFieldTestTest {
                     new LabelledValue("theFifthField", 1.0),
                     new LabelledValue("theSixthField", 1),
                     new LabelledValue("theSeventhField", new ArrayOfFields()),
-                    new LabelledValue(field, value)
+                    expected
                 )
             ).passes(),
-            is(true)
+            CoreMatchers.is(true)
         );
     }
 
+    /**
+     * ContainedFieldTest doesn't pass if the field is present but has a
+     *  different value.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
-    public void doesntMatchIfTheValueDiffers() throws Exception {
+    public void doesntPassIfTheValueDiffers() throws Exception {
         final String field = "mySecondField";
-        final String value = "expected";
+        final LabelledValue expected = new LabelledValue(
+            field, "expected"
+        );
         MatcherAssert.assertThat(
             "A field with a different value was matched.",
             new ContainedFieldTest(
-                new LabelledValue(field, value),
+                expected,
                 new ArrayOfFields(
                     new LabelledValue("myFirstField", 1),
+                    expected,
                     new LabelledValue(field, "actual"),
                     new LabelledValue("myThirdField", 1L)
                 )
             ).passes(),
-            is(false)
+            CoreMatchers.is(false)
         );
     }
 
+    /**
+     * ContainedFieldTest doesn't pass if the field is not present.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
-    public void doesntMatchIfTheFieldIsNotPresent() throws Exception {
+    public void doesntPassIfTheFieldIsNotPresent() throws Exception {
+        final String value = "expectedValue";
         MatcherAssert.assertThat(
             "A missing field was matched.",
             new ContainedFieldTest(
-                new LabelledValue("expectedField", "expectedValue"),
+                new LabelledValue("expectedField", value),
                 new ArrayOfFields(
                     new LabelledValue("someFirstField", 1),
-                    new LabelledValue("someSecondField", "expectedValue"),
+                    new LabelledValue("someSecondField", value),
                     new LabelledValue("someThirdField", 1L)
                 )
             ).passes(),
-            is(false)
+            CoreMatchers.is(false)
         );
     }
 
-    @Test
-    public void matchesIfFieldIsReassignedToExpected() throws Exception {
-        final String field = "name";
-        final String value = "Pablo";
-        MatcherAssert.assertThat(
-            "A reassigned field didn't match.",
-            new ContainedFieldTest(
-                new LabelledValue(field, value),
-                new ArrayOfFields(
-                    new LabelledValue(field, "Robert"),
-                    new LabelledValue("lastName", "Rodríguez"),
-                    new LabelledValue(field, value)
-                )
-            ).passes(),
-            is(true)
-        );
-    }
-
-    @Test
-    public void doesntMatchIfReassignedToAnotherValue() throws Exception {
-        final String field = "id";
-        final Integer value = 1;
-        MatcherAssert.assertThat(
-            "A reassigned field did match when it shouldn't.",
-            new ContainedFieldTest(
-                new LabelledValue(field, value),
-                new ArrayOfFields(
-                    new LabelledValue(field, value),
-                    new LabelledValue("title", "First post"),
-                    new LabelledValue(field, 0)
-                )
-            ).passes(),
-            is(false)
-        );
-    }
-
+    /**
+     * ContainedFieldTest doesn't pass if there are no fields.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public void doesntPassIfThereAreNoFields() throws Exception {
         MatcherAssert.assertThat(
@@ -248,7 +294,7 @@ public final class ContainedFieldTestTest {
                 new LabelledValue("whateverField", "whateverValue"),
                 new ArrayOfFields()
             ).passes(),
-            is(false)
+            CoreMatchers.is(false)
         );
     }
 }

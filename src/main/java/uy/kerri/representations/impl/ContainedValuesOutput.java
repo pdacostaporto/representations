@@ -30,10 +30,33 @@ import uy.kerri.representations.Output;
 import uy.kerri.representations.Value;
 import uy.kerri.representations.Values;
 
+/**
+ * An {@link uy.kerri.representations.Output} that shows if values printed on it
+ *  are contained in a given sequence of values.
+ *
+ * @since 1.3
+ */
 public final class ContainedValuesOutput implements Output {
+    /**
+     * The sequence of values to be matched.
+     */
     private final Values actual;
+
+    /**
+     * The indexes of the already matched values in the containing sequence,
+     *  with 0 indicating that a value didn't match.
+     */
     private final List<Integer> matched;
 
+    /**
+     * Constructs an output that shows if values printed on it are contained in
+     *  a given sequence of values, considering a list of indexes of given
+     *  sequence that have already been matched, with 0 indicating that a
+     *  printed value didn't match.
+     *
+     * @param values The sequence of values to be matched.
+     * @param already A list of the indexes already matched.
+     */
     private ContainedValuesOutput(
         final Values values, final List<Integer> already
     ) {
@@ -41,64 +64,78 @@ public final class ContainedValuesOutput implements Output {
         this.matched = already;
     }
 
+    /**
+     * Constructs an output that shows if values printed on it are contained in
+     *  a given sequence of values.
+     *
+     * @param values The sequence of values to be matched.
+     */
     public ContainedValuesOutput(final Values values) {
-        this(values, new ArrayList<Integer>());
+        this(values, new ArrayList<Integer>(0));
     }
 
     @Override
-    public final String show() {
-        return Boolean.valueOf(!this.matched.contains(0)).toString();
+    public String show() {
+        return String.format("%b", !this.matched.contains(0));
     }
 
     @Override
     public Output print(final String key, final String value) throws Exception {
-        return this.select(new LabelledValue(key, value));
+        return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Integer value
     ) throws Exception {
-        return this.select(new LabelledValue(key, value));
+        return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Boolean value
     ) throws Exception {
-        return this.select(new LabelledValue(key, value));
+        return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Double value
     ) throws Exception {
-        return this.select(new LabelledValue(key, value));
+        return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Long value
     ) throws Exception {
-        return this.select(new LabelledValue(key, value));
+        return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Fields value
     ) throws Exception {
-        return this.select(new LabelledValue(key, value));
+        return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Values values
     ) throws Exception {
-        return this.select(new LabelledValue(key, values));
+        return this.match(new LabelledValue(key, values));
     }
 
-    private Output select(final Value value) throws Exception {
-        final List<Integer> exclude = new ArrayList<Integer>(this.matched);
+    /**
+     * Matches the printed value.
+     *
+     * @param value The recently printed value.
+     * @return An output updated to whether the value was contained in the
+     *  sequence or not.
+     * @throws Exception if something goes wrong.
+     */
+    private Output match(final Value value) throws Exception {
+        final List<Integer> exclude = new ArrayList<>(this.matched);
         exclude.add(
             Integer.valueOf(
                 this.actual.printTo(new ContainedValueOutput(value, exclude))

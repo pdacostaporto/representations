@@ -25,23 +25,19 @@ package uy.kerri.representations.impl;
 
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
-import uy.kerri.representations.Value;
 import uy.kerri.representations.Values;
-import uy.kerri.representations.exception.FieldNotMatchedException;
+import uy.kerri.representations.exception.PairNotMatchedException;
 
 /**
- * An {@link uy.kerri.representations.Output} that shows if a field matches
- *  certain value.
+ * An {@link uy.kerri.representations.Output} that shows if the last label-value
+ *  pair printed on it matches the first pair that was printed.
  *
  * @since 1.3
  */
 public class PairMatchingOutput implements Output {
-    public PairMatchingOutput() {
-    }
-
     @Override
     public final String show() throws Exception {
-        throw new Exception(
+        throw new PairNotMatchedException(
             "Tried to show the result of matching without matching anything."
         );
     }

@@ -28,132 +28,130 @@ import uy.kerri.representations.Output;
 import uy.kerri.representations.Value;
 import uy.kerri.representations.Values;
 
+/**
+ * An {@link uy.kerri.representations.Output} that shows if the n-th value in a
+ *  sequence of values matches a given value.
+ *
+ * @since 1.3
+ */
 public final class IndexMatchingOutput implements Output {
+    /**
+     * The index where the value is to be matched.
+     */
     private final Integer index;
+
+    /**
+     * The value to be matched.
+     */
     private final Value expected;
-    private final Boolean matched;
+
+    /**
+     * The index of the next value to be printed.
+     */
     private final Integer current;
 
+    /**
+     * Constructs an output that shows if the value at a given place in a
+     *  sequence of values matches a given value, considering the position
+     *  correspondent to the next value to be printed.
+     *
+     * @param idx The index where the value is to be matched.
+     * @param value The value to be matched.
+     * @param position The index of the next value to be printed.
+     */
     private IndexMatchingOutput(
         final Integer idx,
         final Value value,
-        final Boolean status,
         final Integer position
     ) {
         this.index = idx;
         this.expected = value;
-        this.matched = status;
         this.current = position;
     }
 
+    /**
+     * Constructs an output that shows if the value at a given place in a
+     *  sequence of values matches a given value.
+     *
+     * @param idx The index where the value is to be matched.
+     * @param value The value to be matched.
+     */
     public IndexMatchingOutput(final Integer idx, final Value value) {
-        this(idx, value, false, 1);
-    }
-
-    public IndexMatchingOutput(
-        final Integer idx, final String lbl, final String value
-    ) {
-        this(idx, new LabelledValue(lbl, value));
-    }
-
-    public IndexMatchingOutput(
-        final Integer idx, final String lbl, final Integer value
-    ) {
-        this(idx, new LabelledValue(lbl, value));
-    }
-
-    public IndexMatchingOutput(
-        final Integer idx, final String lbl, final Boolean value
-    ) {
-        this(idx, new LabelledValue(lbl, value));
-    }
-
-    public IndexMatchingOutput(
-        final Integer idx, final String lbl, final Long value
-    ) {
-        this(idx, new LabelledValue(lbl, value));
-    }
-
-    public IndexMatchingOutput(
-        final Integer idx, final String lbl, final Double value
-    ) {
-        this(idx, new LabelledValue(lbl, value));
-    }
-
-    public IndexMatchingOutput(
-        final Integer idx, final String lbl, final Fields value
-    ) {
-        this(idx, new LabelledValue(lbl, value));
-    }
-
-    public IndexMatchingOutput(
-        final Integer idx, final String lbl, final Values values
-    ) {
-        this(idx, new LabelledValue(lbl, values));
+        this(idx, value, 1);
     }
 
     @Override
-    public final String show() {
-        return this.matched.toString();
+    public String show() throws Exception {
+        return "false";
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final String value
     ) throws Exception {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Integer value
     ) throws Exception {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Boolean value
     ) throws Exception {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Double value
     ) throws Exception {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Long value
     ) throws Exception {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Fields value
     ) throws Exception {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Values values
     ) throws Exception {
         return this.match(new LabelledValue(key, values));
     }
 
+    /**
+     * Matches the value.
+     *
+     * @param value The value to be matched.
+     * @return An output updated to whether the value matched or not.
+     * @throws Exception if something goes wrong.
+     */
     private Output match(final Value value) throws Exception {
-        return new IndexMatchingOutput(
-            this.index,
-            this.expected,
-            this.current.equals(this.index) ? (
+        final Output selected;
+        if (this.current.equals(this.index)) {
+            selected = new FixedOutput(
                 new MatchingValueTest(this.expected, value).passes()
-            ) : this.matched,
-            this.current + 1
-        );
+            );
+        } else {
+            selected = new IndexMatchingOutput(
+                this.index, this.expected, this.current + 1
+            );
+        }
+        return selected;
     }
 }

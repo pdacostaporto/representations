@@ -23,43 +23,34 @@
  */
 package uy.kerri.representations.impl;
 
-import uy.kerri.representations.Field;
-import uy.kerri.representations.Test;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.junit.MatcherAssert;
+import org.junit.Test;
 
 /**
- * A {@link uy.kerri.representations.Test} to verify that the names of two
- *  fields match.
+ * Tests for {@link uy.kerri.representations.impl.SelectedLongValue}.
  *
  * @since 1.3
  */
-public final class MatchingFieldNameTest implements Test {
+public final class SelectedLongValueTest {
     /**
-     * The field with the expected name.
-     */
-    private final Field expected;
-
-    /**
-     * The actual field.
-     */
-    private final Field actual;
-
-    /**
-     * Constructs a test to verify if the names of two fields match.
+     * SelectedLongValue allows to select a long.
      *
-     * @param some The field with the expected name.
-     * @param other The actual field.
+     * @throws Exception if something goes wrong.
      */
-    public MatchingFieldNameTest(final Field some, final Field other) {
-        this.expected = some;
-        this.actual = other;
-    }
-
-    @Override
-    public Boolean passes() throws Exception {
-        return Boolean.valueOf(
-            this.actual.printTo(
-                this.expected.printTo(new LabelMatchingOutput())
-            ).show()
+    @Test
+    public void selectsALong() throws Exception {
+        final String field = "Long";
+        final Long value = 20L;
+        MatcherAssert.assertThat(
+            "A long value wasn't selected.",
+            new SelectedLongValue(
+                new ArrayOfFields(
+                    new LabelledValue(field, value)
+                ),
+                new SelectedOutput(field)
+            ).value(),
+            CoreMatchers.equalTo(value)
         );
     }
 }

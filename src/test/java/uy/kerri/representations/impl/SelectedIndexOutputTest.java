@@ -244,7 +244,7 @@ public class SelectedIndexOutputTest {
     }
 
     /**
-     * SelectedOutput throws IndexNotFoundException if the index isn't
+     * SelectedOutput throws ValueNotSelectedException if the index isn't
      *  present.
      *
      * @throws Exception if anything goes wrong.

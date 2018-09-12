@@ -25,21 +25,39 @@ package uy.kerri.representations.impl;
 
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
-import uy.kerri.representations.Value;
 import uy.kerri.representations.Values;
-import uy.kerri.representations.exception.FieldNotMatchedException;
 
 /**
- * An {@link uy.kerri.representations.Output} that shows if a field matches
- *  certain value.
+ * An {@link uy.kerri.representations.Output} that shows if the last key-value
+ *  printed on it matches a given key-value pair with a composite value as
+ *  value.
  *
  * @since 1.3
  */
-public class CompositePairMatchingOutput implements Output {
+public final class CompositePairMatchingOutput implements Output {
+    /**
+     * The label of the pair.
+     */
     private final String label;
+
+    /**
+     * The value of the pair.
+     */
     private final Fields expected;
+
+    /**
+     * Whether the last printed value matched or not.
+     */
     private final Boolean matched;
 
+    /**
+     * Constructs an output that shows if the last label-value printed on it
+     *  matches a given label-value pair with a single value as value.
+     *
+     * @param key The label.
+     * @param value The single value to match.
+     * @param status Whether the last printed pair matched or not.
+     */
     private CompositePairMatchingOutput(
         final String key, final Fields value, final Boolean status
     ) {
@@ -48,52 +66,59 @@ public class CompositePairMatchingOutput implements Output {
         this.matched = status;
     }
 
+    /**
+     * Constructs an output that shows if the last label-value printed on it
+     *  matches a given label-value pair with a single value as value.
+     *
+     * @param key The label.
+     * @param value The single value to match.
+     */
     public CompositePairMatchingOutput(final String key, final Fields value) {
         this(key, value, false);
     }
 
     @Override
-    public final String show() {
+    public String show() {
         return this.matched.toString();
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final String value
     ) throws Exception {
         return this.next(false);
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Integer value
     ) throws Exception {
         return this.next(false);
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Boolean value
     ) throws Exception {
         return this.next(false);
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Double value
     ) throws Exception {
         return this.next(false);
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Long value
     ) throws Exception {
         return this.next(false);
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Fields value
     ) throws Exception {
         return this.next(
@@ -103,12 +128,18 @@ public class CompositePairMatchingOutput implements Output {
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Values values
     ) throws Exception {
         return this.next(false);
     }
 
+    /**
+     * The next state for the output after a value is printed.
+     *
+     * @param matches Whether the printed pair matched or not.
+     * @return An output updated to indicate if the new printed pair matched.
+     */
     private Output next(final Boolean matches) {
         return new CompositePairMatchingOutput(
             this.label, this.expected, matches

@@ -1,14 +1,45 @@
-package uy.kerri.representations.test.impl;
+/*
+ * MIT License
+ *
+ * Copyright (c) 2018 Pablo Da Costa Porto
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+package uy.kerri.representations.impl;
 
-import org.hamcrest.MatcherAssert;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.junit.MatcherAssert;
 import org.junit.Test;
 import uy.kerri.representations.Values;
-import uy.kerri.representations.impl.ArrayOfValues;
-import uy.kerri.representations.impl.LabelledValue;
-import uy.kerri.representations.impl.MatchingValuesTest;
-import static org.hamcrest.CoreMatchers.is;
 
+/**
+ * Tests for {@link uy.kerri.representations.impl.MatchingValuesTest}.
+ *
+ * @since 1.3
+ */
 public final class MatchingValuesTestTest {
+    /**
+     * MatchingValuesTest matches two sequences of values with same values in
+     *  the same order.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public void matchesTwoEqualSequences() throws Exception {
         final LabelledValue first = new LabelledValue("first", "first value");
@@ -19,10 +50,16 @@ public final class MatchingValuesTestTest {
         MatcherAssert.assertThat(
             "Two equal sequences of values didn't match.",
             new MatchingValuesTest(some, other).passes(),
-            is(true)
+            CoreMatchers.is(true)
         );
     }
 
+    /**
+     * MatchingValuesTest does not pass if the second sequence is shorter than
+     *  the first.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public void doesntMatchAShorterSequence() throws Exception {
         final LabelledValue first = new LabelledValue("1st field", "1");
@@ -33,10 +70,16 @@ public final class MatchingValuesTestTest {
         MatcherAssert.assertThat(
             "A sequence of values matched to a shorter sequence.",
             new MatchingValuesTest(some, other).passes(),
-            is(false)
+            CoreMatchers.is(false)
         );
     }
 
+    /**
+     * MatchingValuesTest does not pass if the second sequence is longer than
+     *  the first.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public void doesntMatchALongerSequence() throws Exception {
         final LabelledValue first = new LabelledValue("1st", "1st value");
@@ -48,10 +91,15 @@ public final class MatchingValuesTestTest {
         MatcherAssert.assertThat(
             "A sequence of values matched to a longer sequence.",
             new MatchingValuesTest(some, other).passes(),
-            is(false)
+            CoreMatchers.is(false)
         );
     }
 
+    /**
+     * MatchingValuesTest does not pass if some value has a different label.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public void doesntMatchIfALabelDiffers() throws Exception {
         final LabelledValue first = new LabelledValue("1stField", "1stValue");
@@ -63,7 +111,7 @@ public final class MatchingValuesTestTest {
         MatcherAssert.assertThat(
             "A sequences matches another with different labels.",
             new MatchingValuesTest(some, other).passes(),
-            is(false)
+            CoreMatchers.is(false)
         );
     }
 }

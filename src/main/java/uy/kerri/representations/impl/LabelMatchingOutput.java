@@ -25,71 +25,67 @@ package uy.kerri.representations.impl;
 
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
-import uy.kerri.representations.Value;
 import uy.kerri.representations.Values;
-import uy.kerri.representations.exception.FieldNotMatchedException;
+import uy.kerri.representations.exception.LabelNotMatchedException;
 
 /**
- * An {@link uy.kerri.representations.Output} that shows if a field matches
- *  certain value.
+ * An {@link uy.kerri.representations.Output} that shows if the last label
+ *  printed on it matches the first label that was printed.
  *
  * @since 1.3
  */
-public class LabelMatchingOutput implements Output {
-    public LabelMatchingOutput() {
-    }
-
+public final class LabelMatchingOutput implements Output {
     @Override
-    public final String show() throws Exception {
-        throw new Exception(
+    public String show() throws LabelNotMatchedException {
+        throw new LabelNotMatchedException(
             "Tried to show the result of matching without matching anything."
         );
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final String value
     ) throws Exception {
         return new SelectedLabelMatchingOutput(key);
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Integer value
     ) throws Exception {
         return new SelectedLabelMatchingOutput(key);
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Boolean value
     ) throws Exception {
         return new SelectedLabelMatchingOutput(key);
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Double value
     ) throws Exception {
         return new SelectedLabelMatchingOutput(key);
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Long value
     ) throws Exception {
         return new SelectedLabelMatchingOutput(key);
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Fields value
     ) throws Exception {
         return new SelectedLabelMatchingOutput(key);
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Values values
     ) throws Exception {
         return new SelectedLabelMatchingOutput(key);

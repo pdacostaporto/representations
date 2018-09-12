@@ -27,76 +27,108 @@ import uy.kerri.representations.Field;
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
 import uy.kerri.representations.Values;
-import uy.kerri.representations.exception.FieldNotMatchedException;
 
-public class FieldMatchingOutput implements Output {
+/**
+ * An {@link uy.kerri.representations.Output} that shows if the last field
+ *  printed on it matches a given field.
+ *
+ * @since 1.3
+ */
+public final class FieldMatchingOutput implements Output {
+    /**
+     * The expected field.
+     */
     private final Field expected;
 
+    /**
+     * Whether the last printed field matched or not.
+     */
     private final Boolean matched;
 
+    /**
+     * Constructs an output that shows if the last field printed on it matches
+     *  a given field.
+     *
+     * @param field The field to be matched.
+     * @param status Whether the last printed field matched the field or not.
+     */
     private FieldMatchingOutput(final Field field, final Boolean status) {
         this.expected = field;
         this.matched = status;
     }
 
+    /**
+     * Constructs an output that shows if the last field printed on it matches
+     *  a given field.
+     *
+     * @param field The field to be matched.
+     */
     public FieldMatchingOutput(final Field field) {
         this(field, false);
     }
 
     @Override
-    public final String show() {
+    public String show() {
         return this.matched.toString();
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final String value
     ) throws Exception {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Integer value
     ) throws Exception {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Boolean value
     ) throws Exception {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Double value
     ) throws Exception {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Long value
     ) throws Exception {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Fields value
     ) throws Exception {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Values values
     ) throws Exception {
         return this.match(new LabelledValue(key, values));
     }
 
+    /**
+     * Determines whether the currently printed field matches the expected field
+     *  or not.
+     *
+     * @param actual The currently printed field.
+     * @return An output indicating whether the field matched or not.
+     * @throws Exception if something goes wrong.
+     */
     private Output match(final Field actual) throws Exception {
         final Output selected;
         if (new MatchingFieldNameTest(this.expected, actual).passes()) {

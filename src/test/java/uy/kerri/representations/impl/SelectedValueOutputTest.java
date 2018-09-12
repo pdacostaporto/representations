@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package uy.kerri.representations.test.impl;
+package uy.kerri.representations.impl;
 
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.junit.MatcherAssert;
@@ -29,7 +29,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import uy.kerri.representations.exception.ValueNotSelectedException;
-import uy.kerri.representations.impl.SelectedValueOutput;
 
 /**
  * Tests for {@link uy.kerri.representations.impl.SelectedSingleFieldOutput}

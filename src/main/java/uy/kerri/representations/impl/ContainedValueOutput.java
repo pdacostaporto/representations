@@ -30,98 +30,142 @@ import uy.kerri.representations.Output;
 import uy.kerri.representations.Value;
 import uy.kerri.representations.Values;
 
+/**
+ * An {@link uy.kerri.representations.Output} that shows the position of the
+ *  first value printed on it that matches a given value.
+ *
+ * @since 1.3
+ */
 public final class ContainedValueOutput implements Output {
+    /**
+     * The index of the current value to be printed.
+     */
     private final Integer current;
-    private final Value actual;
-    private final List<Integer> already;
-    private final Integer matched;
 
+    /**
+     * The value to be matched.
+     */
+    private final Value actual;
+
+    /**
+     * Indexes to ignore.
+     */
+    private final List<Integer> already;
+
+    /**
+     * Constructs an output that shows the position of the first value printed
+     *  on it that matches a given value, considering a current position in the
+     *  sequence and a list of indexes to be excluded from matching.
+     *
+     * @param index The current index in the sequence.
+     * @param value The value to be matched.
+     * @param exclude A list of indexes to be excluded from matching.
+     */
     private ContainedValueOutput(
         final Integer index,
         final Value value,
-        final List<Integer> exclude,
-        final Integer status
+        final List<Integer> exclude
     ) {
         this.current = index;
         this.actual = value;
         this.already = exclude;
-        this.matched = status;
     }
 
+    /**
+     * Constructs an output that shows if any of the values printed on it
+     *  matches a given value, considering a list of indexes to be excluded from
+     *  matching and assuming that it is the start of the sequence.
+     *
+     * @param value The value to be matched.
+     * @param exclude A list of indexes to be excluded from matching.
+     */
     public ContainedValueOutput(
-        final Value actual, final List<Integer> exclude
+        final Value value, final List<Integer> exclude
     ) {
-        this(1, actual, exclude, 0);
+        this(1, value, exclude);
     }
 
-    public ContainedValueOutput(final Value actual) {
-        this(actual, new ArrayList<Integer>());
+    /**
+     * Constructs an output that shows if any of the values printed on it
+     *  matches a given value.
+     *
+     * @param value The value to be matched.
+     */
+    public ContainedValueOutput(final Value value) {
+        this(value, new ArrayList<Integer>(0));
     }
 
     @Override
-    public final String show() {
-        return this.matched.toString();
+    public String show() {
+        return "0";
     }
 
     @Override
     public Output print(final String key, final String value) throws Exception {
-        return this.select(new LabelledValue(key, value));
+        return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Integer value
     ) throws Exception {
-        return this.select(new LabelledValue(key, value));
+        return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Boolean value
     ) throws Exception {
-        return this.select(new LabelledValue(key, value));
+        return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Double value
     ) throws Exception {
-        return this.select(new LabelledValue(key, value));
+        return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Long value
     ) throws Exception {
-        return this.select(new LabelledValue(key, value));
+        return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Fields value
     ) throws Exception {
-        return this.select(new LabelledValue(key, value));
+        return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Values values
     ) throws Exception {
-        return this.select(new LabelledValue(key, values));
+        return this.match(new LabelledValue(key, values));
     }
 
-    private Output select(final Value value) throws Exception {
-        final Integer status;
+    /**
+     * Matches the printed value if it corresponds.
+     *
+     * @param value The last printed value.
+     * @return An output indicating whether the value was matched or not.
+     * @throws Exception if something goes wrong.
+     */
+    private Output match(final Value value) throws Exception {
+        final Output selected;
         if (
             !this.already.contains(this.current)
-            && new MatchingValueTest(value, this.actual).passes()
+                && new MatchingValueTest(value, this.actual).passes()
         ) {
-            status = this.current;
+            selected = new FixedOutput(this.current);
         } else {
-            status = this.matched;
+            selected = new ContainedValueOutput(
+                this.current + 1, this.actual, this.already
+            );
         }
-        return new ContainedValueOutput(
-            this.current + 1, this.actual, this.already, status
-        );
+        return selected;
     }
 }

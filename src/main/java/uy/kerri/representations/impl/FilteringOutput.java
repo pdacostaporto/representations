@@ -28,58 +28,77 @@ import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
 import uy.kerri.representations.Values;
 
+/**
+ * An {@link uy.kerri.representations.Output} that only allows certain fields
+ *  to be printed on a nested output.
+ *
+ * @since 1.3
+ */
 public final class FilteringOutput implements Output {
+    /**
+     * The fields to be allowed.
+     */
     private final List<String> fields;
 
+    /**
+     * The nested output.
+     */
     private final Output nested;
 
+    /**
+     * Constructs an output that only allows given fields to be printed on a
+     *  nested output.
+     *
+     * @param names The names of the fields allowed.
+     * @param output The output where the fields will be printed.
+     */
     public FilteringOutput(final List<String> names, final Output output) {
         this.fields = names;
         this.nested = output;
     }
 
     @Override
-    public final String show() throws Exception {
+    public String show() throws Exception {
         return this.nested.show();
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final String value
     ) throws Exception {
         return this.select(key, this.nested.print(key, value));
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Integer value
     ) throws Exception {
         return this.select(key, this.nested.print(key, value));
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Boolean value
     ) throws Exception {
         return this.select(key, this.nested.print(key, value));
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Double value
     ) throws Exception {
         return this.select(key, this.nested.print(key, value));
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Long value
     ) throws Exception {
         return this.select(key, this.nested.print(key, value));
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key,
         final Fields value
     ) throws Exception {
@@ -87,12 +106,22 @@ public final class FilteringOutput implements Output {
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Values values
     ) throws Exception {
         return this.select(key, this.nested.print(key, values));
     }
 
+    /**
+     * Chooses between the output with a printed field or not considering if the
+     *  field is allowed to be printed.
+     *
+     * @param key The name of the printed field.
+     * @param printed This output with the field already printed.
+     * @return This output with the field already printed or not considering if
+     *  the field is allowed.
+     * @throws Exception if something goes wrong.
+     */
     private Output select(
         final String key, final Output printed
     ) throws Exception {

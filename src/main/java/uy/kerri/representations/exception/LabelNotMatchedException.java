@@ -21,45 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package uy.kerri.representations.impl;
-
-import uy.kerri.representations.Field;
-import uy.kerri.representations.Test;
+package uy.kerri.representations.exception;
 
 /**
- * A {@link uy.kerri.representations.Test} to verify that the names of two
- *  fields match.
+ * Exception to throw when a label is to be matched with another but has not
+ *  been yet.
  *
  * @since 1.3
  */
-public final class MatchingFieldNameTest implements Test {
+public class LabelNotMatchedException extends Exception {
     /**
-     * The field with the expected name.
+     * Creates an exception.
      */
-    private final Field expected;
-
-    /**
-     * The actual field.
-     */
-    private final Field actual;
-
-    /**
-     * Constructs a test to verify if the names of two fields match.
-     *
-     * @param some The field with the expected name.
-     * @param other The actual field.
-     */
-    public MatchingFieldNameTest(final Field some, final Field other) {
-        this.expected = some;
-        this.actual = other;
+    public LabelNotMatchedException() {
+        super();
     }
 
-    @Override
-    public Boolean passes() throws Exception {
-        return Boolean.valueOf(
-            this.actual.printTo(
-                this.expected.printTo(new LabelMatchingOutput())
-            ).show()
-        );
+    /**
+    * Creates an exception with given message and cause.
+    *
+    * @param message The message of the exception.
+    */
+    public LabelNotMatchedException(final String message) {
+        super(message);
+    }
+
+    /**
+    * Creates an exception with given message and cause.
+    *
+    * @param message The message of the exception.
+    * @param cause The cause of the exception.
+    */
+    public LabelNotMatchedException(
+        final String message, final Exception cause
+    ) {
+        super(message, cause);
     }
 }

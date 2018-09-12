@@ -1,31 +1,66 @@
-package uy.kerri.representations.test.impl;
+/*
+ * MIT License
+ *
+ * Copyright (c) 2018 Pablo Da Costa Porto
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+package uy.kerri.representations.impl;
 
-import org.hamcrest.MatcherAssert;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.junit.MatcherAssert;
 import org.junit.Test;
 import uy.kerri.representations.Fields;
-import uy.kerri.representations.impl.ArrayOfFields;
-import uy.kerri.representations.impl.ArrayOfValues;
-import uy.kerri.representations.impl.LabelledValue;
-import uy.kerri.representations.impl.MatchingFieldsTest;
-import static org.hamcrest.CoreMatchers.is;
 
+/**
+ * Tests for {@link uy.kerri.representations.impl.MatchingFieldsTest}.
+ *
+ * @since 1.3
+ */
 public final class MatchingFieldsTestTest {
+    /**
+     * MatchingFieldsTest matches two equal sets of fields.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
-    public void matchesTwoEqualGroups() throws Exception {
+    public void matchesTwoEqualSets() throws Exception {
         final LabelledValue first = new LabelledValue("first", "first value");
         final LabelledValue second = new LabelledValue("second", 2);
         final LabelledValue third = new LabelledValue("third", true);
         final Fields some = new ArrayOfFields(first, second, third);
         final Fields other = new ArrayOfFields(first, third, second);
         MatcherAssert.assertThat(
-            "Two equal groups of fields didn't match.",
+            "Two equal sets of fields didn't match.",
             new MatchingFieldsTest(some, other).passes(),
-            is(true)
+            CoreMatchers.is(true)
         );
     }
 
+    /**
+     * MatchingFieldsTest does not pass if the second set misses some field
+     *  from the other.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
-    public void doesntMatchLessFields() throws Exception {
+    public void doesntMatchMissingFields() throws Exception {
         final LabelledValue first = new LabelledValue("1st field", 1.0);
         final LabelledValue second = new LabelledValue("2nd field", 2);
         final LabelledValue third = new LabelledValue(
@@ -34,44 +69,62 @@ public final class MatchingFieldsTestTest {
         final Fields some = new ArrayOfFields(first, second, third);
         final Fields other = new ArrayOfFields(first, second);
         MatcherAssert.assertThat(
-            "A group of fields matched to a group with less fields.",
+            "A set of fields matched to a set with missing fields.",
             new MatchingFieldsTest(some, other).passes(),
-            is(false)
+            CoreMatchers.is(false)
         );
     }
 
+    /**
+     * MatchingFieldsTest does not pass if the second set has some additional
+     *  field.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
-    public void doesntMatchMoreFields() throws Exception {
+    public void doesntMatchAdditionalFields() throws Exception {
         final LabelledValue first = new LabelledValue("1st", "1st value");
         final LabelledValue second = new LabelledValue("2nd", 2);
         final LabelledValue third = new LabelledValue("3rd", true);
         final LabelledValue fourth = new LabelledValue(
-                "4th", new ArrayOfFields()
+            "4th", new ArrayOfFields()
         );
         final Fields some = new ArrayOfFields(first, second, third);
         final Fields other = new ArrayOfFields(first, second, third, fourth);
         MatcherAssert.assertThat(
-            "A group of fields matched to a group with more fields.",
+            "A set of fields matched to a set with additional fields.",
             new MatchingFieldsTest(some, other).passes(),
-            is(false)
+            CoreMatchers.is(false)
         );
     }
 
+    /**
+     * MatchingFieldsTest does not pass if the sets have the same amount of
+     *  fields but one has a different name.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public void doesntMatchIfAFieldDiffers() throws Exception {
         final LabelledValue first = new LabelledValue("1stField", "1stValue");
         final LabelledValue second = new LabelledValue("2ndField", 1L);
         final LabelledValue alternate = new LabelledValue("alternate", 2);
-        final LabelledValue third = new LabelledValue("3rdField", true);
+        final LabelledValue third = new LabelledValue("3rdField", 2);
         final Fields some = new ArrayOfFields(first, second, third);
         final Fields other = new ArrayOfFields(first, alternate, third);
         MatcherAssert.assertThat(
-            "A group of fields matched to a group with a different field.",
+            "A set of fields matched to a set with a different field.",
             new MatchingFieldsTest(some, other).passes(),
-            is(false)
+            CoreMatchers.is(false)
         );
     }
 
+    /**
+     * MatchingFieldsTest does not pass if the sets have different values for a
+     *  field.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public void doesntMatchIfAValueDiffers() throws Exception {
         final String field = "thirdField";
@@ -84,12 +137,18 @@ public final class MatchingFieldsTestTest {
         final Fields some = new ArrayOfFields(first, second, third);
         final Fields other = new ArrayOfFields(first, alternate, second);
         MatcherAssert.assertThat(
-            "A group matched to a group with a different value for a field.",
+            "A set matched to a set with a different value for a field.",
             new MatchingFieldsTest(some, other).passes(),
-            is(false)
+            CoreMatchers.is(false)
         );
     }
 
+    /**
+     * MatchingFieldsTest consider only the last assigned value for a field with
+     *  a single value.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public void lastAssignCountsForASingleValue() throws Exception {
         final String field = "3F";
@@ -110,10 +169,16 @@ public final class MatchingFieldsTestTest {
         MatcherAssert.assertThat(
             "Last assign of a single field was ignored.",
             new MatchingFieldsTest(some, other).passes(),
-            is(true)
+            CoreMatchers.is(true)
         );
     }
 
+    /**
+     * MatchingFieldsTest consider only the last assigned value for a field with
+     *  a composite value.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public void lastAssignCountsForACompositeValue() throws Exception {
         final String field = "3FC";
@@ -137,10 +202,16 @@ public final class MatchingFieldsTestTest {
         MatcherAssert.assertThat(
             "Last assign of a composite field was ignored.",
             new MatchingFieldsTest(some, other).passes(),
-            is(true)
+            CoreMatchers.is(true)
         );
     }
 
+    /**
+     * MatchingFieldsTest consider only the last assigned value for a field with
+     *  a sequence of values.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public void lastAssignCountsForASequenceValue() throws Exception {
         final String field = "3FS";
@@ -164,7 +235,7 @@ public final class MatchingFieldsTestTest {
         MatcherAssert.assertThat(
             "Last assign of a multivalued field was ignored.",
             new MatchingFieldsTest(some, other).passes(),
-            is(true)
+            CoreMatchers.is(true)
         );
     }
 }

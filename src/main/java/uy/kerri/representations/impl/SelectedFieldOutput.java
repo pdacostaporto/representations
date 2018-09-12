@@ -26,7 +26,6 @@ package uy.kerri.representations.impl;
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
 import uy.kerri.representations.Values;
-import uy.kerri.representations.exception.FieldNotMatchedException;
 
 /**
  * An {@link uy.kerri.representations.Output} that selects the value of a field.

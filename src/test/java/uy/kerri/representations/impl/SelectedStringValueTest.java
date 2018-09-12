@@ -21,38 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package uy.kerri.representations.exception;
+package uy.kerri.representations.impl;
+
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.junit.MatcherAssert;
+import org.junit.Test;
 
 /**
- * Exception to throw when a sequence of values doesn't have a value for the
- *  selected index.
+ * Tests for {@link uy.kerri.representations.impl.SelectedStringValue}.
  *
- * @since 1.0
+ * @since 1.3
  */
-public class IndexNotFoundException extends Exception {
+public final class SelectedStringValueTest {
     /**
-     * Creates an exception.
+     * SelectedStringValue allows to select a string.
+     *
+     * @throws Exception if something goes wrong.
      */
-    public IndexNotFoundException() {
-        super();
-    }
-
-    /**
-    * Creates an exception with given message and cause.
-    *
-    * @param message The message of the exception.
-    */
-    public IndexNotFoundException(final String message) {
-        super(message);
-    }
-
-    /**
-    * Creates an exception with given message and cause.
-    *
-    * @param message The message of the exception.
-    * @param cause The cause of the exception.
-    */
-    public IndexNotFoundException(final String message, final Exception cause) {
-        super(message, cause);
+    @Test
+    public void selectsAString() throws Exception {
+        final String field = "field";
+        final String value = "value";
+        MatcherAssert.assertThat(
+            "A string value wasn't selected.",
+            new SelectedStringValue(
+                new ArrayOfFields(
+                    new LabelledValue(field, value)
+                ),
+                new SelectedOutput(field)
+            ).value(),
+            CoreMatchers.equalTo(value)
+        );
     }
 }

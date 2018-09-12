@@ -27,85 +27,131 @@ import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
 import uy.kerri.representations.Value;
 import uy.kerri.representations.Values;
-import uy.kerri.representations.exception.IndexNotFoundException;
 
+/**
+ * An {@link uy.kerri.representations.Output} that shows if the values printed
+ *  on it match a subsequence inside another sequence of values.
+ *
+ * @since 1.3
+ */
 public final class SubsequenceMatchingOutput implements Output {
+    /**
+     * The index in the containing sequence corresponding to the next value to
+     *  be printed.
+     */
     private final Integer current;
+
+    /**
+     * The sequence.
+     */
     private final Values actual;
+
+    /**
+     * Whether the values printed so far match a subsequence.
+     */
     private final Boolean matched;
 
+    /**
+     * Constructs an output that shows if the values printed on it match a
+     *  subsequence inside another sequence of values, considering whether the
+     *  values printed so far matched a subsequence or not.
+     *
+     * @param index The index in the sequence correspondent to the next value to
+     *  be printed.
+     * @param values The sequence.
+     * @param status Whether the values printed so far matched a subsequence or
+     *  not.
+     */
     private SubsequenceMatchingOutput(
-        final Integer start, final Values values, final Boolean status
+        final Integer index, final Values values, final Boolean status
     ) {
-        this.current = start;
+        this.current = index;
         this.actual = values;
         this.matched = status;
     }
 
-    public SubsequenceMatchingOutput(final Integer start, final Values values) {
-        this(start, values, true);
+    /**
+     * Constructs an output that shows if the values printed on it match a
+     *  subsequence inside another sequence of values, positioned at the start
+     *  of the subsequence to be matched.
+     *
+     * @param index The index in the sequence of the start of the subsequence to
+     *  be matched.
+     * @param values The sequence.
+     */
+    public SubsequenceMatchingOutput(final Integer index, final Values values) {
+        this(index, values, true);
     }
 
     @Override
-    public final String show() {
+    public String show() {
         return this.matched.toString();
     }
 
     @Override
     public Output print(final String key, final String value) throws Exception {
-        return this.select(new LabelledValue(key, value));
+        return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Integer value
     ) throws Exception {
-        return this.select(new LabelledValue(key, value));
+        return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Boolean value
     ) throws Exception {
-        return this.select(new LabelledValue(key, value));
+        return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Double value
     ) throws Exception {
-        return this.select(new LabelledValue(key, value));
+        return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Long value
     ) throws Exception {
-        return this.select(new LabelledValue(key, value));
+        return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Fields value
     ) throws Exception {
-        return this.select(new LabelledValue(key, value));
+        return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Values values
     ) throws Exception {
-        return this.select(new LabelledValue(key, values));
+        return this.match(new LabelledValue(key, values));
     }
 
-    private Output select(final Value value) throws Exception {
+    /**
+     * Determines whether the printed values, including the currently printed
+     *  value, match the expected subsequence.
+     *
+     * @param value The currently printed value.
+     * @return An output updated to indicate if the printed values match a
+     *  subsequence.
+     * @throws Exception if something goes wrong.
+     */
+    private Output match(final Value value) throws Exception {
         return new SubsequenceMatchingOutput(
             this.current + 1,
             this.actual,
-            Boolean.valueOf(
+            this.matched && Boolean.valueOf(
                 this.actual
                 .printTo(new IndexMatchingOutput(this.current, value)).show()
-            ) && this.matched
+            )
         );
     }
 }

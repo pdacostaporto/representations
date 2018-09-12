@@ -28,19 +28,32 @@ import java.util.Map;
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
 import uy.kerri.representations.Values;
-import uy.kerri.representations.exception.FieldNotMatchedException;
 
 /**
- * An {@link uy.kerri.representations.Output} that shows if a field matches
- *  certain value.
+ * An {@link uy.kerri.representations.Output} that shows if the fields printed
+ *  on it match to correspondent fields on a given group of fields.
  *
  * @since 1.3
  */
-public class FieldsMatchingOutput implements Output {
+public final class FieldsMatchingOutput implements Output {
+    /**
+     * The group of fields to match the printed fields to.
+     */
     private final Fields actual;
 
+    /**
+     * Already printed fields and whether they matched or not.
+     */
     private final Map<String, Boolean> matched;
 
+    /**
+     * Constructs and output that shows if fields printed on it match on a given
+     *  group of fields, considering that some fields have already been printed.
+     *
+     * @param fields The group of fields to match the printed fields to.
+     * @param matches A map of already printed fields to whether they matched or
+     *  not.
+     */
     public FieldsMatchingOutput(
         final Fields fields, final Map<String, Boolean> matches
     ) {
@@ -48,17 +61,24 @@ public class FieldsMatchingOutput implements Output {
         this.matched = matches;
     }
 
+    /**
+     * Constructs and output that shows if fields printed on it match on a given
+     *  group of fields.
+     *
+     * @param fields The group of fields to match the printed fields to.
+     *  not.
+     */
     public FieldsMatchingOutput(final Fields fields) {
         this(fields, new HashMap<String, Boolean>());
     }
 
     @Override
-    public final String show() {
-        return Boolean.valueOf(!this.matched.containsValue(false)).toString();
+    public String show() {
+        return String.format("%b", !this.matched.containsValue(false));
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final String value
     ) throws Exception {
         return this.match(
@@ -69,7 +89,7 @@ public class FieldsMatchingOutput implements Output {
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Integer value
     ) throws Exception {
         return this.match(
@@ -80,7 +100,7 @@ public class FieldsMatchingOutput implements Output {
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Boolean value
     ) throws Exception {
         return this.match(
@@ -91,7 +111,7 @@ public class FieldsMatchingOutput implements Output {
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Double value
     ) throws Exception {
         return this.match(
@@ -102,7 +122,7 @@ public class FieldsMatchingOutput implements Output {
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Long value
     ) throws Exception {
         return this.match(
@@ -113,7 +133,7 @@ public class FieldsMatchingOutput implements Output {
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Fields value
     ) throws Exception {
         return this.match(
@@ -124,7 +144,7 @@ public class FieldsMatchingOutput implements Output {
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Values values
     ) throws Exception {
         return this.match(
@@ -134,12 +154,18 @@ public class FieldsMatchingOutput implements Output {
         );
     }
 
-    private final Output match(
+    /**
+     * Matches a printed field.
+     *
+     * @param key The name of the printed field.
+     * @param current Whether the current field matched or not.
+     * @return An output updated to indicate if the field matched or not.
+     * @throws Exception if something goes wrong.
+     */
+    private Output match(
         final String key, final Boolean current
     ) throws Exception {
-        Map<String, Boolean> matches = new HashMap<String, Boolean>(
-            this.matched
-        );
+        final Map<String, Boolean> matches = new HashMap<>(this.matched);
         matches.put(key, current);
         return new FieldsMatchingOutput(this.actual, matches);
     }

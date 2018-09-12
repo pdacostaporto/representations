@@ -21,21 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package uy.kerri.representations.test.impl;
+package uy.kerri.representations.impl;
 
+import org.hamcrest.CoreMatchers;
 import org.hamcrest.junit.MatcherAssert;
 import org.junit.Rule;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import uy.kerri.representations.exception.FieldNotMatchedException;
-import uy.kerri.representations.impl.ArrayOfFields;
-import uy.kerri.representations.impl.ArrayOfValues;
-import uy.kerri.representations.impl.LabelledValue;
-import uy.kerri.representations.impl.SelectedFieldOutput;
-import uy.kerri.representations.impl.SelectedIndexOutput;
-import uy.kerri.representations.impl.FieldMatchingOutput;
-import static org.hamcrest.CoreMatchers.equalTo;
 
 /**
  * Tests for {@link uy.kerri.representations.impl.FieldMatchingOutput}.
@@ -49,23 +41,29 @@ public class FieldMatchingOutputTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
+    /**
+     * FieldMatchingOutput matches a string field.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public final void matchesAString() throws Exception {
         final String field = "name";
         final String value = "Lionel Messi";
-        final Integer age = 31;
-        final Double height = 1.71;
-        final Long minutes = 3357L;
-        final String team = "team";
         MatcherAssert.assertThat(
             "Matching string field didn't match.",
             new FieldMatchingOutput(new LabelledValue(field, value))
             .print("field", "value")
             .print(field, value).show(),
-            equalTo(Boolean.TRUE.toString())
+            CoreMatchers.equalTo(Boolean.TRUE.toString())
         );
     }
 
+    /**
+     * FieldMatchingOutput matches an integer field.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public final void matchesAnInteger() throws Exception {
         final String field = "credits";
@@ -74,10 +72,15 @@ public class FieldMatchingOutputTest {
             "Matching integer field didn't match.",
             new FieldMatchingOutput(new LabelledValue(field, value))
             .print("some field", " some value").print(field, value).show(),
-            equalTo(Boolean.TRUE.toString())
+            CoreMatchers.equalTo(Boolean.TRUE.toString())
         );
     }
 
+    /**
+     * FieldMatchingOutput matches a boolean field.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public final void matchesABoolean() throws Exception {
         final String field = "extinct";
@@ -87,10 +90,15 @@ public class FieldMatchingOutputTest {
             "Matching boolean field didn't match.",
             new FieldMatchingOutput(new LabelledValue(field, value))
             .print("irrelevant field", irrelevant).print(field, value).show(),
-            equalTo(Boolean.TRUE.toString())
+            CoreMatchers.equalTo(Boolean.TRUE.toString())
         );
     }
 
+    /**
+     * FieldMatchingOutput matches a double field.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public final void matchesADouble() throws Exception {
         final String field = "densityAtSTP";
@@ -100,10 +108,15 @@ public class FieldMatchingOutputTest {
             "Matching double field didn't match.",
             new FieldMatchingOutput(new LabelledValue(field, value))
             .print("whatever", irrelevant).print(field, value).show(),
-            equalTo(Boolean.TRUE.toString())
+            CoreMatchers.equalTo(Boolean.TRUE.toString())
         );
     }
 
+    /**
+     * FieldMatchingOutput matches a long field.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public final void matchesALong() throws Exception {
         final String field = "maxNumberOfFiles";
@@ -113,10 +126,15 @@ public class FieldMatchingOutputTest {
             "Matching long field didn't match.",
             new FieldMatchingOutput(new LabelledValue(field, value))
             .print("filler", irrelevant).print(field, value).show(),
-            equalTo(Boolean.TRUE.toString())
+            CoreMatchers.equalTo(Boolean.TRUE.toString())
         );
     }
 
+    /**
+     * FieldMatchingOutput matches a composite field.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
     public final void matchesACompositeField() throws Exception {
         final String field = "company";
@@ -132,12 +150,17 @@ public class FieldMatchingOutputTest {
                 new LabelledValue(field, new ArrayOfFields(first, second))
             ).print("not important", "really not important")
             .print(field, new ArrayOfFields(second, first)).show(),
-            equalTo(Boolean.TRUE.toString())
+            CoreMatchers.equalTo(Boolean.TRUE.toString())
         );
     }
 
+    /**
+     * FieldMatchingOutput matches a multivalued field.
+     *
+     * @throws Exception if something goes wrong.
+     */
     @Test
-    public final void matchesASequenceOfValues() throws Exception {
+    public final void matchesAMultivaluedField() throws Exception {
         final String field = "transactions";
         final LabelledValue first = new LabelledValue("first", "first value");
         final LabelledValue second = new LabelledValue(
@@ -150,9 +173,9 @@ public class FieldMatchingOutputTest {
                 new LabelledValue(
                     field, new ArrayOfValues(first, second, third)
                 )
-            ).print("not important", "really, not important")
+            ).print("notImportant", "extremely not important")
             .print(field, new ArrayOfValues(first, second, third)).show(),
-            equalTo(Boolean.TRUE.toString())
+            CoreMatchers.equalTo(Boolean.TRUE.toString())
         );
     }
 }

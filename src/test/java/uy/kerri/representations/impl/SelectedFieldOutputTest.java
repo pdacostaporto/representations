@@ -36,7 +36,7 @@ import uy.kerri.representations.exception.ValueNotSelectedException;
  *
  * @since 1.0
  */
-public class SelectedFieldOutputTest {
+public final class SelectedFieldOutputTest {
     /**
      * Rule for expecting exceptions.
      */
@@ -49,7 +49,7 @@ public class SelectedFieldOutputTest {
      * @throws Exception if anything goes wrong.
      */
     @Test
-    public final void selectsAString() throws Exception {
+    public void selectsAString() throws Exception {
         final String field = "name";
         final String value = "Lionel Messi";
         final Integer age = 31;
@@ -89,7 +89,7 @@ public class SelectedFieldOutputTest {
      * @throws Exception if anything goes wrong.
      */
     @Test
-    public final void selectsAnInteger() throws Exception {
+    public void selectsAnInteger() throws Exception {
         final String field = "credits";
         final Integer value = 425;
         final Double average = 5.7;
@@ -110,7 +110,7 @@ public class SelectedFieldOutputTest {
      * @throws Exception if anything goes wrong.
      */
     @Test
-    public final void selectsABoolean() throws Exception {
+    public void selectsABoolean() throws Exception {
         final String field = "extinct";
         final Boolean value = false;
         MatcherAssert.assertThat(
@@ -137,7 +137,7 @@ public class SelectedFieldOutputTest {
      * @throws Exception if anything goes wrong.
      */
     @Test
-    public final void selectsADouble() throws Exception {
+    public void selectsADouble() throws Exception {
         final String field = "densityAtSTP";
         final Double value = 0.08988;
         final Double fusion = 0.117;
@@ -159,7 +159,7 @@ public class SelectedFieldOutputTest {
      * @throws Exception if anything goes wrong.
      */
     @Test
-    public final void selectsALong() throws Exception {
+    public void selectsALong() throws Exception {
         final String field = "maxNumberOfFiles";
         final Long value = 4294967295L;
         final Integer introduced = 1997;
@@ -181,7 +181,7 @@ public class SelectedFieldOutputTest {
      * @throws Exception if anything goes wrong.
      */
     @Test
-    public final void selectsANestedField() throws Exception {
+    public void selectsANestedField() throws Exception {
         final String composite = "keyPeople";
         final String nested = "director";
         final String value = "Jack P. Dorsey";
@@ -223,7 +223,7 @@ public class SelectedFieldOutputTest {
      * @throws Exception if anything goes wrong.
      */
     @Test
-    public final void selectsASequenceOfValues() throws Exception {
+    public void selectsASequenceOfValues() throws Exception {
         final String field = "transactions";
         final Integer value = 1001;
         final Integer first = 1000;
@@ -252,13 +252,13 @@ public class SelectedFieldOutputTest {
     }
 
     /**
-     * SelectedOutput throws FieldNotMatchedException if the
+     * SelectedOutput throws ValueNotSelectedException if the
      *  field isn't present.
      *
      * @throws Exception if anything goes wrong.
      */
     @Test
-    public final void throwsIfSingleNotPresent() throws Exception {
+    public void throwsIfSingleNotPresent() throws Exception {
         final String field = "single";
         this.thrown.expect(ValueNotSelectedException.class);
         this.thrown.expectMessage(
