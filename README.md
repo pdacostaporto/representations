@@ -16,7 +16,11 @@ A `Representation` is a media for communicating data. A `Representation` can be:
 
 Their principal feature is their ability to print themselves on an `Output`, which serves as a formatter for the `Representation`'s data as a string. For example, an `Output` implementation can format the data as a JSON string, while another implementation formats it as an XML document. This way, data can be manipulated in many ways just by changing the output implementation on which it is printed.
 
+All objects in this library are immutable so they can be reused easily without unexpected side effects.
+
 ## Usage
+
+### Representing
 
 At the moment, `ArrayOfValues` and `ArrayOfFields` are the only implementations of `Values` and `Fields` available, respectively. They both take an array of `Value`s or `Field`s as a parameter for their constructors, which will be the data they will encapsulate.
 `LabelledValue` is the main implementation of the `Value` and `Field` interfaces. Its constructor can take a primitive value of the types `Integer`, `String`, `Boolean`, `Double` or `Long`, or a `Fields` or `Values` instance to represent composite values. It also requires a string label which will represent the name of the represented `Field` or a label for the represented `Value` in a sequence of values.
@@ -31,6 +35,15 @@ Fields person = new ArrayOfFields(
   LabelledValue("name", "Pablo Da Costa Porto"),
   LabelledValue("age", 25),
   LabelledValue(
+    "address",
+    new ArrayOfFields(
+      new LabelledValue("line1", "18 de julio 999"),
+      new LabelledValue("line2", "Apt. 101"),
+      new LabelledValue("city", "Montevideo"),
+      new LabelledValue("country", "Uruguay"),
+      new LabelledValue("zip", 11200)
+    ),
+  LabelledValue(
     "phoneNumbers",
     new ArrayOfValues(
       new LabelledValue("598 815 56 59"),
@@ -40,30 +53,94 @@ Fields person = new ArrayOfFields(
 );
 ```
 
+### Printing
+
 Once you constructed your representation, you can format it as a string through an `Output`. At the moment, the only implementations of this interface that do this are `JsonObjectOutput` and `JsonArrayOutput`, which format the data as a JSON object or a JSON array, respectively. This serialization is done through the `show` method.
 
 ```
 import uy.kerri.representations.impl.JsonObjectOutput;
 
-String json = person.printTo(new JsonObjectOutput()).show(); // {"name":"Pablo Da Costa Porto","age":25,"phoneNumbers":["598 815 56 59","598 90 599 666"]}
+String json = person.printTo(new JsonObjectOutput()).show(); // {"name":"Pablo Da Costa Porto","age":25,"address":{"lines":["18 de julio 999","Apt. 101"],"city":"Montevideo","country":"Uruguay","zip":11200},"phoneNumbers":["598 815 56 59","598 90 599 666"]}
 ```
 
-You can also access specific values through `SelectedFieldOutput` and `SelectedIndexOutput` to select a specific field in a map or index in a sequence of values, respectively.
+### Selecting
 
+You can also access specific values through `Selected<Type>Value` and `SelectedOutput` to select a specific field in a map or index in a sequence of values, respectively.
 ```
-import uy.kerri.representations.impl.SelectedFieldOutput;
-import uy.kerri.representations.impl.SelectedIndexOutput;
+import uy.kerri.representations.impl.SelectedIntegerValue;
+import uy.kerri.representations.impl.SelectedStringValue;
+import uy.kerri.representations.impl.SelectedOutput;
 
-String age = person.printTo(new SelectedFieldOutput("age")).show(); // 25
-String cellphone = person.printTo(
-  new SelectedFieldOutput(
+Integer age = new SelectedIntegerValue(
+  person, new SelectedOutput("age")
+).value(); // 25
+String cellphone = new SelectedStringValue(
+  person,
+  new SelectedOutput(
     "phoneNumbers",
-    SelectedIndexOutput(2)
+    SelectedOutput(2)
   )
 ).show(); // 598 90 599 666
 ```
+To select composite values or multivalued fields is a bit different.
+```
+import uy.kerri.representations.impl.SelectedFields;
+import uy.kerri.representations.impl.SelectedValues;
 
-All objects in this library are immutable so they can be reused easily without unexpected side effects.
+Fields address = new SelectedFields("address", person); // {"lines":["18 de julio 999","Apt. 101"],"city":"Montevideo","country":"Uruguay","zip":11200}
+Values lines = new SelectedValues("lines", lines); // ["18 de julio 999","Apt. 101"]
+```
+
+You can also filter a set of fields.
+```
+import java.util.Arrays;
+import uy.kerri.representations.impl.FilteredFields;
+
+Fields filtered = new FielteredFields(Arrays.asList("name", "age"), person); // {"name":"Pablo Da Costa Porto","age":25}
+```
+
+### Testing
+
+You can test representations for some conditions through `Test` implementations.
+```
+import uy.kerri.representations.impl.ArrayOfFields;
+import uy.kerri.representations.impl.ArrayOfValues;
+import uy.kerri.representations.impl.LabelledValue;
+import uy.kerri.representations.impl.MatchingFieldsTest;
+import uy.kerri.representations.impl.MatchingValuesTest;
+
+LabelledValue first = new LabelledValue("first", 1);
+LabelledValue second = new LabelledValue("second", "second value");
+LabelledValue third = new LabelledValue("third", 3.0);
+new MatchingValuesTest(
+  new ArrayOfValues(first, second, third),
+  new ArrayOfValues(first, second, third)
+).passes(); // true
+new MatchingFieldsTest(
+  new ArrayOfFields(first, third),
+  new ArrayOfFields(first, second)
+).passes(); // false
+```
+Check the `uy.kerri.representations.test` package to see available tests.
+
+There are also some [Hamcrest](http://hamcrest.org/JavaHamcrest/) matchers available.
+```
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.junit.MatcherAssert;
+import uy.kerri.representations.matchers.RepresentationMatchers;
+
+MatcherAssert.assertThat(
+  new ArrayOfValues(first, second, third),
+  RepresentationMatchers.equalTo(new ArrayOfValues(first, second, third))
+);
+MatcherAssert.assertThat(
+  new ArrayOfFields(first, third),
+  CoreMatchers.not(
+    RepresentationMatchers.equalTo(new ArrayOfValues(first, second))
+  )
+);
+```
+Check the `RepresentationMatchers` class to see available matchers.
 
 ## Installation
 
