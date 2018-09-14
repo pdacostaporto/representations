@@ -23,13 +23,14 @@
  */
 package uy.kerri.representations.test;
 
+import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Values;
 
 /**
  * A {@link uy.kerri.test.representations.Test} to verify that a sequence of
  *  values is a subsequence of another.
  *
- * @since 1.3
+ * @since 2.0
  */
 public final class MatchingSubsequenceTest implements Test {
     /**
@@ -65,7 +66,7 @@ public final class MatchingSubsequenceTest implements Test {
     }
 
     @Override
-    public Boolean passes() throws Exception {
+    public Boolean passes() throws RepresentationsException {
         return Boolean.valueOf(
             this.subsequence.printTo(
                 new SubsequenceMatchingOutput(this.start, this.sequence)

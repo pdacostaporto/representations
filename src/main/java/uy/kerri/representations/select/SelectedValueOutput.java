@@ -27,13 +27,12 @@ import uy.kerri.representations.Fields;
 import uy.kerri.representations.FixedOutput;
 import uy.kerri.representations.Output;
 import uy.kerri.representations.Values;
-import uy.kerri.representations.exception.ValueNotSelectedException;
 
 /**
  * An {@link uy.kerri.representations.Output} that selects the first value that
  *  is printed on it.
  *
- * @since 1.0
+ * @since 2.0
  */
 public class SelectedValueOutput implements Output {
     @Override

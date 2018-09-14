@@ -25,6 +25,7 @@ package uy.kerri.representations.select;
 
 import uy.kerri.representations.Output;
 import uy.kerri.representations.Representation;
+import uy.kerri.representations.RepresentationsException;
 
 /**
  * A string value selected from a
@@ -60,7 +61,7 @@ public final class SelectedStringValue
     }
 
     @Override
-    public java.lang.String value() throws Exception {
+    public java.lang.String value() throws RepresentationsException {
         return this.origin.printTo(this.selection).show();
     }
 }

@@ -25,6 +25,7 @@ package uy.kerri.representations.select;
 
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
+import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Values;
 
 /**
@@ -66,56 +67,56 @@ public class SelectedIndexOutput implements Output {
     }
 
     @Override
-    public final String show() throws Exception {
+    public final String show() throws RepresentationsException {
         return this.nested.show();
     }
 
     @Override
     public final Output print(
         final String key, final String value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.select(this.nested.print(key, value));
     }
 
     @Override
     public final Output print(
         final String key, final Integer value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.select(this.nested.print(key, value));
     }
 
     @Override
     public final Output print(
         final String key, final Boolean value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.select(this.nested.print(key, value));
     }
 
     @Override
     public final Output print(
         final String key, final Double value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.select(this.nested.print(key, value));
     }
 
     @Override
     public final Output print(
         final String key, final Long value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.select(this.nested.print(key, value));
     }
 
     @Override
     public final Output print(
         final String key, final Fields value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.select(value.printTo(this.nested));
     }
 
     @Override
     public final Output print(
         final String key, final Values values
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.select(values.printTo(this.nested));
     }
 
@@ -126,9 +127,11 @@ public class SelectedIndexOutput implements Output {
      * @param printed The output with the value of the index printed on it.
      * @return The printed output if the actual index corresponds to the index
      *  to select or an output to print the next index otherwise.
-     * @throws Exception if something fails.
+     * @throws RepresentationsException if something fails.
      */
-    private Output select(final Output printed) throws Exception {
+    private Output select(
+        final Output printed
+    ) throws RepresentationsException {
         final Output selected;
         if (this.index.equals(1)) {
             selected = new SelectedIndexOutput(this.index - 1, printed);

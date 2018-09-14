@@ -24,6 +24,7 @@
 package uy.kerri.representations.test;
 
 import uy.kerri.representations.Output;
+import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Value;
 import uy.kerri.representations.Values;
 
@@ -31,7 +32,7 @@ import uy.kerri.representations.Values;
  * A {@link uy.kerri.representations.test.Test} to verify that contains a given
  *  value in a given place.
  *
- * @since 1.3
+ * @since 2.0
  */
 public final class MatchingIndexTest implements Test {
     /**
@@ -73,7 +74,7 @@ public final class MatchingIndexTest implements Test {
     }
 
     @Override
-    public Boolean passes() throws Exception {
+    public Boolean passes() throws RepresentationsException {
         return Boolean.valueOf(this.values.printTo(this.output).show());
     }
 }

@@ -29,6 +29,7 @@ import javax.json.JsonObjectBuilder;
 import javax.json.JsonReader;
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
+import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Values;
 
 /**
@@ -68,7 +69,7 @@ public class JsonObjectOutput implements Output {
     }
 
     @Override
-    public final String show() throws Exception {
+    public final String show() throws RepresentationsException {
         return this.reader.readObject().toString();
     }
 
@@ -76,7 +77,7 @@ public class JsonObjectOutput implements Output {
     public final JsonObjectOutput print(
         final String key,
         final String value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return new JsonObjectOutput(
             this.builder().add(key, value).build().toString()
         );
@@ -86,7 +87,7 @@ public class JsonObjectOutput implements Output {
     public final JsonObjectOutput print(
         final String key,
         final Integer value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return new JsonObjectOutput(
             this.builder().add(key, value).build().toString()
         );
@@ -96,7 +97,7 @@ public class JsonObjectOutput implements Output {
     public final JsonObjectOutput print(
         final String key,
         final Boolean value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return new JsonObjectOutput(
             this.builder().add(key, value).build().toString()
         );
@@ -106,7 +107,7 @@ public class JsonObjectOutput implements Output {
     public final JsonObjectOutput print(
         final String key,
         final Double value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return new JsonObjectOutput(
             this.builder().add(key, value).build().toString()
         );
@@ -116,7 +117,7 @@ public class JsonObjectOutput implements Output {
     public final JsonObjectOutput print(
         final String key,
         final Long value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return new JsonObjectOutput(
             this.builder().add(key, value).build().toString()
         );
@@ -126,7 +127,7 @@ public class JsonObjectOutput implements Output {
     public final JsonObjectOutput print(
         final String key,
         final Fields value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return new JsonObjectOutput(
             this.builder().add(
                 key,
@@ -143,7 +144,7 @@ public class JsonObjectOutput implements Output {
     public final JsonObjectOutput print(
         final String key,
         final Values values
-    ) throws Exception {
+    ) throws RepresentationsException {
         return new JsonObjectOutput(
             this.builder().add(
                 key,
@@ -160,9 +161,9 @@ public class JsonObjectOutput implements Output {
      * Creates a JSON object builder initialized to the current state.
      *
      * @return The builder.
-     * @throws Exception if anything goes wrong.
+     * @throws RepresentationsException if anything goes wrong.
      */
-    private JsonObjectBuilder builder() throws Exception {
+    private JsonObjectBuilder builder() throws RepresentationsException {
         return Json.createObjectBuilder(this.reader.readObject());
     }
 }

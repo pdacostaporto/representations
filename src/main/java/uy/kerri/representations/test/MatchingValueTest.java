@@ -23,12 +23,13 @@
  */
 package uy.kerri.representations.test;
 
+import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Value;
 
 /**
  * A {@link uy.kerri.representations.test.Test} to verify that two values match.
  *
- * @since 1.3
+ * @since 2.0
  */
 public final class MatchingValueTest implements Test {
     /**
@@ -53,7 +54,7 @@ public final class MatchingValueTest implements Test {
     }
 
     @Override
-    public Boolean passes() throws Exception {
+    public Boolean passes() throws RepresentationsException {
         return Boolean.valueOf(
             this.actual.printTo(
                 this.expected.printTo(new PairMatchingOutput())

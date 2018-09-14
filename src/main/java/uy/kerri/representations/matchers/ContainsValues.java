@@ -25,6 +25,7 @@ package uy.kerri.representations.matchers;
 
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
+import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Values;
 import uy.kerri.representations.fake.FakeOutput;
 import uy.kerri.representations.test.ContainedValuesTest;
@@ -32,10 +33,8 @@ import uy.kerri.representations.test.ContainedValuesTest;
 /**
  * Hamcrest matcher to match a group of values contained on another.
  *
- * @checkstyle IllegalCatchCheck (100 lines)
- * @since 1.3
+ * @since 2.0
  */
-@SuppressWarnings("PMD.AvoidCatchingGenericException")
 public final class ContainsValues extends TypeSafeMatcher<Values> {
     /**
      * The containing group of values.
@@ -58,7 +57,7 @@ public final class ContainsValues extends TypeSafeMatcher<Values> {
             description.appendText("a group of values containing ").appendValue(
                 this.contained.printTo(new FakeOutput()).show()
             );
-        } catch (final Exception exception) {
+        } catch (final RepresentationsException exception) {
             throw new IllegalArgumentException(exception);
         }
     }
@@ -71,7 +70,7 @@ public final class ContainsValues extends TypeSafeMatcher<Values> {
             description.appendText("the containing group was ").appendValue(
                 containing.printTo(new FakeOutput()).show()
             );
-        } catch (final Exception exception) {
+        } catch (final RepresentationsException exception) {
             throw new IllegalArgumentException(exception);
         }
     }
@@ -80,7 +79,7 @@ public final class ContainsValues extends TypeSafeMatcher<Values> {
     protected boolean matchesSafely(final Values containing) {
         try {
             return new ContainedValuesTest(containing, this.contained).passes();
-        } catch (final Exception exception) {
+        } catch (final RepresentationsException exception) {
             throw new IllegalArgumentException(exception);
         }
     }

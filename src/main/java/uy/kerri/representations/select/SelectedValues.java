@@ -25,13 +25,14 @@ package uy.kerri.representations.select;
 
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
+import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Values;
 
 /**
  * A sequence of values selected from another
  *  {@link uy.kerri.representations.Representation}.
  *
- * @since 1.3
+ * @since 2.0
  */
 public final class SelectedValues implements Values {
     /**
@@ -71,7 +72,7 @@ public final class SelectedValues implements Values {
     }
 
     @Override
-    public Output printTo(final Output output) throws Exception {
+    public Output printTo(final Output output) throws RepresentationsException {
         return this.selected.printTo(output);
     }
 }

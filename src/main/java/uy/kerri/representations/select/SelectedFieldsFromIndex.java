@@ -25,6 +25,7 @@ package uy.kerri.representations.select;
 
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
+import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Values;
 
 /**
@@ -56,7 +57,7 @@ public final class SelectedFieldsFromIndex implements Fields {
     }
 
     @Override
-    public Output printTo(final Output output) throws Exception {
+    public Output printTo(final Output output) throws RepresentationsException {
         return this.container.printTo(new SelectedOutput(this.index, output));
     }
 }

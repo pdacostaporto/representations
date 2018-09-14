@@ -23,17 +23,19 @@
  */
 package uy.kerri.representations.test;
 
+import uy.kerri.representations.RepresentationsException;
+
 /**
  * The verification of certain condition.
  *
- * @since 1.3
+ * @since 2.0
  */
 public interface Test {
     /**
      * Verification of the condition.
      *
      * @return Whether the condition was verified or not.
-     * @throws Exception if something goes wrong.
+     * @throws RepresentationsException if something goes wrong.
      */
-    Boolean passes() throws Exception;
+    Boolean passes() throws RepresentationsException;
 }

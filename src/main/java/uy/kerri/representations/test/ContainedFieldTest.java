@@ -25,6 +25,7 @@ package uy.kerri.representations.test;
 
 import uy.kerri.representations.Field;
 import uy.kerri.representations.Fields;
+import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Output;
 
 /**
@@ -66,7 +67,7 @@ public final class ContainedFieldTest implements Test {
     }
 
     @Override
-    public Boolean passes() throws Exception {
+    public Boolean passes() throws RepresentationsException {
         return Boolean.valueOf(this.fields.printTo(this.output).show());
     }
 }

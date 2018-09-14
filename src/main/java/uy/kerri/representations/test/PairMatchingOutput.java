@@ -25,18 +25,18 @@ package uy.kerri.representations.test;
 
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
+import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Values;
-import uy.kerri.representations.exception.PairNotMatchedException;
 
 /**
  * An {@link uy.kerri.representations.Output} that shows if the last label-value
  *  pair printed on it matches the first pair that was printed.
  *
- * @since 1.3
+ * @since 2.0
  */
 public class PairMatchingOutput implements Output {
     @Override
-    public final String show() throws Exception {
+    public final String show() throws PairNotMatchedException {
         throw new PairNotMatchedException(
             "Tried to show the result of matching without matching anything."
         );
@@ -45,49 +45,49 @@ public class PairMatchingOutput implements Output {
     @Override
     public final Output print(
         final String key, final String value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return new SinglePairMatchingOutput(key, value);
     }
 
     @Override
     public final Output print(
         final String key, final Integer value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return new SinglePairMatchingOutput(key, value);
     }
 
     @Override
     public final Output print(
         final String key, final Boolean value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return new SinglePairMatchingOutput(key, value);
     }
 
     @Override
     public final Output print(
         final String key, final Double value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return new SinglePairMatchingOutput(key, value);
     }
 
     @Override
     public final Output print(
         final String key, final Long value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return new SinglePairMatchingOutput(key, value);
     }
 
     @Override
     public final Output print(
         final String key, final Fields value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return new CompositePairMatchingOutput(key, value);
     }
 
     @Override
     public final Output print(
         final String key, final Values values
-    ) throws Exception {
+    ) throws RepresentationsException {
         return new MultivaluedPairMatchingOutput(key, values);
     }
 }

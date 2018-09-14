@@ -21,7 +21,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package uy.kerri.representations;
+
 /**
- * Exceptions thrown in the process of encapsulated data communication.
+ * Exceptions to be thrown by classes in this library.
+ *
+ * @since 2.0
  */
-package uy.kerri.representations.exception;
+public class RepresentationsException extends Exception {
+    /**
+     * Creates an exception.
+     */
+    public RepresentationsException() {
+        super();
+    }
+
+    /**
+    * Creates an exception with given message and cause.
+    *
+    * @param message The message of the exception.
+    */
+    public RepresentationsException(final String message) {
+        super(message);
+    }
+
+    /**
+    * Creates an exception with given message and cause.
+    *
+    * @param message The message of the exception.
+    * @param cause The cause of the exception.
+    */
+    public RepresentationsException(
+        final String message, final Exception cause
+    ) {
+        super(message, cause);
+    }
+}

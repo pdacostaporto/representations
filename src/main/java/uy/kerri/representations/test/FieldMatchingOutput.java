@@ -27,13 +27,14 @@ import uy.kerri.representations.Field;
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.LabelledValue;
 import uy.kerri.representations.Output;
+import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Values;
 
 /**
  * An {@link uy.kerri.representations.Output} that shows if the last field
  *  printed on it matches a given field.
  *
- * @since 1.3
+ * @since 2.0
  */
 public final class FieldMatchingOutput implements Output {
     /**
@@ -76,49 +77,49 @@ public final class FieldMatchingOutput implements Output {
     @Override
     public Output print(
         final String key, final String value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Integer value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Boolean value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Double value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Long value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Fields value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Values values
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, values));
     }
 
@@ -128,9 +129,9 @@ public final class FieldMatchingOutput implements Output {
      *
      * @param actual The currently printed field.
      * @return An output indicating whether the field matched or not.
-     * @throws Exception if something goes wrong.
+     * @throws RepresentationsException if something goes wrong.
      */
-    private Output match(final Field actual) throws Exception {
+    private Output match(final Field actual) throws RepresentationsException {
         final Output selected;
         if (new MatchingFieldNameTest(this.expected, actual).passes()) {
             selected = new FieldMatchingOutput(

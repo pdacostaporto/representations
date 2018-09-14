@@ -25,6 +25,7 @@ package uy.kerri.representations.select;
 
 import uy.kerri.representations.Output;
 import uy.kerri.representations.Representation;
+import uy.kerri.representations.RepresentationsException;
 
 /**
  * A long value selected from a
@@ -59,7 +60,7 @@ public final class SelectedLongValue implements SelectedValue<Long> {
     }
 
     @Override
-    public Long value() throws Exception {
+    public Long value() throws RepresentationsException {
         return Long.valueOf(this.origin.printTo(this.selection).show());
     }
 }

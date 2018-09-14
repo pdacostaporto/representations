@@ -26,6 +26,7 @@ package uy.kerri.representations.select;
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
 import uy.kerri.representations.Values;
+import uy.kerri.representations.RepresentationsException;
 
 /**
  * An {@link uy.kerri.representations.Output} that selects the value of a field.
@@ -65,42 +66,42 @@ public class SelectedFieldOutput implements Output {
     }
 
     @Override
-    public final String show() throws Exception {
+    public final String show() throws RepresentationsException {
         return this.nested.show();
     }
 
     @Override
     public final Output print(
         final String key, final String value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.select(key, this.nested.print(key, value));
     }
 
     @Override
     public final Output print(
         final String key, final Integer value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.select(key, this.nested.print(key, value));
     }
 
     @Override
     public final Output print(
         final String key, final Boolean value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.select(key, this.nested.print(key, value));
     }
 
     @Override
     public final Output print(
         final String key, final Double value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.select(key, this.nested.print(key, value));
     }
 
     @Override
     public final Output print(
         final String key, final Long value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.select(key, this.nested.print(key, value));
     }
 
@@ -108,14 +109,14 @@ public class SelectedFieldOutput implements Output {
     public final Output print(
         final String key,
         final Fields value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.select(key, value.printTo(this.nested));
     }
 
     @Override
     public final Output print(
         final String key, final Values values
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.select(key, values.printTo(this.nested));
     }
 
@@ -127,11 +128,11 @@ public class SelectedFieldOutput implements Output {
      * @param printed The output with the field printed on it.
      * @return The printed output if the field matches the field to select or
      *  this otherwise.
-     * @throws Exception if something fails.
+     * @throws RepresentationsException if something fails.
      */
     private Output select(
         final String key, final Output printed
-    ) throws Exception {
+    ) throws RepresentationsException {
         final Output selected;
         if (key.equals(this.field)) {
             selected = new SelectedFieldOutput(this.field, printed);

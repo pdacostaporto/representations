@@ -24,11 +24,12 @@
 package uy.kerri.representations.test;
 
 import uy.kerri.representations.Field;
+import uy.kerri.representations.RepresentationsException;
 
 /**
  * A {@link uy.kerri.representations.test.Test} to verify that two fields match.
  *
- * @since 1.3
+ * @since 2.0
  */
 public final class MatchingFieldTest implements Test {
     /**
@@ -53,7 +54,7 @@ public final class MatchingFieldTest implements Test {
     }
 
     @Override
-    public Boolean passes() throws Exception {
+    public Boolean passes() throws RepresentationsException {
         return Boolean.valueOf(
             this.actual.printTo(
                 this.expected.printTo(new PairMatchingOutput())

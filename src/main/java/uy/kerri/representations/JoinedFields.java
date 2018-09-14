@@ -46,7 +46,9 @@ public class JoinedFields implements Fields {
     }
 
     @Override
-    public final Output printTo(final Output output) throws Exception {
+    public final Output printTo(
+        final Output output
+    ) throws RepresentationsException {
         Output printed = output;
         for (final Fields fields : this.array) {
             printed = fields.printTo(printed);

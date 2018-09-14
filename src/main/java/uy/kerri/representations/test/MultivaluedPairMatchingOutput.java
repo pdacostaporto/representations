@@ -25,6 +25,7 @@ package uy.kerri.representations.test;
 
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
+import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Values;
 
 /**
@@ -32,7 +33,7 @@ import uy.kerri.representations.Values;
  *  printed on it matches a given key-value pair with a sequence of values as
  *  value.
  *
- * @since 1.3
+ * @since 2.0
  */
 public final class MultivaluedPairMatchingOutput implements Output {
     /**
@@ -87,49 +88,49 @@ public final class MultivaluedPairMatchingOutput implements Output {
     @Override
     public Output print(
         final String key, final String value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.next(false);
     }
 
     @Override
     public Output print(
         final String key, final Integer value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.next(false);
     }
 
     @Override
     public Output print(
         final String key, final Boolean value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.next(false);
     }
 
     @Override
     public Output print(
         final String key, final Double value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.next(false);
     }
 
     @Override
     public Output print(
         final String key, final Long value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.next(false);
     }
 
     @Override
     public Output print(
         final String key, final Fields value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.next(false);
     }
 
     @Override
     public Output print(
         final String key, final Values values
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.next(
             key.equals(this.label)
             && new MatchingValuesTest(this.expected, values).passes()

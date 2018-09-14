@@ -26,6 +26,7 @@ package uy.kerri.representations.select;
 import java.util.List;
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
+import uy.kerri.representations.RepresentationsException;
 
 /**
  * A set of fields selected from another set of fields.
@@ -55,7 +56,7 @@ public final class FilteredFields implements Fields {
     }
 
     @Override
-    public Output printTo(final Output output) throws Exception {
+    public Output printTo(final Output output) throws RepresentationsException {
         return this.origin.printTo(new FilteringOutput(this.filtered, output));
     }
 }

@@ -26,6 +26,7 @@ package uy.kerri.representations.fake;
 import org.apache.commons.lang3.StringUtils;
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
+import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Values;
 
 /**
@@ -89,7 +90,7 @@ public class FakeOutput implements Output {
     public final FakeOutput print(
         final String key,
         final Fields value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.print(
             key,
             "Nested",
@@ -104,7 +105,7 @@ public class FakeOutput implements Output {
     public final FakeOutput print(
         final String key,
         final Values values
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.print(
             key,
             "Multivalued",

@@ -26,6 +26,7 @@ package uy.kerri.representations.test;
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.LabelledValue;
 import uy.kerri.representations.Output;
+import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Value;
 import uy.kerri.representations.Values;
 
@@ -90,49 +91,51 @@ public final class SubsequenceMatchingOutput implements Output {
     }
 
     @Override
-    public Output print(final String key, final String value) throws Exception {
+    public Output print(
+        final String key, final String value
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Integer value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Boolean value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Double value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Long value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Fields value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Values values
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, values));
     }
 
@@ -143,9 +146,9 @@ public final class SubsequenceMatchingOutput implements Output {
      * @param value The currently printed value.
      * @return An output updated to indicate if the printed values match a
      *  subsequence.
-     * @throws Exception if something goes wrong.
+     * @throws RepresentationsException if something goes wrong.
      */
-    private Output match(final Value value) throws Exception {
+    private Output match(final Value value) throws RepresentationsException {
         return new SubsequenceMatchingOutput(
             this.current + 1,
             this.actual,

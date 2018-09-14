@@ -31,7 +31,6 @@ import org.junit.rules.ExpectedException;
 import uy.kerri.representations.ArrayOfFields;
 import uy.kerri.representations.ArrayOfValues;
 import uy.kerri.representations.LabelledValue;
-import uy.kerri.representations.exception.ValueNotSelectedException;
 
 /**
  * Tests for index selection with

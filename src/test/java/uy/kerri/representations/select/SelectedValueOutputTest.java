@@ -28,7 +28,6 @@ import org.hamcrest.junit.MatcherAssert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import uy.kerri.representations.exception.ValueNotSelectedException;
 
 /**
  * Tests for {@link uy.kerri.representations.select.SelectedValueOutput}.

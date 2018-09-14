@@ -25,14 +25,14 @@ package uy.kerri.representations.test;
 
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
+import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Values;
-import uy.kerri.representations.exception.LabelNotMatchedException;
 
 /**
  * An {@link uy.kerri.representations.Output} that shows if the last label
  *  printed on it matches the first label that was printed.
  *
- * @since 1.3
+ * @since 2.0
  */
 public final class LabelMatchingOutput implements Output {
     @Override
@@ -45,49 +45,49 @@ public final class LabelMatchingOutput implements Output {
     @Override
     public Output print(
         final String key, final String value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return new SelectedLabelMatchingOutput(key);
     }
 
     @Override
     public Output print(
         final String key, final Integer value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return new SelectedLabelMatchingOutput(key);
     }
 
     @Override
     public Output print(
         final String key, final Boolean value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return new SelectedLabelMatchingOutput(key);
     }
 
     @Override
     public Output print(
         final String key, final Double value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return new SelectedLabelMatchingOutput(key);
     }
 
     @Override
     public Output print(
         final String key, final Long value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return new SelectedLabelMatchingOutput(key);
     }
 
     @Override
     public Output print(
         final String key, final Fields value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return new SelectedLabelMatchingOutput(key);
     }
 
     @Override
     public Output print(
         final String key, final Values values
-    ) throws Exception {
+    ) throws RepresentationsException {
         return new SelectedLabelMatchingOutput(key);
     }
 }

@@ -24,12 +24,13 @@
 package uy.kerri.representations.test;
 
 import uy.kerri.representations.Representation;
+import uy.kerri.representations.RepresentationsException;
 
 /**
  * A {@link uy.kerri.representations.test.Test} to verify that two
  *  representations print the same amount of values.
  *
- * @since 1.3
+ * @since 2.0
  */
 public final class MatchingCountTest implements Test {
     /**
@@ -57,7 +58,7 @@ public final class MatchingCountTest implements Test {
     }
 
     @Override
-    public Boolean passes() throws Exception {
+    public Boolean passes() throws RepresentationsException {
         return Integer.valueOf(this.some.printTo(new CountingOutput()).show())
         .equals(
             Integer.valueOf(this.other.printTo(new CountingOutput()).show())

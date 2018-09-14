@@ -23,6 +23,8 @@
  */
 package uy.kerri.representations.select;
 
+import uy.kerri.representations.RepresentationsException;
+
 /**
  * A single value selected from a
  *  {@link uy.kerri.representations.Representation}.
@@ -35,7 +37,7 @@ public interface SelectedValue<T> {
      * The selected value.
      *
      * @return The selected value.
-     * @throws Exception if something goes wrong.
+     * @throws RepresentationsException if something goes wrong.
      */
-    T value() throws Exception;
+    T value() throws RepresentationsException;
 }

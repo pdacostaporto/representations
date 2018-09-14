@@ -25,13 +25,14 @@ package uy.kerri.representations.test;
 
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
+import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Values;
 
 /**
  * An {@link uy.kerri.representations.Output} that shows if the label of the
  *  last printed label-value pair matches a given label.
  *
- * @since 1.3
+ * @since 2.0
  */
 public final class SelectedLabelMatchingOutput implements Output {
     /**
@@ -77,49 +78,49 @@ public final class SelectedLabelMatchingOutput implements Output {
     @Override
     public Output print(
         final String key, final String value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(key);
     }
 
     @Override
     public Output print(
         final String key, final Integer value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(key);
     }
 
     @Override
     public Output print(
         final String key, final Boolean value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(key);
     }
 
     @Override
     public Output print(
         final String key, final Double value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(key);
     }
 
     @Override
     public Output print(
         final String key, final Long value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(key);
     }
 
     @Override
     public Output print(
         final String key, final Fields value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(key);
     }
 
     @Override
     public Output print(
         final String key, final Values values
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(key);
     }
 
@@ -128,9 +129,9 @@ public final class SelectedLabelMatchingOutput implements Output {
      *
      * @param actual The printed label.
      * @return An output indicating if the label matched.
-     * @throws Exception if something goes wrong.
+     * @throws RepresentationsException if something goes wrong.
      */
-    private Output match(final String actual) throws Exception {
+    private Output match(final String actual) throws RepresentationsException {
         return new SelectedLabelMatchingOutput(
             this.expected, actual.equals(this.expected)
         );

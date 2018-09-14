@@ -25,6 +25,7 @@ package uy.kerri.representations.test;
 
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
+import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Values;
 
 /**
@@ -85,42 +86,42 @@ public final class CompositePairMatchingOutput implements Output {
     @Override
     public Output print(
         final String key, final String value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.next(false);
     }
 
     @Override
     public Output print(
         final String key, final Integer value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.next(false);
     }
 
     @Override
     public Output print(
         final String key, final Boolean value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.next(false);
     }
 
     @Override
     public Output print(
         final String key, final Double value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.next(false);
     }
 
     @Override
     public Output print(
         final String key, final Long value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.next(false);
     }
 
     @Override
     public Output print(
         final String key, final Fields value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.next(
             key.equals(this.label)
             && new MatchingFieldsTest(this.expected, value).passes()
@@ -130,7 +131,7 @@ public final class CompositePairMatchingOutput implements Output {
     @Override
     public Output print(
         final String key, final Values values
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.next(false);
     }
 

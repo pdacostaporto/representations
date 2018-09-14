@@ -63,7 +63,9 @@ public class ArrayOfValues implements Values {
     }
 
     @Override
-    public final Output printTo(final Output output) throws Exception {
+    public final Output printTo(
+        final Output output
+    ) throws RepresentationsException {
         Output printed = output;
         for (final Value value : this.array) {
             printed = value.printTo(printed);

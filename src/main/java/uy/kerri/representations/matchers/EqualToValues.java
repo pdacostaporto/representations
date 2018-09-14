@@ -25,6 +25,7 @@ package uy.kerri.representations.matchers;
 
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
+import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Values;
 import uy.kerri.representations.fake.FakeOutput;
 import uy.kerri.representations.test.MatchingValuesTest;
@@ -32,10 +33,8 @@ import uy.kerri.representations.test.MatchingValuesTest;
 /**
  * Hamcrest matcher to match two equal sequences of values.
  *
- * @checkstyle IllegalCatchCheck (100 lines)
- * @since 1.3
+ * @since 2.0
  */
-@SuppressWarnings("PMD.AvoidCatchingGenericException")
 public final class EqualToValues extends TypeSafeMatcher<Values> {
     /**
      * The expected sequence of values.

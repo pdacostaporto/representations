@@ -24,13 +24,14 @@
 
 package uy.kerri.representations.test;
 
+import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Values;
 
 /**
  * A {@link uy.kerri.representations.Test} to verify that the values from a
  *  sequence are contained into another.
  *
- * @since 1.3
+ * @since 2.0
  */
 public final class ContainedValuesTest implements Test {
     /**
@@ -56,7 +57,7 @@ public final class ContainedValuesTest implements Test {
     }
 
     @Override
-    public Boolean passes() throws Exception {
+    public Boolean passes() throws RepresentationsException {
         return Boolean.valueOf(
             this.contained.printTo(new ContainedValuesOutput(this.container))
             .show()

@@ -25,6 +25,7 @@ package uy.kerri.representations.select;
 
 import uy.kerri.representations.Output;
 import uy.kerri.representations.Representation;
+import uy.kerri.representations.RepresentationsException;
 
 /**
  * A boolean value selected from a
@@ -59,7 +60,7 @@ public final class SelectedIntegerValue implements SelectedValue<Integer> {
     }
 
     @Override
-    public Integer value() throws Exception {
+    public Integer value() throws RepresentationsException {
         return Integer.valueOf(this.origin.printTo(this.selection).show());
     }
 }

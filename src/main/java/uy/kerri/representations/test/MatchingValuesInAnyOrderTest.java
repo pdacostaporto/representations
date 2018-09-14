@@ -23,6 +23,7 @@
  */
 package uy.kerri.representations.test;
 
+import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Values;
 
 /**
@@ -57,7 +58,7 @@ public final class MatchingValuesInAnyOrderTest implements Test {
     }
 
     @Override
-    public Boolean passes() throws Exception {
+    public Boolean passes() throws RepresentationsException {
         return this.contained.passes() && this.length.passes();
     }
 }

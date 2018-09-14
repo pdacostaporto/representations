@@ -26,6 +26,7 @@ package uy.kerri.representations.select;
 import java.util.List;
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
+import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Values;
 
 /**
@@ -58,42 +59,42 @@ public final class FilteringOutput implements Output {
     }
 
     @Override
-    public String show() throws Exception {
+    public String show() throws RepresentationsException {
         return this.nested.show();
     }
 
     @Override
     public Output print(
         final String key, final String value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.select(key, this.nested.print(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Integer value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.select(key, this.nested.print(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Boolean value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.select(key, this.nested.print(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Double value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.select(key, this.nested.print(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Long value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.select(key, this.nested.print(key, value));
     }
 
@@ -101,14 +102,14 @@ public final class FilteringOutput implements Output {
     public Output print(
         final String key,
         final Fields value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.select(key, this.nested.print(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Values values
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.select(key, this.nested.print(key, values));
     }
 
@@ -120,11 +121,11 @@ public final class FilteringOutput implements Output {
      * @param printed This output with the field already printed.
      * @return This output with the field already printed or not considering if
      *  the field is allowed.
-     * @throws Exception if something goes wrong.
+     * @throws RepresentationsException if something goes wrong.
      */
     private Output select(
         final String key, final Output printed
-    ) throws Exception {
+    ) throws RepresentationsException {
         final Output selected;
         if (this.fields.contains(key)) {
             selected = new FilteringOutput(this.fields, printed);

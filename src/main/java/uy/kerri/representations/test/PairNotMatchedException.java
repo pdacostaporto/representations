@@ -21,15 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package uy.kerri.representations.exception;
+package uy.kerri.representations.test;
+
+import uy.kerri.representations.RepresentationsException;
 
 /**
  * Exception to throw when a label-value pair is to be matched with another but
  *  has not been yet.
  *
- * @since 1.3
+ * @since 2.0
  */
-public class PairNotMatchedException extends Exception {
+public class PairNotMatchedException extends RepresentationsException {
     /**
      * Creates an exception.
      */

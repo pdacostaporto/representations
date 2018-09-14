@@ -29,6 +29,7 @@ import uy.kerri.representations.Fields;
 import uy.kerri.representations.FixedOutput;
 import uy.kerri.representations.LabelledValue;
 import uy.kerri.representations.Output;
+import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Value;
 import uy.kerri.representations.Values;
 
@@ -36,7 +37,7 @@ import uy.kerri.representations.Values;
  * An {@link uy.kerri.representations.Output} that shows the position of the
  *  first value printed on it that matches a given value.
  *
- * @since 1.3
+ * @since 2.0
  */
 public final class ContainedValueOutput implements Output {
     /**
@@ -103,49 +104,51 @@ public final class ContainedValueOutput implements Output {
     }
 
     @Override
-    public Output print(final String key, final String value) throws Exception {
+    public Output print(
+        final String key, final String value
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Integer value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Boolean value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Double value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Long value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Fields value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Values values
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, values));
     }
 
@@ -154,9 +157,9 @@ public final class ContainedValueOutput implements Output {
      *
      * @param value The last printed value.
      * @return An output indicating whether the value was matched or not.
-     * @throws Exception if something goes wrong.
+     * @throws RepresentationsException if something goes wrong.
      */
-    private Output match(final Value value) throws Exception {
+    private Output match(final Value value) throws RepresentationsException {
         final Output selected;
         if (
             !this.already.contains(this.current)

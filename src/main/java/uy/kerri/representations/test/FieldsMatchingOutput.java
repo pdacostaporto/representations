@@ -28,13 +28,14 @@ import java.util.Map;
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.LabelledValue;
 import uy.kerri.representations.Output;
+import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Values;
 
 /**
  * An {@link uy.kerri.representations.Output} that shows if the fields printed
  *  on it match to correspondent fields on a given group of fields.
  *
- * @since 1.3
+ * @since 2.0
  */
 public final class FieldsMatchingOutput implements Output {
     /**
@@ -81,7 +82,7 @@ public final class FieldsMatchingOutput implements Output {
     @Override
     public Output print(
         final String key, final String value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(
             key,
             new ContainedFieldTest(new LabelledValue(key, value), this.actual)
@@ -92,7 +93,7 @@ public final class FieldsMatchingOutput implements Output {
     @Override
     public Output print(
         final String key, final Integer value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(
             key,
             new ContainedFieldTest(new LabelledValue(key, value), this.actual)
@@ -103,7 +104,7 @@ public final class FieldsMatchingOutput implements Output {
     @Override
     public Output print(
         final String key, final Boolean value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(
             key,
             new ContainedFieldTest(new LabelledValue(key, value), this.actual)
@@ -114,7 +115,7 @@ public final class FieldsMatchingOutput implements Output {
     @Override
     public Output print(
         final String key, final Double value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(
             key,
             new ContainedFieldTest(new LabelledValue(key, value), this.actual)
@@ -125,7 +126,7 @@ public final class FieldsMatchingOutput implements Output {
     @Override
     public Output print(
         final String key, final Long value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(
             key,
             new ContainedFieldTest(new LabelledValue(key, value), this.actual)
@@ -136,7 +137,7 @@ public final class FieldsMatchingOutput implements Output {
     @Override
     public Output print(
         final String key, final Fields value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(
             key,
             new ContainedFieldTest(new LabelledValue(key, value), this.actual)
@@ -147,7 +148,7 @@ public final class FieldsMatchingOutput implements Output {
     @Override
     public Output print(
         final String key, final Values values
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(
             key,
             new ContainedFieldTest(new LabelledValue(key, values), this.actual)
@@ -161,11 +162,11 @@ public final class FieldsMatchingOutput implements Output {
      * @param key The name of the printed field.
      * @param current Whether the current field matched or not.
      * @return An output updated to indicate if the field matched or not.
-     * @throws Exception if something goes wrong.
+     * @throws RepresentationsException if something goes wrong.
      */
     private Output match(
         final String key, final Boolean current
-    ) throws Exception {
+    ) throws RepresentationsException {
         final Map<String, Boolean> matches = new HashMap<>(this.matched);
         matches.put(key, current);
         return new FieldsMatchingOutput(this.actual, matches);

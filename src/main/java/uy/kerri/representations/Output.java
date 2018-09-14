@@ -33,9 +33,9 @@ public interface Output {
      * Shows the output.
      *
      * @return A string representation of the output
-     * @throws Exception if anything goes wrong
+     * @throws RepresentationsException if anything goes wrong
      */
-    String show() throws Exception;
+    String show() throws RepresentationsException;
 
     /**
      * Prints a string field on the output.
@@ -43,9 +43,9 @@ public interface Output {
      * @param key The key of the printed field.
      * @param value The value of the printed field.
      * @return The output with the field printed on it.
-     * @throws Exception if anything goes wrong.
+     * @throws RepresentationsException if anything goes wrong.
      */
-    Output print(String key, String value) throws Exception;
+    Output print(String key, String value) throws RepresentationsException;
 
     /**
      * Prints an integer field on the output.
@@ -53,9 +53,9 @@ public interface Output {
      * @param key The key of the printed field.
      * @param value The value of the printed field.
      * @return The output with the field printed on it.
-     * @throws Exception if anything goes wrong.
+     * @throws RepresentationsException if anything goes wrong.
      */
-    Output print(String key, Integer value) throws Exception;
+    Output print(String key, Integer value) throws RepresentationsException;
 
     /**
      * Prints a boolean field on the output.
@@ -63,9 +63,9 @@ public interface Output {
      * @param key The key of the printed field.
      * @param value The value of the printed field.
      * @return The output with the field printed on it.
-     * @throws Exception if anything goes wrong.
+     * @throws RepresentationsException if anything goes wrong.
      */
-    Output print(String key, Boolean value) throws Exception;
+    Output print(String key, Boolean value) throws RepresentationsException;
 
     /**
      * Prints a double field on the output.
@@ -73,9 +73,9 @@ public interface Output {
      * @param key The key of the printed field.
      * @param value The value of the printed field.
      * @return The output with the field printed on it.
-     * @throws Exception if anything goes wrong.
+     * @throws RepresentationsException if anything goes wrong.
      */
-    Output print(String key, Double value) throws Exception;
+    Output print(String key, Double value) throws RepresentationsException;
 
     /**
      * Prints a long field on the output.
@@ -83,9 +83,9 @@ public interface Output {
      * @param key The key of the printed field.
      * @param value The value of the printed field.
      * @return The output with the field printed on it.
-     * @throws Exception if anything goes wrong.
+     * @throws RepresentationsException if anything goes wrong.
      */
-    Output print(String key, Long value) throws Exception;
+    Output print(String key, Long value) throws RepresentationsException;
 
     /**
      * Prints nested fields on the output.
@@ -93,9 +93,9 @@ public interface Output {
      * @param key The key of the printed field.
      * @param value The nested fields of the printed field.
      * @return The output with the nested fields printed on it.
-     * @throws Exception if anything goes wrong.
+     * @throws RepresentationsException if anything goes wrong.
      */
-    Output print(String key, Fields value) throws Exception;
+    Output print(String key, Fields value) throws RepresentationsException;
 
     /**
      * Prints a multivalued field on the output.
@@ -103,7 +103,7 @@ public interface Output {
      * @param key The key of the printed field.
      * @param values The values of the printed field.
      * @return The output with the field printed on it.
-     * @throws Exception if anything goes wrong.
+     * @throws RepresentationsException if anything goes wrong.
      */
-    Output print(String key, Values values) throws Exception;
+    Output print(String key, Values values) throws RepresentationsException;
 }

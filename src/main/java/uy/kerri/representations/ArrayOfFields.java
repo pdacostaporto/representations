@@ -63,7 +63,9 @@ public class ArrayOfFields implements Fields {
     }
 
     @Override
-    public final Output printTo(final Output output) throws Exception {
+    public final Output printTo(
+        final Output output
+    ) throws RepresentationsException {
         Output printed = output;
         for (final Field field : this.array) {
             printed = field.printTo(printed);

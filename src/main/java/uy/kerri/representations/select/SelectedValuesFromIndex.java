@@ -24,12 +24,13 @@
 package uy.kerri.representations.select;
 
 import uy.kerri.representations.Output;
+import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Values;
 
 /**
  * A sequence of values selected from another sequence of values.
  *
- * @since 1.3
+ * @since 2.0
  */
 public final class SelectedValuesFromIndex implements Values {
     /**
@@ -55,7 +56,7 @@ public final class SelectedValuesFromIndex implements Values {
     }
 
     @Override
-    public Output printTo(final Output output) throws Exception {
+    public Output printTo(final Output output) throws RepresentationsException {
         return this.container.printTo(new SelectedOutput(this.index, output));
     }
 }

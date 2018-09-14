@@ -25,6 +25,7 @@ package uy.kerri.representations.select;
 
 import uy.kerri.representations.Output;
 import uy.kerri.representations.Representation;
+import uy.kerri.representations.RepresentationsException;
 
 /**
  * A double value selected from a
@@ -59,7 +60,7 @@ public final class SelectedDoubleValue implements SelectedValue<Double> {
     }
 
     @Override
-    public Double value() throws Exception {
+    public Double value() throws RepresentationsException {
         return Double.valueOf(this.origin.printTo(this.selection).show());
     }
 }

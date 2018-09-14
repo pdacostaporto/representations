@@ -28,6 +28,7 @@ import java.util.List;
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.LabelledValue;
 import uy.kerri.representations.Output;
+import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Value;
 import uy.kerri.representations.Values;
 
@@ -35,7 +36,7 @@ import uy.kerri.representations.Values;
  * An {@link uy.kerri.representations.Output} that shows if values printed on it
  *  are contained in a given sequence of values.
  *
- * @since 1.3
+ * @since 2.0
  */
 public final class ContainedValuesOutput implements Output {
     /**
@@ -81,49 +82,51 @@ public final class ContainedValuesOutput implements Output {
     }
 
     @Override
-    public Output print(final String key, final String value) throws Exception {
+    public Output print(
+        final String key, final String value
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Integer value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Boolean value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Double value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Long value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Fields value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Values values
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, values));
     }
 
@@ -133,9 +136,9 @@ public final class ContainedValuesOutput implements Output {
      * @param value The recently printed value.
      * @return An output updated to whether the value was contained in the
      *  sequence or not.
-     * @throws Exception if something goes wrong.
+     * @throws RepresentationsException if something goes wrong.
      */
-    private Output match(final Value value) throws Exception {
+    private Output match(final Value value) throws RepresentationsException {
         final List<Integer> exclude = new ArrayList<>(this.matched);
         exclude.add(
             Integer.valueOf(

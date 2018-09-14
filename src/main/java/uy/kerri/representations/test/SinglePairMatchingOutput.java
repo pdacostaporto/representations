@@ -25,13 +25,14 @@ package uy.kerri.representations.test;
 
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
+import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Values;
 
 /**
  * An {@link uy.kerri.representations.Output} that shows if the last key-value
  *  printed on it matches a given key-value pair with a single value as value.
  *
- * @since 1.3
+ * @since 2.0
  */
 public final class SinglePairMatchingOutput implements Output {
     /**
@@ -84,49 +85,49 @@ public final class SinglePairMatchingOutput implements Output {
     @Override
     public Output print(
         final String key, final String value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.next(key, value);
     }
 
     @Override
     public Output print(
         final String key, final Integer value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.next(key, value);
     }
 
     @Override
     public Output print(
         final String key, final Boolean value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.next(key, value);
     }
 
     @Override
     public Output print(
         final String key, final Double value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.next(key, value);
     }
 
     @Override
     public Output print(
         final String key, final Long value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.next(key, value);
     }
 
     @Override
     public Output print(
         final String key, final Fields value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.next(key, value);
     }
 
     @Override
     public Output print(
         final String key, final Values values
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.next(key, values);
     }
 
@@ -136,9 +137,11 @@ public final class SinglePairMatchingOutput implements Output {
      * @param key The printed label.
      * @param value The printed value.
      * @return An output updated to indicate if the new printed pair matched.
-     * @throws Exception if something goes wrong.
+     * @throws RepresentationsException if something goes wrong.
      */
-    private Output next(final String key, final Object value) throws Exception {
+    private Output next(
+        final String key, final Object value
+    ) throws RepresentationsException {
         return new SinglePairMatchingOutput(
             this.label,
             this.expected,

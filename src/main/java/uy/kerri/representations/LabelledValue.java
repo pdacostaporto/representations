@@ -114,7 +114,9 @@ public class LabelledValue implements Field, Value {
     }
 
     @Override
-    public final Output printTo(final Output output) throws Exception {
+    public final Output printTo(
+        final Output output
+    ) throws RepresentationsException {
         return this.value.printTo(output);
     }
 }

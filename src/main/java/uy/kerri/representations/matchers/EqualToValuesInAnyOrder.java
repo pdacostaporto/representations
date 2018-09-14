@@ -25,6 +25,7 @@ package uy.kerri.representations.matchers;
 
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
+import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Values;
 import uy.kerri.representations.fake.FakeOutput;
 import uy.kerri.representations.test.MatchingValuesInAnyOrderTest;
@@ -33,10 +34,8 @@ import uy.kerri.representations.test.MatchingValuesInAnyOrderTest;
  * Hamcrest matcher to match two equal sequences of values disregarding the
  *  order in which the values are arranged.
  *
- * @checkstyle IllegalCatchCheck (100 lines)
- * @since 1.3
+ * @since 2.0
  */
-@SuppressWarnings("PMD.AvoidCatchingGenericException")
 public final class EqualToValuesInAnyOrder extends TypeSafeMatcher<Values> {
     /**
      * The expected sequence of values.
@@ -61,7 +60,7 @@ public final class EqualToValuesInAnyOrder extends TypeSafeMatcher<Values> {
             description.appendValue(
                 this.expected.printTo(new FakeOutput()).show()
             );
-        } catch (final Exception exception) {
+        } catch (final RepresentationsException exception) {
             throw new IllegalArgumentException(exception);
         }
     }
@@ -74,7 +73,7 @@ public final class EqualToValuesInAnyOrder extends TypeSafeMatcher<Values> {
             description.appendText("the actual was ").appendValue(
                 actual.printTo(new FakeOutput()).show()
             );
-        } catch (final Exception exception) {
+        } catch (final RepresentationsException exception) {
             throw new IllegalArgumentException(exception);
         }
     }
@@ -84,7 +83,7 @@ public final class EqualToValuesInAnyOrder extends TypeSafeMatcher<Values> {
         try {
             return new MatchingValuesInAnyOrderTest(this.expected, actual)
             .passes();
-        } catch (final Exception exception) {
+        } catch (final RepresentationsException exception) {
             throw new IllegalArgumentException(exception);
         }
     }

@@ -25,6 +25,7 @@ package uy.kerri.representations.select;
 
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
+import uy.kerri.representations.RepresentationsException;
 
 /**
  * A set of fields selected from a field of another set of fields.
@@ -56,7 +57,7 @@ public final class SelectedFieldsFromField implements Fields {
     }
 
     @Override
-    public Output printTo(final Output output) throws Exception {
+    public Output printTo(final Output output) throws RepresentationsException {
         return this.container.printTo(new SelectedOutput(this.field, output));
     }
 }

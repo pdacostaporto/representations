@@ -21,15 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package uy.kerri.representations.exception;
+package uy.kerri.representations.select;
+
+import uy.kerri.representations.RepresentationsException;
 
 /**
  * Exception to throw when an output is to be shown but its value has not been
  *  selected yet.
  *
- * @since 1.0
+ * @since 2.0
  */
-public class ValueNotSelectedException extends Exception {
+public class ValueNotSelectedException extends RepresentationsException {
     /**
      * Creates an exception.
      */

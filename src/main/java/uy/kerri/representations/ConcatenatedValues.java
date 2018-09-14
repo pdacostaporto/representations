@@ -46,7 +46,9 @@ public class ConcatenatedValues implements Values {
     }
 
     @Override
-    public final Output printTo(final Output output) throws Exception {
+    public final Output printTo(
+        final Output output
+    ) throws RepresentationsException {
         Output printed = output;
         for (final Values values : this.array) {
             printed = values.printTo(printed);

@@ -27,6 +27,7 @@ import uy.kerri.representations.Fields;
 import uy.kerri.representations.FixedOutput;
 import uy.kerri.representations.LabelledValue;
 import uy.kerri.representations.Output;
+import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Value;
 import uy.kerri.representations.Values;
 
@@ -34,7 +35,7 @@ import uy.kerri.representations.Values;
  * An {@link uy.kerri.representations.Output} that shows if the n-th value in a
  *  sequence of values matches a given value.
  *
- * @since 1.3
+ * @since 2.0
  */
 public final class IndexMatchingOutput implements Output {
     /**
@@ -83,56 +84,56 @@ public final class IndexMatchingOutput implements Output {
     }
 
     @Override
-    public String show() throws Exception {
+    public String show() {
         return "false";
     }
 
     @Override
     public Output print(
         final String key, final String value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Integer value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Boolean value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Double value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Long value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Fields value
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, value));
     }
 
     @Override
     public Output print(
         final String key, final Values values
-    ) throws Exception {
+    ) throws RepresentationsException {
         return this.match(new LabelledValue(key, values));
     }
 
@@ -141,9 +142,9 @@ public final class IndexMatchingOutput implements Output {
      *
      * @param value The value to be matched.
      * @return An output updated to whether the value matched or not.
-     * @throws Exception if something goes wrong.
+     * @throws RepresentationsException if something goes wrong.
      */
-    private Output match(final Value value) throws Exception {
+    private Output match(final Value value) throws RepresentationsException {
         final Output selected;
         if (this.current.equals(this.index)) {
             selected = new FixedOutput(
