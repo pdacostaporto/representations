@@ -175,7 +175,7 @@ Besides that, just check that `mvn install` runs without issues before submiting
 
 ### Releasing
 
-To release a new version just run the `release.sh` script and fill the prompted information.
+To release a new version just run the `release.sh` script and fill the prompted information. Then, add a [corresponding release](https://github.com/pdacostaporto/representations/releases) to the created tag.
 
 Remember to configure your [OSSRH Nexus](https://oss.sonatype.org/) credentials and your GPG passphrase on your `settings.xml` file. If you use Vagrant edit the file at `/home/vagrant/.m2/settings.xml`.
 
