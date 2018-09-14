@@ -33,7 +33,7 @@ import uy.kerri.representations.LabelledValue;
 /**
  * Tests for {@link uy.kerri.representations.matchers.RepresentationMatchers}.
  *
- * @since 1.3
+ * @since 2.0
  */
 public final class MatchersTest {
     /**

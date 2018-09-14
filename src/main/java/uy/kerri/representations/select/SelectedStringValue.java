@@ -31,7 +31,7 @@ import uy.kerri.representations.RepresentationsException;
  * A string value selected from a
  *  {@link uy.kerri.representations.Representation}.
  *
- * @since 1.3
+ * @since 2.0
  */
 public final class SelectedStringValue
     implements SelectedValue<java.lang.String> {

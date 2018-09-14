@@ -32,7 +32,7 @@ import org.junit.rules.ExpectedException;
 /**
  * Tests for {@link uy.kerri.representations.select.SelectedValueOutput}.
  *
- * @since 1.0
+ * @since 2.0
  */
 public class SelectedValueOutputTest {
     /**

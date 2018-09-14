@@ -36,7 +36,7 @@ import uy.kerri.representations.LabelledValue;
  * Tests for field selection with
  *  {@link uy.kerri.representations.select.SelectedOutput}.
  *
- * @since 1.0
+ * @since 2.0
  */
 public final class SelectedFieldOutputTest {
     /**

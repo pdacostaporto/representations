@@ -31,7 +31,7 @@ import uy.kerri.representations.RepresentationsException;
 /**
  * An {@link uy.kerri.representations.Output} that selects the value of a field.
  *
- * @since 1.0
+ * @since 2.0
  */
 public class SelectedFieldOutput implements Output {
     /**

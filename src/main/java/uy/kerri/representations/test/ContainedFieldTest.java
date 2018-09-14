@@ -32,7 +32,7 @@ import uy.kerri.representations.Output;
  * A {@link uy.kerri.representations.test.Test} to verify that a field is
  *  contained in a group of fields and its value matches.
  *
- * @since 1.3
+ * @since 2.0
  */
 public final class ContainedFieldTest implements Test {
     /**

@@ -30,7 +30,7 @@ import uy.kerri.representations.RepresentationsException;
 /**
  * A set of fields selected from a field of another set of fields.
  *
- * @since 1.3
+ * @since 2.0
  */
 public final class SelectedFieldsFromField implements Fields {
     /**

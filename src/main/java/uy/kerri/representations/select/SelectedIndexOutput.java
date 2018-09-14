@@ -32,7 +32,7 @@ import uy.kerri.representations.Values;
  * An {@link uy.kerri.representations.Output} to select the n-th printed value
  *  in a sequence of values.
  *
- * @since 1.0
+ * @since 2.0
  */
 public class SelectedIndexOutput implements Output {
     /**

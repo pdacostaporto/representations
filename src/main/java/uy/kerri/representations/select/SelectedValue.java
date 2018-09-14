@@ -30,7 +30,7 @@ import uy.kerri.representations.RepresentationsException;
  *  {@link uy.kerri.representations.Representation}.
  *
  * @param <T> The primitive type of the selected value.
- * @since 1.3
+ * @since 2.0
  */
 public interface SelectedValue<T> {
     /**

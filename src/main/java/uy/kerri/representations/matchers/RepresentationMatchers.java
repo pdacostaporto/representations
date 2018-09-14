@@ -29,7 +29,7 @@ import uy.kerri.representations.Values;
 /**
  * Hamcrest matchers for testing representations.
  *
- * @since 1.3
+ * @since 2.0
  */
 @SuppressWarnings("PMD.ProhibitPublicStaticMethods")
 public final class RepresentationMatchers {

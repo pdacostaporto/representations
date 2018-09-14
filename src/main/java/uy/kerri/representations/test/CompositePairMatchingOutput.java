@@ -33,7 +33,7 @@ import uy.kerri.representations.Values;
  *  printed on it matches a given key-value pair with a composite value as
  *  value.
  *
- * @since 1.3
+ * @since 2.0
  */
 public final class CompositePairMatchingOutput implements Output {
     /**

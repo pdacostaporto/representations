@@ -37,7 +37,7 @@ import uy.kerri.representations.Values;
  *
  * Labels are ignored.
  *
- * @since 1.0
+ * @since 2.0
  */
 public class JsonArrayOutput implements Output {
     /**

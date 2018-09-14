@@ -31,7 +31,7 @@ import uy.kerri.representations.RepresentationsException;
 /**
  * A set of fields selected from another set of fields.
  *
- * @since 1.3
+ * @since 2.0
  */
 public final class FilteredFields implements Fields {
     /**

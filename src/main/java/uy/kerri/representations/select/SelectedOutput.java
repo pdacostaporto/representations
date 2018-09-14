@@ -32,7 +32,7 @@ import uy.kerri.representations.Values;
  * An {@link uy.kerri.representations.Output} that selects some encapsulated
  *  value.
  *
- * @since 1.3
+ * @since 2.0
  */
 public final class SelectedOutput implements Output {
     /**

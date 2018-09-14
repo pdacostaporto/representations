@@ -31,7 +31,7 @@ import uy.kerri.representations.Values;
 /**
  * A set of fields selected from a sequence of values.
  *
- * @since 1.3
+ * @since 2.0
  */
 public final class SelectedFieldsFromIndex implements Fields {
     /**

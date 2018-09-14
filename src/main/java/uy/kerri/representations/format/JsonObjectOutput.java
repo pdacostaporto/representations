@@ -35,7 +35,7 @@ import uy.kerri.representations.Values;
 /**
  * An {@link uy.kerri.representations.Output} in JSON object format.
  *
- * @since 1.0
+ * @since 2.0
  */
 public class JsonObjectOutput implements Output {
     /**

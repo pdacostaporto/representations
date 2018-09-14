@@ -34,7 +34,7 @@ import uy.kerri.representations.Values;
  * An {@link uy.kerri.representations.Output} that shows if the values printed
  *  on it match a subsequence inside another sequence of values.
  *
- * @since 1.3
+ * @since 2.0
  */
 public final class SubsequenceMatchingOutput implements Output {
     /**
