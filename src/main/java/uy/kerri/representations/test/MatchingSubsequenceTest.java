@@ -27,8 +27,8 @@ import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Values;
 
 /**
- * A {@link uy.kerri.test.representations.Test} to verify that a sequence of
- *  values is a subsequence of another.
+ * A {@link uy.kerri.test.representations.test.Test} to verify that a sequence
+ *  of values is a subsequence of another.
  *
  * @since 2.0
  */
