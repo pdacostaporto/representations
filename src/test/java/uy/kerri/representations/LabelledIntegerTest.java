@@ -21,7 +21,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package uy.kerri.representations;
+
+import org.apache.commons.lang3.StringUtils;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.junit.MatcherAssert;
+import org.junit.Test;
+import uy.kerri.representations.fake.FakeOutput;
+
 /**
- * Unit tests for classes in {@link uy.kerri.representations.fake}.
+ * Tests for {@link uy.kerri.representations.LabelledInteger}.
+ *
+ * @since 2.0
  */
-package uy.kerri.representations.fake;
+public class LabelledIntegerTest {
+    /**
+     * LabelledInteger prints itself in an output.
+     *
+     * @throws Exception if something fails.
+     */
+    @Test
+    public final void printsItself() throws Exception {
+        final String name = "name:String:StephinMerrit";
+        final FakeOutput output = new FakeOutput(name);
+        final Integer age = 53;
+        MatcherAssert.assertThat(
+            "The field didn't print itself correctly.",
+            new LabelledInteger("age", age).printTo(output).show(),
+            CoreMatchers.equalTo(
+                StringUtils.join(
+                    new String[] {
+                        name,
+                        String.format("age:Integer:%d", age),
+                    },
+                    String.format("%n")
+                )
+            )
+        );
+    }
+}

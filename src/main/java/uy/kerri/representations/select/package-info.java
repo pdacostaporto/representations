@@ -22,6 +22,6 @@
  * SOFTWARE.
  */
 /**
- * Unit tests for classes in {@link uy.kerri.representations.fake}.
+ * Classes for selecting specific data between represented data.
  */
-package uy.kerri.representations.fake;
+package uy.kerri.representations.select;

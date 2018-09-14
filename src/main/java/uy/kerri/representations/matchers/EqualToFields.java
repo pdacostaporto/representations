@@ -27,7 +27,7 @@ import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.fake.FakeOutput;
-import uy.kerri.representations.impl.MatchingFieldsTest;
+import uy.kerri.representations.test.MatchingFieldsTest;
 
 /**
  * Hamcrest matcher to match two equal sets of field.

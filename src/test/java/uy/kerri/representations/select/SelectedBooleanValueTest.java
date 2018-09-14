@@ -21,7 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package uy.kerri.representations.select;
+
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.junit.MatcherAssert;
+import org.junit.Test;
+import uy.kerri.representations.ArrayOfValues;
+import uy.kerri.representations.LabelledValue;
+
 /**
- * Unit tests for classes in {@link uy.kerri.representations.fake}.
+ * Tests for {@link uy.kerri.representations.select.SelectedBooleanValue}.
+ *
+ * @since 2.0
  */
-package uy.kerri.representations.fake;
+public final class SelectedBooleanValueTest {
+    /**
+     * SelectedBooleanValue allows to select a boolean.
+     *
+     * @throws Exception if something goes wrong.
+     */
+    @Test
+    public void selectsABoolean() throws Exception {
+        final Integer index = 1;
+        final Boolean value = true;
+        MatcherAssert.assertThat(
+            "A boolean value wasn't selected.",
+            new SelectedBooleanValue(
+                new ArrayOfValues(
+                    new LabelledValue("label", value)
+                ),
+                new SelectedOutput(index)
+            ).value(),
+            CoreMatchers.is(value)
+        );
+    }
+}

@@ -21,7 +21,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package uy.kerri.representations.test;
+
+import uy.kerri.representations.Representation;
+
 /**
- * Unit tests for classes in {@link uy.kerri.representations.fake}.
+ * A {@link uy.kerri.representations.test.Test} to verify that two
+ *  representations print the same amount of values.
+ *
+ * @since 1.3
  */
-package uy.kerri.representations.fake;
+public final class MatchingCountTest implements Test {
+    /**
+     * One representation.
+     */
+    private final Representation some;
+
+    /**
+     * The other representation.
+     */
+    private final Representation other;
+
+    /**
+     * Constructs a test to verify that two representations print the same
+     *  amount of values.
+     *
+     * @param first One representation.
+     * @param second The other representation.
+     */
+    public MatchingCountTest(
+        final Representation first, final Representation second
+    ) {
+        this.some = first;
+        this.other = second;
+    }
+
+    @Override
+    public Boolean passes() throws Exception {
+        return Integer.valueOf(this.some.printTo(new CountingOutput()).show())
+        .equals(
+            Integer.valueOf(this.other.printTo(new CountingOutput()).show())
+        );
+    }
+}

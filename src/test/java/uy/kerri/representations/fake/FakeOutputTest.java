@@ -21,17 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package uy.kerri.representations.test.fake;
+package uy.kerri.representations.fake;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.junit.MatcherAssert;
 import org.junit.Test;
-import uy.kerri.representations.fake.FakeOutput;
-import uy.kerri.representations.impl.ArrayOfFields;
-import uy.kerri.representations.impl.ArrayOfValues;
-import uy.kerri.representations.impl.LabelledString;
+import uy.kerri.representations.ArrayOfFields;
+import uy.kerri.representations.ArrayOfValues;
+import uy.kerri.representations.LabelledString;
 
 /**
  * Tests for {@link uy.kerri.representations.fake.FakeOutput}.

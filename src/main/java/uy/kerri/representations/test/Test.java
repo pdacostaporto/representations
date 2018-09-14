@@ -21,7 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package uy.kerri.representations.test;
+
 /**
- * Unit tests for classes in {@link uy.kerri.representations.fake}.
+ * The verification of certain condition.
+ *
+ * @since 1.3
  */
-package uy.kerri.representations.fake;
+public interface Test {
+    /**
+     * Verification of the condition.
+     *
+     * @return Whether the condition was verified or not.
+     * @throws Exception if something goes wrong.
+     */
+    Boolean passes() throws Exception;
+}

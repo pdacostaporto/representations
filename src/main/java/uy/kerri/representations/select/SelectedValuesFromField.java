@@ -21,7 +21,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package uy.kerri.representations.select;
+
+import uy.kerri.representations.Fields;
+import uy.kerri.representations.Output;
+import uy.kerri.representations.Values;
+
 /**
- * Unit tests for classes in {@link uy.kerri.representations.fake}.
+ * A sequence of values selected from a field in a set of fields.
+ *
+ * @since 1.3
  */
-package uy.kerri.representations.fake;
+public final class SelectedValuesFromField implements Values {
+    /**
+     * The name of the field to be selected.
+     */
+    private final String field;
+
+    /**
+     * The set of fields where the field will be selected from.
+     */
+    private final Fields container;
+
+    /**
+     * Constructs a sequence of values selected from a field of a set of fields.
+     *
+     * @param name The name of the field containing the sequence to be
+     *  selected.
+     * @param fields The set of fields where the field will be selected from.
+     */
+    public SelectedValuesFromField(final String name, final Fields fields) {
+        this.field = name;
+        this.container = fields;
+    }
+
+    @Override
+    public Output printTo(final Output output) throws Exception {
+        return this.container.printTo(new SelectedOutput(this.field, output));
+    }
+}

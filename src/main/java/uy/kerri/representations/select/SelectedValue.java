@@ -21,7 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package uy.kerri.representations.select;
+
 /**
- * Unit tests for classes in {@link uy.kerri.representations.fake}.
+ * A single value selected from a
+ *  {@link uy.kerri.representations.Representation}.
+ *
+ * @param <T> The primitive type of the selected value.
+ * @since 1.3
  */
-package uy.kerri.representations.fake;
+public interface SelectedValue<T> {
+    /**
+     * The selected value.
+     *
+     * @return The selected value.
+     * @throws Exception if something goes wrong.
+     */
+    T value() throws Exception;
+}

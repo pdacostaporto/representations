@@ -21,7 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package uy.kerri.representations.test;
+
+import uy.kerri.representations.Fields;
+
 /**
- * Unit tests for classes in {@link uy.kerri.representations.fake}.
+ * A {@link uy.kerri.representations.test.Test} to verify that two sets of
+ *  fields match.
+ *
+ * @since 1.3
  */
-package uy.kerri.representations.fake;
+public final class MatchingFieldsTest implements Test {
+    /**
+     * The expected fields.
+     */
+    private final Fields expected;
+
+    /**
+     * The actual fields.
+     */
+    private final Fields actual;
+
+    /**
+     * Constructs a test to verify that two sets of fields match.
+     *
+     * @param first The expected set of fields.
+     * @param second The actual set of fields.
+     */
+    public MatchingFieldsTest(final Fields first, final Fields second) {
+        this.expected = first;
+        this.actual = second;
+    }
+
+    @Override
+    public Boolean passes() throws Exception {
+        return Boolean.valueOf(
+            this.expected.printTo(new FieldsMatchingOutput(this.actual)).show()
+        ) && Boolean.valueOf(
+            this.actual.printTo(new FieldsMatchingOutput(this.expected)).show()
+        );
+    }
+}

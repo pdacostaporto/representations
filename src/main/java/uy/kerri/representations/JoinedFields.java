@@ -21,7 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package uy.kerri.representations;
+
+import java.util.Arrays;
+
 /**
- * Unit tests for classes in {@link uy.kerri.representations.fake}.
+ * Joined groups of {@link uy.kerri.representations.Field}s.
+ *
+ * @since 2.0
  */
-package uy.kerri.representations.fake;
+public class JoinedFields implements Fields {
+    /**
+     * Fields to join.
+     */
+    private final Fields[] array;
+
+    /**
+     * Constructs a joined group of fields.
+     *
+     * @param fields An array of fields to join.
+     */
+    public JoinedFields(final Fields... fields) {
+        this.array = Arrays.copyOf(fields, fields.length);
+    }
+
+    @Override
+    public final Output printTo(final Output output) throws Exception {
+        Output printed = output;
+        for (final Fields fields : this.array) {
+            printed = fields.printTo(printed);
+        }
+        return printed;
+    }
+}

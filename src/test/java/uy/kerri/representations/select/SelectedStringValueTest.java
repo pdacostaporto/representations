@@ -21,7 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package uy.kerri.representations.select;
+
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.junit.MatcherAssert;
+import org.junit.Test;
+import uy.kerri.representations.ArrayOfFields;
+import uy.kerri.representations.LabelledValue;
+
 /**
- * Unit tests for classes in {@link uy.kerri.representations.fake}.
+ * Tests for {@link uy.kerri.representations.select.SelectedStringValue}.
+ *
+ * @since 2.0
  */
-package uy.kerri.representations.fake;
+public final class SelectedStringValueTest {
+    /**
+     * SelectedStringValue allows to select a string.
+     *
+     * @throws Exception if something goes wrong.
+     */
+    @Test
+    public void selectsAString() throws Exception {
+        final String field = "field";
+        final String value = "value";
+        MatcherAssert.assertThat(
+            "A string value wasn't selected.",
+            new SelectedStringValue(
+                new ArrayOfFields(
+                    new LabelledValue(field, value)
+                ),
+                new SelectedOutput(field)
+            ).value(),
+            CoreMatchers.equalTo(value)
+        );
+    }
+}

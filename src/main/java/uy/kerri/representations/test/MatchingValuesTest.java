@@ -21,7 +21,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package uy.kerri.representations.test;
+
+import uy.kerri.representations.Values;
+
 /**
- * Unit tests for classes in {@link uy.kerri.representations.fake}.
+ * A {@link uy.kerri.representations.test.Test} to verify that two sequences of
+ *  values match.
+ *
+ * @since 1.3
  */
-package uy.kerri.representations.fake;
+public final class MatchingValuesTest implements Test {
+    /**
+     * The test that verifies that one of the sequences is a subsequence of the
+     *  other.
+     */
+    private final Test subsequence;
+
+    /**
+     * The test that verifies that both sequences have the same length.
+     */
+    private final Test length;
+
+    /**
+     * Constructs a test that verifies that to sequences of values match.
+     *
+     * @param expected The expected sequence.
+     * @param actual The actual sequence.
+     */
+    public MatchingValuesTest(final Values expected, final Values actual) {
+        this.subsequence = new MatchingSubsequenceTest(1, expected, actual);
+        this.length = new MatchingCountTest(expected, actual);
+    }
+
+    @Override
+    public Boolean passes() throws Exception {
+        return this.length.passes() && this.subsequence.passes();
+    }
+}

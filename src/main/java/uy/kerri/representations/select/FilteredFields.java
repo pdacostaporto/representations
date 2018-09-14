@@ -21,7 +21,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package uy.kerri.representations.select;
+
+import java.util.List;
+import uy.kerri.representations.Fields;
+import uy.kerri.representations.Output;
+
 /**
- * Unit tests for classes in {@link uy.kerri.representations.fake}.
+ * A set of fields selected from another set of fields.
+ *
+ * @since 1.3
  */
-package uy.kerri.representations.fake;
+public final class FilteredFields implements Fields {
+    /**
+     * The name of the fields to be selected.
+     */
+    private final List<String> filtered;
+
+    /**
+     * The set where the fields will be selected from.
+     */
+    private final Fields origin;
+
+    /**
+     * Constructs a set of fields selected from another set of fields.
+     *
+     * @param names The names of the fields to be selected.
+     * @param fields The set where the field will be selected from.
+     */
+    public FilteredFields(final List<String> names, final Fields fields) {
+        this.filtered = names;
+        this.origin = fields;
+    }
+
+    @Override
+    public Output printTo(final Output output) throws Exception {
+        return this.origin.printTo(new FilteringOutput(this.filtered, output));
+    }
+}

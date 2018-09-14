@@ -27,7 +27,7 @@ import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 import uy.kerri.representations.Values;
 import uy.kerri.representations.fake.FakeOutput;
-import uy.kerri.representations.impl.MatchingValuesInAnyOrderTest;
+import uy.kerri.representations.test.MatchingValuesInAnyOrderTest;
 
 /**
  * Hamcrest matcher to match two equal sequences of values disregarding the

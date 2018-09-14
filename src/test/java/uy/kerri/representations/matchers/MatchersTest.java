@@ -26,9 +26,9 @@ package uy.kerri.representations.matchers;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.junit.MatcherAssert;
 import org.junit.Test;
-import uy.kerri.representations.impl.ArrayOfFields;
-import uy.kerri.representations.impl.ArrayOfValues;
-import uy.kerri.representations.impl.LabelledValue;
+import uy.kerri.representations.ArrayOfFields;
+import uy.kerri.representations.ArrayOfValues;
+import uy.kerri.representations.LabelledValue;
 
 /**
  * Tests for {@link uy.kerri.representations.matchers.RepresentationMatchers}.

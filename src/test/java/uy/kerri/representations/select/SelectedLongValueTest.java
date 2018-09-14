@@ -21,7 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package uy.kerri.representations.select;
+
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.junit.MatcherAssert;
+import org.junit.Test;
+import uy.kerri.representations.ArrayOfFields;
+import uy.kerri.representations.LabelledValue;
+
 /**
- * Unit tests for classes in {@link uy.kerri.representations.fake}.
+ * Tests for {@link uy.kerri.representations.select.SelectedLongValue}.
+ *
+ * @since 1.3
  */
-package uy.kerri.representations.fake;
+public final class SelectedLongValueTest {
+    /**
+     * SelectedLongValue allows to select a long.
+     *
+     * @throws Exception if something goes wrong.
+     */
+    @Test
+    public void selectsALong() throws Exception {
+        final String field = "Long";
+        final Long value = 20L;
+        MatcherAssert.assertThat(
+            "A long value wasn't selected.",
+            new SelectedLongValue(
+                new ArrayOfFields(
+                    new LabelledValue(field, value)
+                ),
+                new SelectedOutput(field)
+            ).value(),
+            CoreMatchers.equalTo(value)
+        );
+    }
+}

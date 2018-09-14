@@ -22,6 +22,6 @@
  * SOFTWARE.
  */
 /**
- * Unit tests for classes in {@link uy.kerri.representations.fake}.
+ * Classes for formatting represented data in multiple data formats.
  */
-package uy.kerri.representations.fake;
+package uy.kerri.representations.format;

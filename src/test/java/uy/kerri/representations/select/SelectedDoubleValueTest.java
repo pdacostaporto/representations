@@ -21,7 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package uy.kerri.representations.select;
+
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.junit.MatcherAssert;
+import org.junit.Test;
+import uy.kerri.representations.ArrayOfFields;
+import uy.kerri.representations.LabelledValue;
+
 /**
- * Unit tests for classes in {@link uy.kerri.representations.fake}.
+ * Tests for {@link uy.kerri.representations.select.SelectedDoubleValue}.
+ *
+ * @since 2.0
  */
-package uy.kerri.representations.fake;
+public final class SelectedDoubleValueTest {
+    /**
+     * SelectedDoubleValue allows to select a double.
+     *
+     * @throws Exception if something goes wrong.
+     */
+    @Test
+    public void selectsADouble() throws Exception {
+        final String field = "Double";
+        final Double value = 1.2;
+        MatcherAssert.assertThat(
+            "A double value wasn't selected.",
+            new SelectedDoubleValue(
+                new ArrayOfFields(
+                    new LabelledValue(field, value)
+                ),
+                new SelectedOutput(field)
+            ).value(),
+            CoreMatchers.equalTo(value)
+        );
+    }
+}

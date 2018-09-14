@@ -27,7 +27,7 @@ import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 import uy.kerri.representations.Values;
 import uy.kerri.representations.fake.FakeOutput;
-import uy.kerri.representations.impl.ContainedValuesTest;
+import uy.kerri.representations.test.ContainedValuesTest;
 
 /**
  * Hamcrest matcher to match a group of values contained on another.

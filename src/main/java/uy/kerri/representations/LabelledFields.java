@@ -21,7 +21,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package uy.kerri.representations;
+
 /**
- * Unit tests for classes in {@link uy.kerri.representations.fake}.
+ * A label-value pair with a set of nested fields as value.
+ *
+ * @since 2.0
  */
-package uy.kerri.representations.fake;
+public class LabelledFields implements Field, Value {
+    /**
+     * The label.
+     */
+    private final String label;
+
+    /**
+     * The value.
+     */
+    private final Fields value;
+
+    /**
+     * Constructs a pair with given label and value.
+     *
+     * @param name The label for this pair.
+     * @param val The nested fields for this pair.
+     */
+    public LabelledFields(final String name, final Fields val) {
+        this.label = name;
+        this.value = val;
+    }
+
+    @Override
+    public final Output printTo(final Output output) throws Exception {
+        return output.print(this.label, this.value);
+    }
+}

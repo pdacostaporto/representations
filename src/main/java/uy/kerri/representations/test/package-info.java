@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 /**
- * Unit tests for classes in {@link uy.kerri.representations.fake}.
+ * Tests over {@link uy.kerri.representations.Representation}s for certain
+ *  conditions.
  */
-package uy.kerri.representations.fake;
+package uy.kerri.representations.test;

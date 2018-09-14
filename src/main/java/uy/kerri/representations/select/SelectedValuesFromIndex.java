@@ -21,7 +21,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package uy.kerri.representations.select;
+
+import uy.kerri.representations.Output;
+import uy.kerri.representations.Values;
+
 /**
- * Unit tests for classes in {@link uy.kerri.representations.fake}.
+ * A sequence of values selected from another sequence of values.
+ *
+ * @since 1.3
  */
-package uy.kerri.representations.fake;
+public final class SelectedValuesFromIndex implements Values {
+    /**
+     * The index of the value to be selected.
+     */
+    private final Integer index;
+
+    /**
+     * The sequence of values where the value will be selected from.
+     */
+    private final Values container;
+
+    /**
+     * Constructs a sequence of values selected from another sequence of values.
+     *
+     * @param idx The index of the value to be selected.
+     * @param values The sequence of values where the index will be selected
+     *  from.
+     */
+    public SelectedValuesFromIndex(final Integer idx, final Values values) {
+        this.index = idx;
+        this.container = values;
+    }
+
+    @Override
+    public Output printTo(final Output output) throws Exception {
+        return this.container.printTo(new SelectedOutput(this.index, output));
+    }
+}

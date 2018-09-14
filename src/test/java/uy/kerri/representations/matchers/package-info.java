@@ -22,6 +22,6 @@
  * SOFTWARE.
  */
 /**
- * Tests for classes in {@link uy.kerri.representations.matchers}.
+ * Unit tests for classes in {@link uy.kerri.representations.matchers}.
  */
-package uy.kerri.representations.test.impl;
+package uy.kerri.representations.matchers;

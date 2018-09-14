@@ -21,7 +21,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+package uy.kerri.representations.test;
+
+import uy.kerri.representations.Values;
+
 /**
- * Unit tests for classes in {@link uy.kerri.representations.fake}.
+ * A {@link uy.kerri.representations.Test} to verify that the values from a
+ *  sequence are contained into another.
+ *
+ * @since 1.3
  */
-package uy.kerri.representations.fake;
+public final class ContainedValuesTest implements Test {
+    /**
+     * The sequence that should contain the values.
+     */
+    private final Values container;
+
+    /**
+     * The values to be matched.
+     */
+    private final Values contained;
+
+    /**
+     * Constructs a test to verify that the values from a sequence are contained
+     *  into another.
+     *
+     * @param first The sequence that should contain the values.
+     * @param second The values to be matched.
+     */
+    public ContainedValuesTest(final Values first, final Values second) {
+        this.container = first;
+        this.contained = second;
+    }
+
+    @Override
+    public Boolean passes() throws Exception {
+        return Boolean.valueOf(
+            this.contained.printTo(new ContainedValuesOutput(this.container))
+            .show()
+        );
+    }
+}

@@ -21,7 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package uy.kerri.representations;
+
+import java.util.Arrays;
+
 /**
- * Unit tests for classes in {@link uy.kerri.representations.fake}.
+ * Concatenated sequences of {@link uy.kerri.representations.Value}s.
+ *
+ * @since 2.0
  */
-package uy.kerri.representations.fake;
+public class ConcatenatedValues implements Values {
+    /**
+     * Values to concatenate.
+     */
+    private final Values[] array;
+
+    /**
+     * Constructs a concatenation of given sequences of values.
+     *
+     * @param values An array of values to join.
+     */
+    public ConcatenatedValues(final Values... values) {
+        this.array = Arrays.copyOf(values, values.length);
+    }
+
+    @Override
+    public final Output printTo(final Output output) throws Exception {
+        Output printed = output;
+        for (final Values values : this.array) {
+            printed = values.printTo(printed);
+        }
+        return printed;
+    }
+}

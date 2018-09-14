@@ -21,7 +21,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package uy.kerri.representations.select;
+
+import uy.kerri.representations.Output;
+import uy.kerri.representations.Representation;
+
 /**
- * Unit tests for classes in {@link uy.kerri.representations.fake}.
+ * A string value selected from a
+ *  {@link uy.kerri.representations.Representation}.
+ *
+ * @since 1.3
  */
-package uy.kerri.representations.fake;
+public final class SelectedStringValue
+    implements SelectedValue<java.lang.String> {
+    /**
+     * The representation where the value will be selected from.
+     */
+    private final Representation origin;
+
+    /**
+     * The output that selects the value.
+     */
+    private final Output selection;
+
+    /**
+     * Constructs a value selected from representation by an output.
+     *
+     * @param representation The representation where the value will be selected
+     *  from.
+     * @param output The output that selects the value from the representation.
+     */
+    public SelectedStringValue(
+        final Representation representation,
+        final Output output
+    ) {
+        this.origin = representation;
+        this.selection = output;
+    }
+
+    @Override
+    public java.lang.String value() throws Exception {
+        return this.origin.printTo(this.selection).show();
+    }
+}

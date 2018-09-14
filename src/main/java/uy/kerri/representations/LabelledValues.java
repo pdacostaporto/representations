@@ -21,7 +21,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package uy.kerri.representations;
+
 /**
- * Unit tests for classes in {@link uy.kerri.representations.fake}.
+ * A label-value pair with multiple values.
+ *
+ * @since 2.0
  */
-package uy.kerri.representations.fake;
+public class LabelledValues implements Field, Value {
+    /**
+     * The label.
+     */
+    private final String label;
+
+    /**
+     * The values.
+     */
+    private final Values values;
+
+    /**
+     * Constructs a pair with given label and values.
+     *
+     * @param name The label for this pair.
+     * @param vals The values for this pair.
+     */
+    public LabelledValues(final String name, final Values vals) {
+        this.label = name;
+        this.values = vals;
+    }
+
+    @Override
+    public final Output printTo(final Output output) throws Exception {
+        return output.print(this.label, this.values);
+    }
+}

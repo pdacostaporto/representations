@@ -21,7 +21,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package uy.kerri.representations.test;
+
+import uy.kerri.representations.Value;
+
 /**
- * Unit tests for classes in {@link uy.kerri.representations.fake}.
+ * A {@link uy.kerri.representations.test.Test} to verify that two values match.
+ *
+ * @since 1.3
  */
-package uy.kerri.representations.fake;
+public final class MatchingValueTest implements Test {
+    /**
+     * The expected value.
+     */
+    private final Value expected;
+
+    /**
+     * The actual value.
+     */
+    private final Value actual;
+
+    /**
+     * Constructs a test to verify that to values match.
+     *
+     * @param some The expected value.
+     * @param other The actual value.
+     */
+    public MatchingValueTest(final Value some, final Value other) {
+        this.expected = some;
+        this.actual = other;
+    }
+
+    @Override
+    public Boolean passes() throws Exception {
+        return Boolean.valueOf(
+            this.actual.printTo(
+                this.expected.printTo(new PairMatchingOutput())
+            ).show()
+        );
+    }
+}
