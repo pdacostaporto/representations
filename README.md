@@ -142,6 +142,10 @@ MatcherAssert.assertThat(
 ```
 Check the `RepresentationMatchers` class to see available matchers.
 
+## API documentation
+
+You can read the documentation [here](https://javadoc.io/doc/uy.kerri.representations/representations).
+
 ## Installation
 
 Add it as a dependency on your `pom.xml`, replacing `{$representations.version}` with the desired version.
