@@ -45,7 +45,7 @@ final class LabelledFields implements Field, Value {
      * @param name The label for this pair.
      * @param val The nested fields for this pair.
      */
-    public LabelledFields(final String name, final Fields val) {
+    LabelledFields(final String name, final Fields val) {
         this.label = name;
         this.value = val;
     }

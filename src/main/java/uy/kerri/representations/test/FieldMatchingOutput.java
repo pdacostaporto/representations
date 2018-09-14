@@ -65,7 +65,7 @@ final class FieldMatchingOutput implements Output {
      *
      * @param field The field to be matched.
      */
-    public FieldMatchingOutput(final Field field) {
+    FieldMatchingOutput(final Field field) {
         this(field, false);
     }
 

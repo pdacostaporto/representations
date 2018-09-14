@@ -46,7 +46,7 @@ final class ContainsValues extends TypeSafeMatcher<Values> {
      *
      * @param contained The contained group.
      */
-    public ContainsValues(final Values contained) {
+    ContainsValues(final Values contained) {
         super();
         this.contained = contained;
     }

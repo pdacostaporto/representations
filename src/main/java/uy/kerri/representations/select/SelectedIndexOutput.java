@@ -52,7 +52,7 @@ final class SelectedIndexOutput implements Output {
      * @param idx The index of the value to be selected.
      * @param output The output where the selected value will be printed.
      */
-    public SelectedIndexOutput(final Integer idx, final Output output) {
+    SelectedIndexOutput(final Integer idx, final Output output) {
         this.index = idx;
         this.nested = output;
     }
@@ -62,7 +62,7 @@ final class SelectedIndexOutput implements Output {
      *
      * @param idx The index of the value to be selected.
      */
-    public SelectedIndexOutput(final Integer idx) {
+    SelectedIndexOutput(final Integer idx) {
         this(idx, new SelectedValueOutput());
     }
 

@@ -45,7 +45,7 @@ final class LabelledInteger implements Field, Value {
      * @param name The label for this pair.
      * @param val The value for this pair.
      */
-    public LabelledInteger(final String name, final Integer val) {
+    LabelledInteger(final String name, final Integer val) {
         this.label = name;
         this.value = val;
     }

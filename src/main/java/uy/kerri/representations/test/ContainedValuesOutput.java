@@ -72,7 +72,7 @@ final class ContainedValuesOutput implements Output {
      *
      * @param values The sequence of values to be matched.
      */
-    public ContainedValuesOutput(final Values values) {
+    ContainedValuesOutput(final Values values) {
         this(values, new ArrayList<Integer>(0));
     }
 

@@ -74,7 +74,7 @@ final class CompositePairMatchingOutput implements Output {
      * @param key The label.
      * @param value The single value to match.
      */
-    public CompositePairMatchingOutput(final String key, final Fields value) {
+    CompositePairMatchingOutput(final String key, final Fields value) {
         this(key, value, false);
     }
 

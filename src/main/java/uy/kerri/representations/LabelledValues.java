@@ -45,7 +45,7 @@ final class LabelledValues implements Field, Value {
      * @param name The label for this pair.
      * @param vals The values for this pair.
      */
-    public LabelledValues(final String name, final Values vals) {
+    LabelledValues(final String name, final Values vals) {
         this.label = name;
         this.values = vals;
     }

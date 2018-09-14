@@ -45,7 +45,7 @@ final class LabelledDouble implements Field, Value {
      * @param name The label for this pair.
      * @param val The value for this pair.
      */
-    public LabelledDouble(final String name, final Double val) {
+    LabelledDouble(final String name, final Double val) {
         this.label = name;
         this.value = val;
     }

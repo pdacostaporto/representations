@@ -53,7 +53,7 @@ final class FilteringOutput implements Output {
      * @param names The names of the fields allowed.
      * @param output The output where the fields will be printed.
      */
-    public FilteringOutput(final List<String> names, final Output output) {
+    FilteringOutput(final List<String> names, final Output output) {
         this.fields = names;
         this.nested = output;
     }

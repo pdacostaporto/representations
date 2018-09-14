@@ -66,7 +66,7 @@ final class SelectedLabelMatchingOutput implements Output {
      *
      * @param label The expected label.
      */
-    public SelectedLabelMatchingOutput(final String label) {
+    SelectedLabelMatchingOutput(final String label) {
         this(label, false);
     }
 

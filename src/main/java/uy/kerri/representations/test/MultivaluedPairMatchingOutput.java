@@ -59,7 +59,7 @@ final class MultivaluedPairMatchingOutput implements Output {
      * @param values The sequence of values to match.
      * @param status Whether the last printed pair matched or not.
      */
-    private MultivaluedPairMatchingOutput(
+    MultivaluedPairMatchingOutput(
         final String key, final Values values, final Boolean status
     ) {
         this.label = key;
@@ -74,9 +74,7 @@ final class MultivaluedPairMatchingOutput implements Output {
      * @param key The label.
      * @param values The sequence of values to match.
      */
-    public MultivaluedPairMatchingOutput(
-        final String key, final Values values
-    ) {
+    MultivaluedPairMatchingOutput(final String key, final Values values) {
         this(key, values, false);
     }
 

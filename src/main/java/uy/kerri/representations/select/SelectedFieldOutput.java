@@ -25,8 +25,8 @@ package uy.kerri.representations.select;
 
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
-import uy.kerri.representations.Values;
 import uy.kerri.representations.RepresentationsException;
+import uy.kerri.representations.Values;
 
 /**
  * An {@link uy.kerri.representations.Output} that selects the value of a field.
@@ -51,7 +51,7 @@ final class SelectedFieldOutput implements Output {
      * @param name The name of the field to be selected.
      * @param output The output to print the field on.
      */
-    public SelectedFieldOutput(final String name, final Output output) {
+    SelectedFieldOutput(final String name, final Output output) {
         this.field = name;
         this.nested = output;
     }
@@ -61,7 +61,7 @@ final class SelectedFieldOutput implements Output {
      *
      * @param name The name of the field to be selected.
      */
-    public SelectedFieldOutput(final String name) {
+    SelectedFieldOutput(final String name) {
         this(name, new SelectedValueOutput());
     }
 

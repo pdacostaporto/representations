@@ -56,7 +56,7 @@ final class FieldsMatchingOutput implements Output {
      * @param matches A map of already printed fields to whether they matched or
      *  not.
      */
-    public FieldsMatchingOutput(
+    FieldsMatchingOutput(
         final Fields fields, final Map<String, Boolean> matches
     ) {
         this.actual = fields;
@@ -70,7 +70,7 @@ final class FieldsMatchingOutput implements Output {
      * @param fields The group of fields to match the printed fields to.
      *  not.
      */
-    public FieldsMatchingOutput(final Fields fields) {
+    FieldsMatchingOutput(final Fields fields) {
         this(fields, new HashMap<String, Boolean>());
     }
 

@@ -45,7 +45,7 @@ final class LabelledBoolean implements Field, Value {
      * @param name The label for this pair.
      * @param val The value for this pair.
      */
-    public LabelledBoolean(final String name, final Boolean val) {
+    LabelledBoolean(final String name, final Boolean val) {
         this.label = name;
         this.value = val;
     }

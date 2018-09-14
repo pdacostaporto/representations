@@ -47,7 +47,7 @@ final class EqualToValues extends TypeSafeMatcher<Values> {
      *
      * @param expected The expected sequence.
      */
-    public EqualToValues(final Values expected) {
+    EqualToValues(final Values expected) {
         super();
         this.expected = expected;
     }
@@ -58,7 +58,7 @@ final class EqualToValues extends TypeSafeMatcher<Values> {
             description.appendValue(
                 this.expected.printTo(new FakeOutput()).show()
             );
-        } catch (final Exception exception) {
+        } catch (final RepresentationsException exception) {
             throw new IllegalArgumentException(exception);
         }
     }
@@ -71,7 +71,7 @@ final class EqualToValues extends TypeSafeMatcher<Values> {
             description.appendText("the actual was ").appendValue(
                 actual.printTo(new FakeOutput()).show()
             );
-        } catch (final Exception exception) {
+        } catch (final RepresentationsException exception) {
             throw new IllegalArgumentException(exception);
         }
     }
@@ -80,7 +80,7 @@ final class EqualToValues extends TypeSafeMatcher<Values> {
     protected boolean matchesSafely(final Values actual) {
         try {
             return new MatchingValuesTest(this.expected, actual).passes();
-        } catch (final Exception exception) {
+        } catch (final RepresentationsException exception) {
             throw new IllegalArgumentException(exception);
         }
     }

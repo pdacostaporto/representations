@@ -51,7 +51,7 @@ final class SelectedValuesFromField implements Values {
      *  selected.
      * @param fields The set of fields where the field will be selected from.
      */
-    public SelectedValuesFromField(final String name, final Fields fields) {
+    SelectedValuesFromField(final String name, final Fields fields) {
         this.field = name;
         this.container = fields;
     }

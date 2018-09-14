@@ -62,10 +62,8 @@ final class IndexMatchingOutput implements Output {
      * @param value The value to be matched.
      * @param position The index of the next value to be printed.
      */
-    private IndexMatchingOutput(
-        final Integer idx,
-        final Value value,
-        final Integer position
+    IndexMatchingOutput(
+        final Integer idx, final Value value, final Integer position
     ) {
         this.index = idx;
         this.expected = value;
@@ -79,7 +77,7 @@ final class IndexMatchingOutput implements Output {
      * @param idx The index where the value is to be matched.
      * @param value The value to be matched.
      */
-    public IndexMatchingOutput(final Integer idx, final Value value) {
+    IndexMatchingOutput(final Integer idx, final Value value) {
         this(idx, value, 1);
     }
 

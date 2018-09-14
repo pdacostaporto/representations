@@ -81,7 +81,7 @@ final class SubsequenceMatchingOutput implements Output {
      *  be matched.
      * @param values The sequence.
      */
-    public SubsequenceMatchingOutput(final Integer index, final Values values) {
+    SubsequenceMatchingOutput(final Integer index, final Values values) {
         this(index, values, true);
     }
 

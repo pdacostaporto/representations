@@ -47,7 +47,7 @@ final class EqualToFields extends TypeSafeMatcher<Fields> {
      *
      * @param expected The expected set.
      */
-    public EqualToFields(final Fields expected) {
+    EqualToFields(final Fields expected) {
         super();
         this.expected = expected;
     }

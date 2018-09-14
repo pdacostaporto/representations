@@ -51,7 +51,7 @@ final class SelectedFieldsFromIndex implements Fields {
      * @param values The sequence of values where the set of fields will be
      *  selected from.
      */
-    public SelectedFieldsFromIndex(final Integer idx, final Values values) {
+    SelectedFieldsFromIndex(final Integer idx, final Values values) {
         this.index = idx;
         this.container = values;
     }

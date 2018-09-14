@@ -25,7 +25,6 @@ package uy.kerri.representations.test;
 
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
-import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Values;
 
 /**
@@ -54,7 +53,7 @@ final class CountingOutput implements Output {
      * Constructs an output that counts the number of pairs that were printed on
      *  it.
      */
-    public CountingOutput() {
+    CountingOutput() {
         this(0);
     }
 

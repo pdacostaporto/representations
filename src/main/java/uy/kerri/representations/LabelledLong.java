@@ -45,7 +45,7 @@ final class LabelledLong implements Field, Value {
      * @param name The label for this pair.
      * @param val The value for this pair.
      */
-    public LabelledLong(final String name, final Long val) {
+    LabelledLong(final String name, final Long val) {
         this.label = name;
         this.value = val;
     }

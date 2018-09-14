@@ -50,7 +50,7 @@ final class SelectedValuesFromIndex implements Values {
      * @param values The sequence of values where the index will be selected
      *  from.
      */
-    public SelectedValuesFromIndex(final Integer idx, final Values values) {
+    SelectedValuesFromIndex(final Integer idx, final Values values) {
         this.index = idx;
         this.container = values;
     }

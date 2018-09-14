@@ -64,7 +64,7 @@ final class ContainedValueOutput implements Output {
      * @param value The value to be matched.
      * @param exclude A list of indexes to be excluded from matching.
      */
-    private ContainedValueOutput(
+    ContainedValueOutput(
         final Integer index,
         final Value value,
         final List<Integer> exclude
@@ -82,9 +82,7 @@ final class ContainedValueOutput implements Output {
      * @param value The value to be matched.
      * @param exclude A list of indexes to be excluded from matching.
      */
-    public ContainedValueOutput(
-        final Value value, final List<Integer> exclude
-    ) {
+    ContainedValueOutput(final Value value, final List<Integer> exclude) {
         this(1, value, exclude);
     }
 
@@ -94,7 +92,7 @@ final class ContainedValueOutput implements Output {
      *
      * @param value The value to be matched.
      */
-    public ContainedValueOutput(final Value value) {
+    ContainedValueOutput(final Value value) {
         this(value, new ArrayList<Integer>(0));
     }
 

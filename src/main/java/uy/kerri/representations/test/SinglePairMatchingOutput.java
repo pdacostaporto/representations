@@ -73,7 +73,7 @@ final class SinglePairMatchingOutput implements Output {
      * @param key The label.
      * @param value The single value to match.
      */
-    public SinglePairMatchingOutput(final String key, final Object value) {
+    SinglePairMatchingOutput(final String key, final Object value) {
         this(key, value, false);
     }
 

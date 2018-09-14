@@ -49,7 +49,7 @@ final class EqualToValuesInAnyOrder extends TypeSafeMatcher<Values> {
      *
      * @param expected The expected sequence.
      */
-    public EqualToValuesInAnyOrder(final Values expected) {
+    EqualToValuesInAnyOrder(final Values expected) {
         super();
         this.expected = expected;
     }

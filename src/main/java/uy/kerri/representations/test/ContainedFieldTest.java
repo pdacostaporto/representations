@@ -25,8 +25,8 @@ package uy.kerri.representations.test;
 
 import uy.kerri.representations.Field;
 import uy.kerri.representations.Fields;
-import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Output;
+import uy.kerri.representations.RepresentationsException;
 
 /**
  * A {@link uy.kerri.representations.test.Test} to verify that a field is
@@ -62,7 +62,7 @@ public final class ContainedFieldTest implements Test {
      * @param field The field to be tested.
      * @param actual The group of fields where the field should be contained.
      */
-    public ContainedFieldTest(final Field field, final Fields actual) {
+    ContainedFieldTest(final Field field, final Fields actual) {
         this(new FieldMatchingOutput(field), actual);
     }
 
