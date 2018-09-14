@@ -34,58 +34,58 @@ import uy.kerri.representations.Values;
  *
  * @since 2.0
  */
-public class PairMatchingOutput implements Output {
+final class PairMatchingOutput implements Output {
     @Override
-    public final String show() throws PairNotMatchedException {
+    public String show() throws PairNotMatchedException {
         throw new PairNotMatchedException(
             "Tried to show the result of matching without matching anything."
         );
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final String value
     ) throws RepresentationsException {
         return new SinglePairMatchingOutput(key, value);
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Integer value
     ) throws RepresentationsException {
         return new SinglePairMatchingOutput(key, value);
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Boolean value
     ) throws RepresentationsException {
         return new SinglePairMatchingOutput(key, value);
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Double value
     ) throws RepresentationsException {
         return new SinglePairMatchingOutput(key, value);
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Long value
     ) throws RepresentationsException {
         return new SinglePairMatchingOutput(key, value);
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Fields value
     ) throws RepresentationsException {
         return new CompositePairMatchingOutput(key, value);
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Values values
     ) throws RepresentationsException {
         return new MultivaluedPairMatchingOutput(key, values);

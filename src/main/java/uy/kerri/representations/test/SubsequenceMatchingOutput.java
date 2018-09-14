@@ -36,7 +36,7 @@ import uy.kerri.representations.Values;
  *
  * @since 2.0
  */
-public final class SubsequenceMatchingOutput implements Output {
+final class SubsequenceMatchingOutput implements Output {
     /**
      * The index in the containing sequence corresponding to the next value to
      *  be printed.

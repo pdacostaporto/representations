@@ -34,7 +34,7 @@ import uy.kerri.representations.Values;
  *
  * @since 2.0
  */
-public class SelectedIndexOutput implements Output {
+final class SelectedIndexOutput implements Output {
     /**
      * Place of the selected value in the sequence.
      */
@@ -67,54 +67,54 @@ public class SelectedIndexOutput implements Output {
     }
 
     @Override
-    public final String show() throws RepresentationsException {
+    public String show() throws RepresentationsException {
         return this.nested.show();
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final String value
     ) throws RepresentationsException {
         return this.select(this.nested.print(key, value));
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Integer value
     ) throws RepresentationsException {
         return this.select(this.nested.print(key, value));
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Boolean value
     ) throws RepresentationsException {
         return this.select(this.nested.print(key, value));
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Double value
     ) throws RepresentationsException {
         return this.select(this.nested.print(key, value));
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Long value
     ) throws RepresentationsException {
         return this.select(this.nested.print(key, value));
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Fields value
     ) throws RepresentationsException {
         return this.select(value.printTo(this.nested));
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Values values
     ) throws RepresentationsException {
         return this.select(values.printTo(this.nested));

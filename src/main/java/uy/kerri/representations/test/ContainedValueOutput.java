@@ -39,7 +39,7 @@ import uy.kerri.representations.Values;
  *
  * @since 2.0
  */
-public final class ContainedValueOutput implements Output {
+final class ContainedValueOutput implements Output {
     /**
      * The index of the current value to be printed.
      */

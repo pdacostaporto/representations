@@ -34,7 +34,7 @@ import uy.kerri.representations.Values;
  *
  * @since 2.0
  */
-public final class CountingOutput implements Output {
+final class CountingOutput implements Output {
     /**
      * The count of pairs printed so far.
      */

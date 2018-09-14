@@ -35,7 +35,7 @@ import uy.kerri.representations.test.ContainedValuesTest;
  *
  * @since 2.0
  */
-public final class ContainsValues extends TypeSafeMatcher<Values> {
+final class ContainsValues extends TypeSafeMatcher<Values> {
     /**
      * The containing group of values.
      */

@@ -33,7 +33,7 @@ import uy.kerri.representations.Values;
  *
  * @since 2.0
  */
-public final class SelectedFieldsFromIndex implements Fields {
+final class SelectedFieldsFromIndex implements Fields {
     /**
      * The index of the value to be selected.
      */

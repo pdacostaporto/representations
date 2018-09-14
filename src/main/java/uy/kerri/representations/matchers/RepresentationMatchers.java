@@ -23,6 +23,7 @@
  */
 package uy.kerri.representations.matchers;
 
+import org.hamcrest.Matcher;
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Values;
 
@@ -45,7 +46,7 @@ public final class RepresentationMatchers {
      * @param expected The expected sequence of values.
      * @return A matcher to test the equality to the expected sequence.
      */
-    public static EqualToValues equalTo(final Values expected) {
+    public static Matcher<Values> equalTo(final Values expected) {
         return new EqualToValues(expected);
     }
 
@@ -57,7 +58,7 @@ public final class RepresentationMatchers {
      * @return A matcher to test the equality to the expected sequence
      *  disregarding the order of the values.
      */
-    public static EqualToValuesInAnyOrder equalToInAnyOrder(
+    public static Matcher<Values> equalToInAnyOrder(
         final Values expected
     ) {
         return new EqualToValuesInAnyOrder(expected);
@@ -70,7 +71,7 @@ public final class RepresentationMatchers {
      * @return A matcher to test that a group of values is contained on the
      *  expected group of values.
      */
-    public static ContainsValues contains(
+    public static Matcher<Values> contains(
         final Values expected
     ) {
         return new ContainsValues(expected);
@@ -82,7 +83,7 @@ public final class RepresentationMatchers {
      * @param expected The expected set of fields.
      * @return A matcher to test the equality to the expected set of fields.
      */
-    public static EqualToFields equalTo(final Fields expected) {
+    public static Matcher<Fields> equalTo(final Fields expected) {
         return new EqualToFields(expected);
     }
 }

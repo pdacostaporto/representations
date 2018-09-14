@@ -33,7 +33,7 @@ import uy.kerri.representations.RepresentationsException;
  *
  * @since 2.0
  */
-public class SelectedFieldOutput implements Output {
+final class SelectedFieldOutput implements Output {
     /**
      * The field to be selected.
      */
@@ -66,47 +66,47 @@ public class SelectedFieldOutput implements Output {
     }
 
     @Override
-    public final String show() throws RepresentationsException {
+    public String show() throws RepresentationsException {
         return this.nested.show();
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final String value
     ) throws RepresentationsException {
         return this.select(key, this.nested.print(key, value));
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Integer value
     ) throws RepresentationsException {
         return this.select(key, this.nested.print(key, value));
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Boolean value
     ) throws RepresentationsException {
         return this.select(key, this.nested.print(key, value));
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Double value
     ) throws RepresentationsException {
         return this.select(key, this.nested.print(key, value));
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Long value
     ) throws RepresentationsException {
         return this.select(key, this.nested.print(key, value));
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key,
         final Fields value
     ) throws RepresentationsException {
@@ -114,7 +114,7 @@ public class SelectedFieldOutput implements Output {
     }
 
     @Override
-    public final Output print(
+    public Output print(
         final String key, final Values values
     ) throws RepresentationsException {
         return this.select(key, values.printTo(this.nested));

@@ -34,7 +34,7 @@ import uy.kerri.representations.Values;
  *
  * @since 2.0
  */
-public final class SinglePairMatchingOutput implements Output {
+final class SinglePairMatchingOutput implements Output {
     /**
      * The label of the pair.
      */

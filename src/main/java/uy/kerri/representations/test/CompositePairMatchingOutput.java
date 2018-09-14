@@ -35,7 +35,7 @@ import uy.kerri.representations.Values;
  *
  * @since 2.0
  */
-public final class CompositePairMatchingOutput implements Output {
+final class CompositePairMatchingOutput implements Output {
     /**
      * The label of the pair.
      */

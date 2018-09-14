@@ -33,7 +33,7 @@ import uy.kerri.representations.Values;
  *
  * @since 2.0
  */
-public final class SelectedValuesFromField implements Values {
+final class SelectedValuesFromField implements Values {
     /**
      * The name of the field to be selected.
      */

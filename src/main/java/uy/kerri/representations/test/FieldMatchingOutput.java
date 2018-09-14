@@ -36,7 +36,7 @@ import uy.kerri.representations.Values;
  *
  * @since 2.0
  */
-public final class FieldMatchingOutput implements Output {
+final class FieldMatchingOutput implements Output {
     /**
      * The expected field.
      */

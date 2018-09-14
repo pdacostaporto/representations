@@ -34,7 +34,7 @@ import uy.kerri.representations.Values;
  *
  * @since 2.0
  */
-public final class LabelMatchingOutput implements Output {
+final class LabelMatchingOutput implements Output {
     @Override
     public String show() throws LabelNotMatchedException {
         throw new LabelNotMatchedException(

@@ -33,9 +33,9 @@ import uy.kerri.representations.Values;
  * An {@link uy.kerri.representations.Output} that only allows certain fields
  *  to be printed on a nested output.
  *
- * @since 1.3
+ * @since 2.0
  */
-public final class FilteringOutput implements Output {
+final class FilteringOutput implements Output {
     /**
      * The fields to be allowed.
      */

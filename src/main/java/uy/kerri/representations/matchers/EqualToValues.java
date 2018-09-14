@@ -35,7 +35,7 @@ import uy.kerri.representations.test.MatchingValuesTest;
  *
  * @since 2.0
  */
-public final class EqualToValues extends TypeSafeMatcher<Values> {
+final class EqualToValues extends TypeSafeMatcher<Values> {
     /**
      * The expected sequence of values.
      */

@@ -32,7 +32,7 @@ import uy.kerri.representations.Values;
  *
  * @since 2.0
  */
-public final class SelectedValuesFromIndex implements Values {
+final class SelectedValuesFromIndex implements Values {
     /**
      * The index of the value to be selected.
      */

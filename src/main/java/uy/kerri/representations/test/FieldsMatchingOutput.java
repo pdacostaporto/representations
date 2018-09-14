@@ -37,7 +37,7 @@ import uy.kerri.representations.Values;
  *
  * @since 2.0
  */
-public final class FieldsMatchingOutput implements Output {
+final class FieldsMatchingOutput implements Output {
     /**
      * The group of fields to match the printed fields to.
      */

@@ -32,7 +32,7 @@ import uy.kerri.representations.RepresentationsException;
  *
  * @since 2.0
  */
-public final class SelectedFieldsFromField implements Fields {
+final class SelectedFieldsFromField implements Fields {
     /**
      * The name of the field to be selected.
      */

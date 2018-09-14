@@ -28,7 +28,7 @@ package uy.kerri.representations;
  *
  * @since 2.0
  */
-public class LabelledDouble implements Field, Value {
+final class LabelledDouble implements Field, Value {
     /**
      * The label.
      */
@@ -51,9 +51,7 @@ public class LabelledDouble implements Field, Value {
     }
 
     @Override
-    public final Output printTo(
-        final Output output
-    ) throws RepresentationsException {
+    public Output printTo(final Output output) throws RepresentationsException {
         return output.print(this.label, this.value);
     }
 }

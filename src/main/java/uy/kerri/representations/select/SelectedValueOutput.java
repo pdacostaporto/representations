@@ -34,44 +34,44 @@ import uy.kerri.representations.Values;
  *
  * @since 2.0
  */
-public class SelectedValueOutput implements Output {
+final class SelectedValueOutput implements Output {
     @Override
-    public final String show() throws ValueNotSelectedException {
+    public String show() throws ValueNotSelectedException {
         throw new ValueNotSelectedException("The value wasn't selected yet.");
     }
 
     @Override
-    public final Output print(final String key, final String value) {
+    public Output print(final String key, final String value) {
         return this.select(value);
     }
 
     @Override
-    public final Output print(final String key, final Integer value) {
+    public Output print(final String key, final Integer value) {
         return this.select(value);
     }
 
     @Override
-    public final Output print(final String key, final Boolean value) {
+    public Output print(final String key, final Boolean value) {
         return this.select(value);
     }
 
     @Override
-    public final Output print(final String key, final Double value) {
+    public Output print(final String key, final Double value) {
         return this.select(value);
     }
 
     @Override
-    public final Output print(final String key, final Long value) {
+    public Output print(final String key, final Long value) {
         return this.select(value);
     }
 
     @Override
-    public final Output print(final String key, final Fields value) {
+    public Output print(final String key, final Fields value) {
         return this.select(value);
     }
 
     @Override
-    public final Output print(final String key, final Values values) {
+    public Output print(final String key, final Values values) {
         return this.select(values);
     }
 

@@ -35,7 +35,7 @@ import uy.kerri.representations.test.MatchingFieldsTest;
  *
  * @since 2.0
  */
-public final class EqualToFields extends TypeSafeMatcher<Fields> {
+final class EqualToFields extends TypeSafeMatcher<Fields> {
     /**
      * The expected set of fields.
      */

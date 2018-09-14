@@ -34,7 +34,7 @@ import uy.kerri.representations.Values;
  *
  * @since 2.0
  */
-public final class SelectedLabelMatchingOutput implements Output {
+final class SelectedLabelMatchingOutput implements Output {
     /**
      * The expected label.
      */

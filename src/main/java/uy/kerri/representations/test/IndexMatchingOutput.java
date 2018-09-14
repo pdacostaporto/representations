@@ -37,7 +37,7 @@ import uy.kerri.representations.Values;
  *
  * @since 2.0
  */
-public final class IndexMatchingOutput implements Output {
+final class IndexMatchingOutput implements Output {
     /**
      * The index where the value is to be matched.
      */

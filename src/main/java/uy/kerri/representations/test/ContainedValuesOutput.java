@@ -38,7 +38,7 @@ import uy.kerri.representations.Values;
  *
  * @since 2.0
  */
-public final class ContainedValuesOutput implements Output {
+final class ContainedValuesOutput implements Output {
     /**
      * The sequence of values to be matched.
      */

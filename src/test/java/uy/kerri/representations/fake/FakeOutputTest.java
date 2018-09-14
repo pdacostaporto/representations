@@ -30,7 +30,7 @@ import org.hamcrest.junit.MatcherAssert;
 import org.junit.Test;
 import uy.kerri.representations.ArrayOfFields;
 import uy.kerri.representations.ArrayOfValues;
-import uy.kerri.representations.LabelledString;
+import uy.kerri.representations.LabelledValue;
 
 /**
  * Tests for {@link uy.kerri.representations.fake.FakeOutput}.
@@ -73,7 +73,7 @@ public class FakeOutputTest {
      * @throws Exception if anything goes wrong.
      */
     @Test
-    public final void printsLabelledString() throws Exception {
+    public final void printsLabelledValue() throws Exception {
         final String preformat = "place:String:Facultad de Ingeniería, UdelaR";
         final String address = "Julio Herrera y Reissig s/n";
         MatcherAssert.assertThat(
@@ -197,10 +197,10 @@ public class FakeOutputTest {
     public final void printsNestedField() throws Exception {
         final String preformat = "band:String:Hole";
         final ArrayOfFields lineup = new ArrayOfFields(
-            new LabelledString("vocals", "Courtney Love"),
-            new LabelledString("guitar", "Eric Erlandson"),
-            new LabelledString("bass", "Melissa Auf der Maur"),
-            new LabelledString("drums", "Patty Schemel")
+            new LabelledValue("vocals", "Courtney Love"),
+            new LabelledValue("guitar", "Eric Erlandson"),
+            new LabelledValue("bass", "Melissa Auf der Maur"),
+            new LabelledValue("drums", "Patty Schemel")
         );
         MatcherAssert.assertThat(
             "Nested fields aren't being printed correctly.",
@@ -237,12 +237,12 @@ public class FakeOutputTest {
         final String preformat = "artist:String:Silver Jews";
         final String label = "album";
         final ArrayOfValues albums = new ArrayOfValues(
-            new LabelledString(label, "Starlite Walker"),
-            new LabelledString(label, "The Natural Bridge"),
-            new LabelledString(label, "American Water"),
-            new LabelledString(label, "Bright Flight"),
-            new LabelledString(label, "Tanglewood Numbers"),
-            new LabelledString(label, "Lookout Mountain, Lookout Sea")
+            new LabelledValue(label, "Starlite Walker"),
+            new LabelledValue(label, "The Natural Bridge"),
+            new LabelledValue(label, "American Water"),
+            new LabelledValue(label, "Bright Flight"),
+            new LabelledValue(label, "Tanglewood Numbers"),
+            new LabelledValue(label, "Lookout Mountain, Lookout Sea")
         );
         MatcherAssert.assertThat(
             "Multivalued field isn't being printed correctly.",
