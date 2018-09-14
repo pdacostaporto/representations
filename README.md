@@ -2,7 +2,7 @@ Representations
 ===============
 [![Build Status](https://travis-ci.org/pdacostaporto/representations.svg?branch=master)](https://travis-ci.org/pdacostaporto/representations)
 [![Coverage Status](https://coveralls.io/repos/github/pdacostaporto/representations/badge.svg)](https://coveralls.io/github/pdacostaporto/representations)
-[![Maintainability](https://api.codeclimate.com/v1/badges/0bae9ee741ef9170b432/maintainability)](https://codeclimate.com/github/pdacostaporto/representations/maintainability)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/uy.kerri.representations/representations/badge.svg)](https://maven-badges.herokuapp.com/maven-central/uy.kerri.representations/representations)
 
 Representations serve as interfaces for objects to communicate data indepently of their implementation details. Their goal is to get rid of getters and setters and other techniques that expose the internal implementation of the objects we want to get data from or force them to be structured on some specific way.
 
@@ -27,9 +27,9 @@ At the moment, `ArrayOfValues` and `ArrayOfFields` are the only implementations 
 
 ```
 import uy.kerri.representations.Fields;
-import uy.kerri.representations.impl.ArrayOfFields;
-import uy.kerri.representations.impl.ArrayOfValues;
-import uy.kerri.representations.impl.LabelledValue;
+import uy.kerri.representations.ArrayOfFields;
+import uy.kerri.representations.ArrayOfValues;
+import uy.kerri.representations.LabelledValue;
 
 Fields person = new ArrayOfFields(
   LabelledValue("name", "Pablo Da Costa Porto"),
@@ -58,7 +58,7 @@ Fields person = new ArrayOfFields(
 Once you constructed your representation, you can format it as a string through an `Output`. At the moment, the only implementations of this interface that do this are `JsonObjectOutput` and `JsonArrayOutput`, which format the data as a JSON object or a JSON array, respectively. This serialization is done through the `show` method.
 
 ```
-import uy.kerri.representations.impl.JsonObjectOutput;
+import uy.kerri.representations.format.JsonObjectOutput;
 
 String json = person.printTo(new JsonObjectOutput()).show(); // {"name":"Pablo Da Costa Porto","age":25,"address":{"lines":["18 de julio 999","Apt. 101"],"city":"Montevideo","country":"Uruguay","zip":11200},"phoneNumbers":["598 815 56 59","598 90 599 666"]}
 ```
@@ -67,9 +67,9 @@ String json = person.printTo(new JsonObjectOutput()).show(); // {"name":"Pablo D
 
 You can also access specific values through `Selected<Type>Value` and `SelectedOutput` to select a specific field in a map or index in a sequence of values, respectively.
 ```
-import uy.kerri.representations.impl.SelectedIntegerValue;
-import uy.kerri.representations.impl.SelectedStringValue;
-import uy.kerri.representations.impl.SelectedOutput;
+import uy.kerri.representations.select.SelectedIntegerValue;
+import uy.kerri.representations.select.SelectedStringValue;
+import uy.kerri.representations.select.SelectedOutput;
 
 Integer age = new SelectedIntegerValue(
   person, new SelectedOutput("age")
@@ -84,8 +84,8 @@ String cellphone = new SelectedStringValue(
 ```
 To select composite values or multivalued fields is a bit different.
 ```
-import uy.kerri.representations.impl.SelectedFields;
-import uy.kerri.representations.impl.SelectedValues;
+import uy.kerri.representations.select.SelectedFields;
+import uy.kerri.representations.select.SelectedValues;
 
 Fields address = new SelectedFields("address", person); // {"lines":["18 de julio 999","Apt. 101"],"city":"Montevideo","country":"Uruguay","zip":11200}
 Values lines = new SelectedValues("lines", lines); // ["18 de julio 999","Apt. 101"]
@@ -94,7 +94,7 @@ Values lines = new SelectedValues("lines", lines); // ["18 de julio 999","Apt. 1
 You can also filter a set of fields.
 ```
 import java.util.Arrays;
-import uy.kerri.representations.impl.FilteredFields;
+import uy.kerri.representations.select.FilteredFields;
 
 Fields filtered = new FielteredFields(Arrays.asList("name", "age"), person); // {"name":"Pablo Da Costa Porto","age":25}
 ```
@@ -103,11 +103,11 @@ Fields filtered = new FielteredFields(Arrays.asList("name", "age"), person); // 
 
 You can test representations for some conditions through `Test` implementations.
 ```
-import uy.kerri.representations.impl.ArrayOfFields;
-import uy.kerri.representations.impl.ArrayOfValues;
-import uy.kerri.representations.impl.LabelledValue;
-import uy.kerri.representations.impl.MatchingFieldsTest;
-import uy.kerri.representations.impl.MatchingValuesTest;
+import uy.kerri.representations.ArrayOfFields;
+import uy.kerri.representations.ArrayOfValues;
+import uy.kerri.representations.LabelledValue;
+import uy.kerri.representations.test.MatchingFieldsTest;
+import uy.kerri.representations.test.MatchingValuesTest;
 
 LabelledValue first = new LabelledValue("first", 1);
 LabelledValue second = new LabelledValue("second", "second value");
@@ -144,13 +144,13 @@ Check the `RepresentationMatchers` class to see available matchers.
 
 ## Installation
 
-Add it as a dependency on your `pom.xml`.
+Add it as a dependency on your `pom.xml`, replacing `{$representations.version}` with the desired version.
 
 ```
 <dependency>
   <groupId>uy.kerri.representations</groupId>
   <artifactId>representations</artifactId>
-  <version>1.0</version>
+  <version>{$representations.version}</version>
 </dependency>
 ```
 
