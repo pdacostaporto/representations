@@ -59,7 +59,7 @@ public class ArrayOfValues implements Values {
      * @param collection A collection of fields.
      */
     public ArrayOfValues(final Collection<? extends Value> collection) {
-        this(collection.toArray(new Value[collection.size()]));
+        this(collection.toArray(new Value[0]));
     }
 
     @Override

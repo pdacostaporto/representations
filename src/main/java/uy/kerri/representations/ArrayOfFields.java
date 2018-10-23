@@ -59,7 +59,7 @@ public class ArrayOfFields implements Fields {
      * @param collection A collection of fields.
      */
     public ArrayOfFields(final Collection<? extends Field> collection) {
-        this(collection.toArray(new Field[collection.size()]));
+        this(collection.toArray(new Field[0]));
     }
 
     @Override

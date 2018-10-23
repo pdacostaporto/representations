@@ -33,8 +33,7 @@ import uy.kerri.representations.RepresentationsException;
  *
  * @since 2.0
  */
-public final class SelectedStringValue
-    implements SelectedValue<java.lang.String> {
+public final class SelectedStringValue implements SelectedValue<String> {
     /**
      * The representation where the value will be selected from.
      */
@@ -61,7 +60,7 @@ public final class SelectedStringValue
     }
 
     @Override
-    public java.lang.String value() throws RepresentationsException {
+    public String value() throws RepresentationsException {
         return this.origin.printTo(this.selection).show();
     }
 }

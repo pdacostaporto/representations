@@ -73,15 +73,10 @@ public class FixedOutputTest {
         MatcherAssert.assertThat(
             "FixedOutput is mutated when printed.",
             new FixedOutput(value).print("whatever", "something")
-            .print("filler", new Integer(0))
-            .print("dummy", Boolean.TRUE)
-            .print("irrelevant", new Double(0))
-            .print("placeholder", new Long(1L))
-            .print(
+            .print("filler", 0).print("dummy", true).print("irrelevant", 0.0)
+            .print("placeholder", 1L).print(
                 "ignored",
-                new ArrayOfFields(
-                    new LabelledString("label", "string")
-                )
+                new ArrayOfFields(new LabelledString("label", "string"))
             ).print(
                 "doesntmatter",
                 new ArrayOfValues(
