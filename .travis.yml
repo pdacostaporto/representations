@@ -15,5 +15,6 @@ env:
 deploy:
   provider: script
   script: prepare.sh
+  skip_cleanup: true
   on:
     branch: release
