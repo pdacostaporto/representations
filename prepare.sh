@@ -2,7 +2,7 @@
 
 git config --global user.email "representations@kerri.uy"
 git config --global user.name "Travis CI"
-git checkout -B "$TRAVIS_BRANCH"
+git checkout -B master
 eval "$(ssh-agent -s)"
 chmod 600 deploy.pem
 ssh-add deploy.pem
