@@ -4,6 +4,7 @@ gpg --import keyring.gpg
 git config --global user.email "representations@kerri.uy"
 git config --global user.name "Travis CI"
 git checkout -B master
+git remote add origin git@github.com:pdacostaporto/representations.git
 git branch --set-upstream-to origin/master
 eval "$(ssh-agent -s)"
 chmod 600 deploy.pem
