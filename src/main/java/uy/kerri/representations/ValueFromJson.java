@@ -24,7 +24,6 @@
 package uy.kerri.representations;
 
 import javax.json.JsonArray;
-import javax.json.JsonNumber;
 
 /**
  * A value contained in a JSON array.
@@ -61,12 +60,9 @@ final class ValueFromJson implements Value {
                 printed = output.print("", this.json.getString(this.index));
                 break;
             case NUMBER:
-                final JsonNumber number = this.json.getJsonNumber(this.index);
-                if (number.isIntegral()) {
-                    printed = output.print("", number.longValue());
-                } else {
-                    printed = output.print("", number.doubleValue());
-                }
+                printed = new LabelledJsonNumber(
+                    "", this.json.getJsonNumber(this.index)
+                ).printTo(output);
                 break;
             case TRUE:
                 printed = output.print("", true);

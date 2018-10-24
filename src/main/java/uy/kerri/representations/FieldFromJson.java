@@ -23,7 +23,6 @@
  */
 package uy.kerri.representations;
 
-import javax.json.JsonNumber;
 import javax.json.JsonObject;
 
 /**
@@ -63,12 +62,9 @@ final class FieldFromJson implements Field {
                 );
                 break;
             case NUMBER:
-                final JsonNumber number = this.json.getJsonNumber(this.name);
-                if (number.isIntegral()) {
-                    printed = output.print(this.name, number.longValue());
-                } else {
-                    printed = output.print(this.name, number.doubleValue());
-                }
+                printed = new LabelledJsonNumber(
+                    this.name, this.json.getJsonNumber(this.name)
+                ).printTo(output);
                 break;
             case TRUE:
                 printed = output.print(this.name, true);
