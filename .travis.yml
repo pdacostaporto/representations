@@ -4,9 +4,9 @@ script:
 - mvn test -B coveralls:report
 before_install:
 - openssl aes-256-cbc -K $encrypted_f9ced39a15db_key -iv $encrypted_f9ced39a15db_iv
-  -in keyring.gpg.enc -out keyring.gpg -d
-- openssl aes-256-cbc -K $encrypted_f9ced39a15db_key -iv $encrypted_f9ced39a15db_iv
   -in deploy.pem.enc -out deploy.pem -d
+- openssl aes-256-cbc -K $encrypted_f9ced39a15db_key -iv $encrypted_f9ced39a15db_iv
+  -in keyring.gpg.enc -out keyring.gpg -d
 env:
   global:
   - secure: ajn1NWk3Lix0kYgqXkmt7SbyYQZmeDbjW+EWQ4d9ZoRR0xXLNG05HwBb7qFuXQK3MkCMsGRpzFHM/s+OCS2TOW6YFy8VYChCwQHIT9qMXommsQvXdWs+HvFdVW43OHzeOeuu0JlhEo6RS1JWri4bANIBxvtlITlMFYy3gM+lqfVmJGVHzmPrs0FPmm1+kYeEOagdI32uonMPyFp4YGHcMYEAJ7XoKuC+MgwEIbUBoL9l4Zgb/8QsNPWsiFjykOJBMVjvVTUT0riKnGTg38qFA0u85Yji5C6wTjExAROZqguiaLiIoDfrgDZN1kjP3JBxKUo0gaPuYvWCc+u6Xd0ZcJvZe9R5ih7qlH7x9sRi/s/EXTyPOm/RZPkMSXMu69Y2UKmPXHPk28MIN+qYp4Tt93PSXPJ+one2SPBQQcjuhjFXHXPRPonYSpcdNYJ7Yl3wrzghGAfhkV1GncVIms/LmCf1Tn8+6XNj/DbWB6Q1P6Dr6wlnyg6La3UJx6Y8daL02CUhevdSOtCJSiJPkP64fNIgKwIZ4lg94/VOONahWvSCZIBL5dSf/VS0fqmZh26T0DUmln7ENc8sun9qNlZeyTaDsHSMemR5i9Fmz5D6OOaC8/Hp2AghzYItiR9xI1Rnk9YIvh87dzwRCRnv/f1w1ub74W9xXBwkGcIefHCv+Q4=
