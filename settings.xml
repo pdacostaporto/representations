@@ -4,7 +4,7 @@
       <id>ossrh</id>
       <username>${env.OSSRH_USERNAME}</username>
       <password>${env.OSSRH_PASSWORD}</password>
-    </server> 
+    </server>
   </servers>
   <profiles>
     <profile>
@@ -13,6 +13,7 @@
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
+        <gpg.keyname>DACB5D079270DDDCE032531963E225790887484C</gpg.keyname>
         <gpg.passphrase>${env.GPG_KEYRING_PASSPHRASE}</gpg.passphrase>
       </properties>
     </profile>
