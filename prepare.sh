@@ -1,8 +1,9 @@
 #!/bin/sh
 
-echo $GPG_KEYRING_PASSPHRASE | gpg --batch --yes --passphrase-fd 0 release.gpg
-eval "$(ssh-agent -s)"
 chmod 600 deploy.pem
+chmod 600 secret.gpg
+chmod 600 public.gpg
+eval "$(ssh-agent -s)"
 ssh-add deploy.pem
 git config --global user.email "representations@kerri.uy"
 git config --global user.name "Travis CI"

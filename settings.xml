@@ -13,8 +13,10 @@
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
-        <gpg.keyname>3072R/0128BA32</gpg.keyname>
         <gpg.passphrase>${env.GPG_KEYRING_PASSPHRASE}</gpg.passphrase>
+        <gpg.defaultKeyring>false</gpg.defaultKeyring>
+        <gpg.publicKeyring>${env.GPG_DIR}/public.gpg</gpg.publicKeyring>
+        <gpg.secretKeyring>${env.GPG_DIR}/secret.gpg</gpg.secretKeyring>
       </properties>
     </profile>
   </profiles>
