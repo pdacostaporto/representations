@@ -1,6 +1,6 @@
 #!/bin/sh
 
-gpg --import -batch --passphrase="$GPG_KEYRING_PASSPHRASE" release.gpg
+echo $GPG_KEYRING_PASSPHRASE | gpg --batch --yes --passphrase-fd 0 release.gpg
 chmod 600 deploy.pem
 ssh-add deploy.pem
 git config --global user.email "representations@kerri.uy"
