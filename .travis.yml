@@ -14,7 +14,7 @@ env:
   - secure: ssuQvM2V/6JBt1s2CcRat3Zbl/q9L2sAQvSkfyPVYlbCsldlbtNM5FKeW4OhvRfRQf6KANiMGHvvS6jR/x4U88r6nw8fK58nbizLldiqmpQ5V/QSlDFA9MrUXLaBeWuVf3lGfzaDmh5V+A7Iz0sO5xmeazrHOU7g65bzJSqPszCPwunJuBJXQeO7MHB8Fff6WX/EKMxv+p9AkA9WOq8YkPRh1jr6WuZKOJdrcLM5FX95M6MCPTWnvxuzPWoLpQLF0yX+5+rZyu/o4CiIhEVeU4yALJnikhSI56tTy4wmWPrVr1q7RszQdkROlR5jK3lxIpz/iQ+wMil1Cnn5z0hrcgQzgDCWa15894fUWgO2TPEHd3er2GYSu+xvnmol7QUQD4BuWARBwEGwTEJgrRZWvRTXIymxRQKNtt51wz+OalCnT/p/LHiIn4OazR0sDK8/4zAoy/O8LxGt0bCMbDjQQJIcqpRCylJbFvO/Z1JqY792ouPCXCDJQGqJND6oT5R/qcT6iqIT7wzt3DYyNc3LuEW2Mk16JGxL/IKJv3xl3prkSSdN3qV1wu7Kk99Qa4bVxpzi2j7rSItZPeNFqcY29cAB/lUyJIvf5BIqko8xEFFOXaS6KzdmtUcdiOFuFaCAUr72EhJKCfAmriInSbTzmIuPLQUoaQYh8hWtwIjzi9U=
 deploy:
   provider: script
-  script: /bin/sh prepare.sh
+  script: "/bin/sh prepare.sh"
   skip_cleanup: true
   on:
     branch: release
