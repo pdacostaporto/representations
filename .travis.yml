@@ -15,8 +15,13 @@ env:
   - secure: EaJAnjO9Zp3o62moyxQ9Z4Hm0xt7Y9n9xd3PW7Th3U5UtL+zvk7DFQ0BIbR7/LybjIJevWwQ1t9/ELFLc+xwoy3Rm1Jx1bPTP4YfA3FYCelHcH0RD4eGsPO32T80aS9LC7uQTx/Cyw293Wg/eKXeDxBxo17RRfqeoQ4m+fh22OH3DgSgGTx8bHSwU18qPLJxoUj2YLikyh2ZD/iWaUxsIVcZ8CFV3LNN3qhygdK7nfHXlC7V07PSbSFC6sWOSI0FrYjcSHj+pBcOxGGOJKF6eEi48fE20+2Jtas5SPswgpKMkMIuubXnDrishseV5/ZK3LZg+HB0JIQp1xEoO2wdj2FhVGxe694ymoFDc9McEWu8hnYbycV2dk/inX5n+NaNwsNzhbkfjSqHOzvWuBDmwtdAE6tb0fWyI0m1EsherZm0yC7uPSw/KSrxNxD6yZ9qmvrXMa2zyGbUYO9DVyUQVtrcCxFy0EXhBAuCJEMuuCIq4b+NcBwZ4IUUdnaS4rnWI6zigwfMxQq8zovUqSUvbkJsizV77pWriARYXjhpGS9ZWkd6R+NPVYh6OEOl0oempMs3DuZhCWhFLsK85IVjb4fjMHSSCggv7qGYKWNVacr3h775bA3dtCda27WZn4l2q+Eg1R5G9ohDzOOWv+DPfDek3kxo7Mj3zyhHqJdptL4=
   - GPG_DIR="`pwd`"
 deploy:
-  provider: script
-  script: "/bin/sh prepare.sh"
-  skip_cleanup: true
-  on:
-    branch: release
+  - provider: script
+    script: "/bin/sh prepare.sh"
+    skip_cleanup: true
+    on:
+      branch: release
+  - provider: script
+    script: "/bin/sh release.sh"
+    skip_cleanup: true
+    on:
+      tags: true
