@@ -15,8 +15,8 @@
       <properties>
         <gpg.passphrase>${env.GPG_KEYRING_PASSPHRASE}</gpg.passphrase>
         <gpg.defaultKeyring>false</gpg.defaultKeyring>
-        <gpg.publicKeyring>${env.GPG_DIR}/public.gpg</gpg.publicKeyring>
-        <gpg.secretKeyring>${env.GPG_DIR}/secret.gpg</gpg.secretKeyring>
+        <gpg.publicKeyring>${env.TRAVIS_BUILD_DIR}/public.gpg</gpg.publicKeyring>
+        <gpg.secretKeyring>${env.TRAVIS_BUILD_DIR}/secret.gpg</gpg.secretKeyring>
       </properties>
     </profile>
   </profiles>
