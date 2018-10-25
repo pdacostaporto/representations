@@ -1,6 +1,7 @@
 #!/bin/sh
 
 echo $GPG_KEYRING_PASSPHRASE | gpg --batch --yes --passphrase-fd 0 release.gpg
+eval "$(ssh-agent -s)"
 chmod 600 deploy.pem
 ssh-add deploy.pem
 git config --global user.email "representations@kerri.uy"
@@ -9,7 +10,6 @@ git remote set-url origin git@github.com:pdacostaporto/representations.git
 git fetch
 git checkout -B master
 git branch --set-upstream-to origin/master
-eval "$(ssh-agent -s)"
 sed -i -e "s/\[Unreleased\]/\[$RELEASE_VERSION\]/" CHANGELOG.md
 sed -i -e "s/\.\.\.HEAD$/\.\.\.$RELEASE_VERSION/" CHANGELOG.md
 git add CHANGELOG.md
