@@ -14,6 +14,7 @@ sed -i -e "s/\[Unreleased\]/\[$RELEASE_VERSION\]/" CHANGELOG.md
 sed -i -e "s/\.\.\.HEAD$/\.\.\.$RELEASE_VERSION/" CHANGELOG.md
 git add CHANGELOG.md
 git commit -m "Changelog updated to version $RELEASE_VERSION"
+gpg --list-secret-keys
 mvn --batch-mode -Dtag=$RELEASE_VERSION release:prepare -DreleaseVersion=$RELEASE_VERSION -DdevelopmentVersion=$DEVELOPMENT_VERSION-SNAPSHOT --settings settings.xml
 sed -i -e "/^\[$RELEASE_VERSION\]: https:.*/i \[Unreleased\]: https:\/\/github.com\/pdacostaporto\/representations\/compare\/$RELEASE_VERSION\.\.\.HEAD" CHANGELOG.md
 git add CHANGELOG.md

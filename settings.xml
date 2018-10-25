@@ -13,7 +13,7 @@
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
-        <gpg.keyname>0128BA32</gpg.keyname>
+        <gpg.keyname>3072R/0128BA32</gpg.keyname>
         <gpg.passphrase>${env.GPG_KEYRING_PASSPHRASE}</gpg.passphrase>
       </properties>
     </profile>
