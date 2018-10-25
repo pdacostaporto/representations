@@ -175,13 +175,13 @@ If you use [Vagrant](https://www.vagrantup.com/) you can automate the configurat
 
 The code of this library tries to respect the [Elegant Objects](https://www.elegantobjects.org/) principles, so check them out when contributing.
 
+For every feature, bugfix or change you make, add a corresponding description of it in the [changelog](https://github.com/pdacostaporto/representations/blob/master/CHANGELOG.md) under a section called `[Unreleased]` at the top of it.
+
 Besides that, just check that `mvn install` runs without issues before submiting the code.
 
 ### Releasing
 
-To release a new version just run the `release.sh` script and fill the prompted information. Then, add a [corresponding release](https://github.com/pdacostaporto/representations/releases) to the created tag.
-
-Remember to configure your [OSSRH Nexus](https://oss.sonatype.org/) credentials and your GPG passphrase on your `settings.xml` file. If you use Vagrant edit the file at `/home/vagrant/.m2/settings.xml`.
+To release a new version set the `RELEASE_VERSION` and `DEVELOPMENT_VERSION` environment variables in Travis and then push the code to a new branch called `release`. Travis will take care of the release automatically.
 
 ## Credits
 
