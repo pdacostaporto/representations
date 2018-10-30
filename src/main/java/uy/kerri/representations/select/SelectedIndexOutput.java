@@ -63,7 +63,14 @@ final class SelectedIndexOutput implements Output {
      * @param idx The index of the value to be selected.
      */
     SelectedIndexOutput(final Integer idx) {
-        this(idx, new SelectedValueOutput());
+        this(
+            idx,
+            new SelectedValueOutput(
+                new ValueNotSelectedException(
+                    String.format("The index %d wasn't selected yet.", idx)
+                )
+            )
+        );
     }
 
     @Override

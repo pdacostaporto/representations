@@ -62,7 +62,14 @@ final class SelectedFieldOutput implements Output {
      * @param name The name of the field to be selected.
      */
     SelectedFieldOutput(final String name) {
-        this(name, new SelectedValueOutput());
+        this(
+            name,
+            new SelectedValueOutput(
+                new ValueNotSelectedException(
+                    String.format("The field '%s' wasn't selected yet.", name)
+                )
+            )
+        );
     }
 
     @Override

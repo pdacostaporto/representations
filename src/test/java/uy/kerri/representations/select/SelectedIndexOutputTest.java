@@ -23,7 +23,7 @@
  */
 package uy.kerri.representations.select;
 
-import org.hamcrest.CoreMatchers;
+import org.hamcrest.Matchers;
 import org.hamcrest.junit.MatcherAssert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -65,7 +65,7 @@ public class SelectedIndexOutputTest {
                 new LabelledValue(label, value),
                 new LabelledValue(label, "Venezuela")
             ).printTo(new SelectedOutput(index)).show(),
-            CoreMatchers.equalTo(value)
+            Matchers.equalTo(value)
         );
     }
 
@@ -95,7 +95,7 @@ public class SelectedIndexOutputTest {
                 new LabelledValue("port", value),
                 new LabelledValue("status", status)
             ).printTo(new SelectedOutput(index)).show(),
-            CoreMatchers.equalTo(value.toString())
+            Matchers.equalTo(value.toString())
         );
     }
 
@@ -125,7 +125,7 @@ public class SelectedIndexOutputTest {
                 new LabelledValue("posts", posts),
                 new LabelledValue("verified", value)
             ).printTo(new SelectedOutput(index)).show(),
-            CoreMatchers.equalTo(value.toString())
+            Matchers.equalTo(value.toString())
         );
     }
 
@@ -150,7 +150,7 @@ public class SelectedIndexOutputTest {
                     new LabelledValue("densityAtSTP", value)
                 ).printTo(new SelectedOutput(index)).show()
             ),
-            CoreMatchers.equalTo(value)
+            Matchers.equalTo(value)
         );
     }
 
@@ -173,7 +173,7 @@ public class SelectedIndexOutputTest {
                 new LabelledValue("developer", "Microsoft"),
                 new LabelledValue("acronym", "NTFS")
             ).printTo(new SelectedOutput(index)).show(),
-            CoreMatchers.equalTo(value.toString())
+            Matchers.equalTo(value.toString())
         );
     }
 
@@ -209,7 +209,7 @@ public class SelectedIndexOutputTest {
                     )
                 ).show()
             ),
-            CoreMatchers.equalTo(value)
+            Matchers.equalTo(value)
         );
     }
 
@@ -241,7 +241,7 @@ public class SelectedIndexOutputTest {
             ).printTo(
                 new SelectedOutput(outer, new SelectedOutput(inner))
             ).show(),
-            CoreMatchers.equalTo(value)
+            Matchers.equalTo(value)
         );
     }
 
@@ -256,7 +256,9 @@ public class SelectedIndexOutputTest {
         final Integer index = 3;
         this.thrown.expect(ValueNotSelectedException.class);
         this.thrown.expectMessage(
-            CoreMatchers.equalTo("The value wasn't selected yet.")
+            Matchers.equalTo(
+                String.format("The index %d wasn't selected yet.", index)
+            )
         );
         new ArrayOfValues(
             new LabelledValue("values", new ArrayOfValues()),
