@@ -23,7 +23,7 @@
  */
 package uy.kerri.representations.select;
 
-import org.hamcrest.CoreMatchers;
+import org.hamcrest.Matchers;
 import org.hamcrest.junit.MatcherAssert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -81,7 +81,7 @@ public final class SelectedFieldOutputTest {
                     )
                 )
             ).printTo(new SelectedOutput(field)).show(),
-            CoreMatchers.equalTo(value)
+            Matchers.equalTo(value)
         );
     }
 
@@ -102,7 +102,7 @@ public final class SelectedFieldOutputTest {
                 new LabelledValue(field, value),
                 new LabelledValue("average", average)
             ).printTo(new SelectedOutput(field)).show(),
-            CoreMatchers.equalTo(value.toString())
+            Matchers.equalTo(value.toString())
         );
     }
 
@@ -129,7 +129,7 @@ public final class SelectedFieldOutputTest {
                     )
                 )
             ).printTo(new SelectedOutput(field)).show(),
-            CoreMatchers.equalTo(value.toString())
+            Matchers.equalTo(value.toString())
         );
     }
 
@@ -151,7 +151,7 @@ public final class SelectedFieldOutputTest {
                 new LabelledValue(field, value),
                 new LabelledValue("heatOfFusion", fusion)
             ).printTo(new SelectedOutput(field)).show(),
-            CoreMatchers.equalTo(value.toString())
+            Matchers.equalTo(value.toString())
         );
     }
 
@@ -173,7 +173,7 @@ public final class SelectedFieldOutputTest {
                 new LabelledValue("acronym", "NTFS"),
                 new LabelledValue(field, value)
             ).printTo(new SelectedOutput(field)).show(),
-            CoreMatchers.equalTo(value.toString())
+            Matchers.equalTo(value.toString())
         );
     }
 
@@ -215,7 +215,7 @@ public final class SelectedFieldOutputTest {
                     new SelectedOutput(nested)
                 )
             ).show(),
-            CoreMatchers.equalTo(value)
+            Matchers.equalTo(value)
         );
     }
 
@@ -249,7 +249,7 @@ public final class SelectedFieldOutputTest {
                     new SelectedIndexOutput(2)
                 )
             ).show(),
-            CoreMatchers.equalTo(value.toString())
+            Matchers.equalTo(value.toString())
         );
     }
 
@@ -264,7 +264,9 @@ public final class SelectedFieldOutputTest {
         final String field = "single";
         this.thrown.expect(ValueNotSelectedException.class);
         this.thrown.expectMessage(
-            CoreMatchers.equalTo("The value wasn't selected yet.")
+            Matchers.equalTo(
+                String.format("The field '%s' wasn't selected yet.", field)
+            )
         );
         new ArrayOfFields(
             new LabelledValue("this", "is"),
@@ -277,5 +279,26 @@ public final class SelectedFieldOutputTest {
                 )
             )
         ).printTo(new SelectedOutput(field)).show();
+    }
+
+    /**
+     * SelectedOutput selects the last ocurrence of the field.
+     *
+     * @throws Exception if anything goes wrong.
+     */
+    @Test
+    public void selectsLastOcurrence() throws Exception {
+        final String field = "selected";
+        final String value = "expected";
+        MatcherAssert.assertThat(
+            new ArrayOfFields(
+                new LabelledValue("notSelected", "not selected"),
+                new LabelledValue(field, "not expected"),
+                new LabelledValue(field, "also not expected"),
+                new LabelledValue("alsoNotSelected", "also not selected"),
+                new LabelledValue(field, value)
+            ).printTo(new SelectedOutput(field)).show(),
+            Matchers.equalTo(value)
+        );
     }
 }

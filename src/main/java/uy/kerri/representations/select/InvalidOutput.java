@@ -24,98 +24,68 @@
 package uy.kerri.representations.select;
 
 import uy.kerri.representations.Fields;
-import uy.kerri.representations.FixedOutput;
 import uy.kerri.representations.Output;
 import uy.kerri.representations.RepresentationsException;
 import uy.kerri.representations.Values;
 
 /**
- * An {@link uy.kerri.representations.Output} that shows the last value that is
- *  printed on it.
+ * An {@link uy.kerri.representations.Output} that throws an exception when
+ *  tried to be shown.
  *
- * @since 2.0
+ * @since 2.1.1
  */
-final class SelectedValueOutput implements Output {
+final class InvalidOutput implements Output {
     /**
-     * The output with the selected value.
+     * The exception to be thrown.
      */
-    private final Output selected;
+    private final RepresentationsException exception;
 
     /**
-     * Constructs an output that shows the last value that is printed on it or
-     *   shows some other output if no values were printed.
+     * Constructs an output that throws an exception when tried to be shown.
      *
-     * @param selected The output to show.
+     * @param exception The exception to be thrown.
      */
-    private SelectedValueOutput(final Output selected) {
-        this.selected = selected;
-    }
-
-    /**
-     * Constructs an output that shows the last value that is printed on it or
-     *  throws some exception if no values were printed.
-     *
-     * @param exception The exception to throw.
-     */
-    SelectedValueOutput(final RepresentationsException exception) {
-        this(new InvalidOutput(exception));
-    }
-
-    /**
-     * Constructs an output that shows the last value that is printed on it or
-     *  throws an exception if no values were printed.
-     */
-    SelectedValueOutput() {
-        this(new ValueNotSelectedException("The value wasn't selected yet."));
+    InvalidOutput(final RepresentationsException exception) {
+        this.exception = exception;
     }
 
     @Override
     public String show() throws RepresentationsException {
-        return this.selected.show();
+        throw this.exception;
     }
 
     @Override
     public Output print(final String key, final String value) {
-        return this.select(value);
+        return this;
     }
 
     @Override
     public Output print(final String key, final Integer value) {
-        return this.select(value);
+        return this;
     }
 
     @Override
     public Output print(final String key, final Boolean value) {
-        return this.select(value);
+        return this;
     }
 
     @Override
     public Output print(final String key, final Double value) {
-        return this.select(value);
+        return this;
     }
 
     @Override
     public Output print(final String key, final Long value) {
-        return this.select(value);
+        return this;
     }
 
     @Override
     public Output print(final String key, final Fields value) {
-        return this.select(value);
+        return this;
     }
 
     @Override
     public Output print(final String key, final Values values) {
-        return this.select(values);
-    }
-
-    /**
-     * Selects the value.
-     *
-     * @param value The value to be selected.
-     * @return An output that shows the selected value.
-     */
-    private static Output select(final Object value) {
-        return new SelectedValueOutput(new FixedOutput(value));
+        return this;
     }
 }

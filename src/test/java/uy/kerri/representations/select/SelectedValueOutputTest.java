@@ -23,7 +23,7 @@
  */
 package uy.kerri.representations.select;
 
-import org.hamcrest.CoreMatchers;
+import org.hamcrest.Matchers;
 import org.hamcrest.junit.MatcherAssert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -52,9 +52,9 @@ public class SelectedValueOutputTest {
         final String value = "some value";
         MatcherAssert.assertThat(
             "The correct string wasn't selected.",
-            new SelectedValueOutput().print("whatever", value)
-            .print("irrelevant", "irrelevant value").show(),
-            CoreMatchers.equalTo(value)
+            new SelectedValueOutput().print("irrelevant", "irrelevant value")
+            .print("whatever", value).show(),
+            Matchers.equalTo(value)
         );
     }
 
@@ -69,9 +69,9 @@ public class SelectedValueOutputTest {
         final Integer value = 50;
         MatcherAssert.assertThat(
             "The correct integer wasn't selected.",
-            new SelectedValueOutput().print("not important", value)
-            .print("something", "another value").show(),
-            CoreMatchers.equalTo(value.toString())
+            new SelectedValueOutput().print("something", "another value")
+            .print("not important", value).show(),
+            Matchers.equalTo(value.toString())
         );
     }
 
@@ -86,9 +86,9 @@ public class SelectedValueOutputTest {
         final Boolean value = true;
         MatcherAssert.assertThat(
             "The correct boolean wasn't selected.",
-            new SelectedValueOutput().print("field", value)
-            .print("whatever field", "whatever value").show(),
-            CoreMatchers.equalTo(value.toString())
+            new SelectedValueOutput().print("whatever field", "whatever value")
+            .print("field", value).show(),
+            Matchers.equalTo(value.toString())
         );
     }
 
@@ -103,9 +103,10 @@ public class SelectedValueOutputTest {
         final Double value = 0.08988;
         MatcherAssert.assertThat(
             "The correct double wasn't selected.",
-            new SelectedValueOutput().print("label", value)
-            .print("trailing", "this is a filler").show(),
-            CoreMatchers.equalTo(value.toString())
+            new SelectedValueOutput()
+            .print("aFiller", "this is a filler")
+            .print("label", value).show(),
+            Matchers.equalTo(value.toString())
         );
     }
 
@@ -120,9 +121,10 @@ public class SelectedValueOutputTest {
         final Long value = 4294967295L;
         MatcherAssert.assertThat(
             "The correct long wasn't selected.",
-            new SelectedValueOutput().print("selected", value)
-            .print("not selected", "this value must not be selected").show(),
-            CoreMatchers.equalTo(value.toString())
+            new SelectedValueOutput()
+            .print("not selected", "this value must not be selected")
+            .print("selected", value).show(),
+            Matchers.equalTo(value.toString())
         );
     }
 
@@ -136,7 +138,7 @@ public class SelectedValueOutputTest {
     public final void throwsIfNotPrinted() throws Exception {
         this.thrown.expect(ValueNotSelectedException.class);
         this.thrown.expectMessage(
-            CoreMatchers.equalTo("The value wasn't selected yet.")
+            Matchers.equalTo("The value wasn't selected yet.")
         );
         new SelectedValueOutput().show();
     }
