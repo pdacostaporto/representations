@@ -130,6 +130,7 @@
         <version>2.22.0</version>
         <configuration>
           <trimStackTrace>false</trimStackTrace>
+          <useSystemClassLoader>false</useSystemClassLoader>
         </configuration>
       </plugin>
 
