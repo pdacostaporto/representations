@@ -19,4 +19,3 @@ sed -i -e "/^\[$RELEASE_VERSION\]: https:.*/i \[Unreleased\]: https:\/\/github.c
 git add CHANGELOG.md
 git commit -m "Changelog updated for new development version"
 git push github master
-git push --delete github release
