@@ -27,36 +27,38 @@ import uy.kerri.representations.Fields;
 import uy.kerri.representations.RepresentationsException;
 
 /**
- * A {@link uy.kerri.representations.test.Test} to verify that two sets of
- *  fields match.
+ * A {@link uy.kerri.representations.test.Test} to verify that a set of fields
+ *  is contained in another.
  *
- * @since 2.0
+ * @since 2.2
  */
-public final class MatchingFieldsTest implements Test {
+public final class ContainedFieldsTest implements Test {
     /**
-     * The expected fields.
+     * The container set of fields.
      */
-    private final Fields expected;
+    private final Fields container;
 
     /**
-     * The actual fields.
+     * The contained set of fields.
      */
-    private final Fields actual;
+    private final Fields contained;
 
     /**
-     * Constructs a test to verify that two sets of fields match.
+     * Constructs a test to verify that a set of fields is contained in another.
      *
-     * @param first The expected set of fields.
-     * @param second The actual set of fields.
+     * @param container The container set of fields.
+     * @param contained The contained set of fields.
      */
-    public MatchingFieldsTest(final Fields first, final Fields second) {
-        this.expected = first;
-        this.actual = second;
+    public ContainedFieldsTest(final Fields container, final Fields contained) {
+        this.container = container;
+        this.contained = contained;
     }
 
     @Override
     public Boolean passes() throws RepresentationsException {
-        return new ContainedFieldsTest(this.expected, this.actual).passes()
-            && new ContainedFieldsTest(this.actual, this.expected).passes();
+        return Boolean.valueOf(
+            this.container.printTo(new FieldsMatchingOutput(this.contained))
+            .show()
+        );
     }
 }
