@@ -25,8 +25,8 @@ package uy.kerri.representations.format;
 
 import java.io.StringReader;
 import javax.json.Json;
+import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
-import javax.json.JsonReader;
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
 import uy.kerri.representations.RepresentationsException;
@@ -41,17 +41,17 @@ import uy.kerri.representations.Values;
  */
 public class JsonArrayOutput implements Output {
     /**
-     * Reader for the array's JSON input stream.
+     * The JSON array.
      */
-    private JsonReader reader;
+    private JsonArray array;
 
     /**
-     * Constructs a JSON array read from an input stream.
+     * Constructs a JSON array.
      *
-     * @param rdr The reader of the input stream containing a JSON array.
+     * @param array The JSON array.
      */
-    private JsonArrayOutput(final JsonReader rdr) {
-        this.reader = rdr;
+    private JsonArrayOutput(final JsonArray array) {
+        this.array = array;
     }
 
     /**
@@ -60,7 +60,7 @@ public class JsonArrayOutput implements Output {
      * @param json A JSON array formatted string.
      */
     public JsonArrayOutput(final String json) {
-        this(Json.createReader(new StringReader(json)));
+        this(Json.createReader(new StringReader(json)).readArray());
     }
 
     /**
@@ -72,7 +72,7 @@ public class JsonArrayOutput implements Output {
 
     @Override
     public final String show() throws RepresentationsException {
-        return this.reader.readArray().toString();
+        return this.array.toString();
     }
 
     @Override
@@ -164,6 +164,6 @@ public class JsonArrayOutput implements Output {
      * @throws RepresentationsException if anything goes wrong.
      */
     private JsonArrayBuilder builder() throws RepresentationsException {
-        return Json.createArrayBuilder(this.reader.readArray());
+        return Json.createArrayBuilder(this.array);
     }
 }
