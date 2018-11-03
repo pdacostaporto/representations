@@ -61,6 +61,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Implementation of JSON representation.
 - Fake implementation of the representation interface.
 
+[Unreleased]: https://github.com/pdacostaporto/representations/compare/2.2.1...HEAD
 [2.2.1]: https://github.com/pdacostaporto/representations/compare/2.2.0...2.2.1
 [2.2.0]: https://github.com/pdacostaporto/representations/compare/2.1.1...2.2.0
 [2.1.1]: https://github.com/pdacostaporto/representations/compare/2.1.0...2.1.1
