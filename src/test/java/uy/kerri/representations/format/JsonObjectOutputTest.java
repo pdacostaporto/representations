@@ -23,7 +23,7 @@
  */
 package uy.kerri.representations.format;
 
-import org.hamcrest.CoreMatchers;
+import org.hamcrest.Matchers;
 import org.hamcrest.junit.MatcherAssert;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -49,7 +49,7 @@ public class JsonObjectOutputTest {
         MatcherAssert.assertThat(
             "Empty output isn't empty.",
             new JsonObjectOutput().show(),
-            CoreMatchers.equalTo("{}")
+            Matchers.equalTo("{}")
         );
     }
 
@@ -64,7 +64,7 @@ public class JsonObjectOutputTest {
         MatcherAssert.assertThat(
             "JSON output isn't showing original values when not printed.",
             new JsonObjectOutput(preformat).show(),
-            CoreMatchers.equalTo(preformat)
+            Matchers.equalTo(preformat)
         );
     }
 
@@ -223,6 +223,22 @@ public class JsonObjectOutputTest {
                     )
                 ).toString()
             )
+        );
+    }
+
+    /**
+     * JsonObjectOutput can be reused.
+     *
+     * @throws Exception if anything goes wrong.
+     */
+    @Test
+    public final void canBeReused() throws Exception {
+        final JsonObjectOutput output = new JsonObjectOutput();
+        output.print("lostField", "lostValue");
+        MatcherAssert.assertThat(
+            "JSON output wasn't reused in an immutable manner.",
+            output.print("persistentField", "persistentValue").show(),
+            Matchers.equalTo("{\"persistentField\":\"persistentValue\"}")
         );
     }
 }

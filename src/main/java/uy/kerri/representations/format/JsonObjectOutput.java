@@ -25,8 +25,8 @@ package uy.kerri.representations.format;
 
 import java.io.StringReader;
 import javax.json.Json;
+import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
-import javax.json.JsonReader;
 import uy.kerri.representations.Fields;
 import uy.kerri.representations.Output;
 import uy.kerri.representations.RepresentationsException;
@@ -39,17 +39,17 @@ import uy.kerri.representations.Values;
  */
 public class JsonObjectOutput implements Output {
     /**
-     * Reader for the object's JSON input stream.
+     * The JSON object.
      */
-    private JsonReader reader;
+    private JsonObject json;
 
     /**
-     * Constructs a JSON object read from an input stream.
+     * Constructs a JSON object.
      *
-     * @param rdr The reader of the input stream containing a JSON object.
+     * @param json The JSON object.
      */
-    private JsonObjectOutput(final JsonReader rdr) {
-        this.reader = rdr;
+    private JsonObjectOutput(final JsonObject json) {
+        this.json = json;
     }
 
     /**
@@ -58,7 +58,7 @@ public class JsonObjectOutput implements Output {
      * @param json A JSON object formatted as a string.
      */
     public JsonObjectOutput(final String json) {
-        this(Json.createReader(new StringReader(json)));
+        this(Json.createReader(new StringReader(json)).readObject());
     }
 
     /**
@@ -70,7 +70,7 @@ public class JsonObjectOutput implements Output {
 
     @Override
     public final String show() throws RepresentationsException {
-        return this.reader.readObject().toString();
+        return this.json.toString();
     }
 
     @Override
@@ -164,6 +164,6 @@ public class JsonObjectOutput implements Output {
      * @throws RepresentationsException if anything goes wrong.
      */
     private JsonObjectBuilder builder() throws RepresentationsException {
-        return Json.createObjectBuilder(this.reader.readObject());
+        return Json.createObjectBuilder(this.json);
     }
 }
