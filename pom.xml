@@ -3,7 +3,7 @@
   <groupId>uy.kerri.representations</groupId>
   <artifactId>representations</artifactId>
   <packaging>jar</packaging>
-  <version>2.2.1</version>
+  <version>3.0.0-SNAPSHOT</version>
   <name>Representations</name>
   <description>
     Classes for communication and serialization without breaking encapsulation.
@@ -25,7 +25,7 @@
     <connection>scm:git:ssh://git@github.com/pdacostaporto/representations.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/pdacostaporto/representations.git</developerConnection>
     <url>https://github.com/pdacostaporto/representations</url>
-    <tag>2.2.1</tag>
+    <tag>HEAD</tag>
   </scm>
   <distributionManagement>
     <snapshotRepository>
